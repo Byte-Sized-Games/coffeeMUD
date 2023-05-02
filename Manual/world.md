@@ -1,5 +1,18 @@
-# The World of []
+# The World of Batatune II
 
-[] is a light fantasy world filled with monsters and dangerous dungeons.
-You and your friends are a group of heros, who have banded together to take on the dragon lord, a powerful red dragon who rules [] with an iron grip
-You and your friends have a long way to go before you can take on the dragon lord, but you will won't stop until you can take him on.
+Batatune II is the second moon of Drogiphus, the sixth farthest planet from the sun. Batatune II is a lush moon full of wonder and magic, as well as terrifying monsters.
+Due to the nature of the monsters that arise to cause chaos and evil, heros emerge to stop their rampages. Powerful mages, champion fighters, devoute clerics, and trickster rougues work together to stop forces of evil.
+
+## The Story so far...
+
+Life on Batatune II has been peaceful until recently, when the Dragon Lord, a powerful demon with the abilities to bend dragons to his will. He rules over most of Batatune, and continues to seek total conquest of this moon. No heros have been able to surpass the power of the Dragon Lord and his minions, but heros still rise all the same. Will you step up to the challenge? Will you defeat the Dragon Lord before all of Batatune II falls under his dominion?
+
+To learn and see more of Batatune II, please read on.
+
+[The Classes](/Manual/classes.md)
+
+[The Monsters](/Manual/monsters.md)
+
+[A Map](/Manual/map)
+
+[A SpellBook](/Manual/spells.md)
