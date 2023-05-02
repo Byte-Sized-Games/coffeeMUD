@@ -13,6 +13,6 @@ To learn and see more of Batatune II, please read on.
 
 [The Monsters](/Manual/monsters.md)
 
-[A Map](/Manual/map)
+[A Map](/Manual/map.md)
 
 [A SpellBook](/Manual/spells.md)
