@@ -5,7 +5,6 @@ public class ui {
         public void createMenu() {
             logger.debug("Creating menu");
         }
-
     }
     public stage createStage() {
         return new stage();
