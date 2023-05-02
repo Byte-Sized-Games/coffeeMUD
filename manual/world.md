@@ -9,10 +9,10 @@ Life on Batatune II has been peaceful until recently, when the Dragon Lord, a po
 
 To learn and see more of Batatune II, please read on.
 
-[The Classes](/Manual/classes.md)
+[The Classes](classes.md)
 
-[The Monsters](/Manual/monsters.md)
+[The Monsters](monsters.md)
 
-[A Map](/Manual/map.md)
+[A Map](map.md)
 
-[A SpellBook](/Manual/spells.md)
+[A SpellBook](spells.md)
