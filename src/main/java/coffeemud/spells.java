@@ -1,22 +1,11 @@
 package coffeemud;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class spells {
-    public static void main(String[] args) {
-        Spell[] wizardSpells = new Spell[16];
-        Spell[] clericSpells = new Spell[16];
-        Spell[] spellScrolls = new Spell[6];
-    }
-}
-
-class Spell {
     // Type of spell. Types: d = damage, h = heal, b = buff, d = debuff
     char type;
     // Element/effect of spell
     /*
      * n = null, no effect
+     * m = magic, generic spell
      * f = fire, good againt plants
      * w = water, good against fire
      * e = electricity, good against water
@@ -35,12 +24,12 @@ class Spell {
     // A short description of the spell
     String desc;
 
-    public Spell() {
+    public spells() {
         type = 'b';
         level = 0;
         effect = 'n';
     }
-    public Spell(char t, int d, char e, int l, String tome) {
+    public spells(char t, int d, char e, int l, String tome) {
         this.set(t, d, e, l, tome);
     }
 
@@ -57,17 +46,18 @@ class Spell {
         return desc;
     }
     public void cast() {
+        // Currently empty, to be filled when player and inventory programs are more fleshed out
     }
     /* Class Functions */
 
-    public static void learn(Spell newSpell, int playerLevel) {
+    public static void learn(spells newSpell, int playerLevel) {
         // Empty for now, will contain code to interface with a character's inventory/spellbook, so that they may use it
         if (playerLevel < newSpell.level) {
             logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
             return;
         }
     }
-    public static void unlearn(Spell oldSpell) {
-
+    public static void unlearn(spells oldSpell) {
+        // Also empty, will interact with player inventory to remove spells
     }
 }
