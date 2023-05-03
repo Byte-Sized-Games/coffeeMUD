@@ -1,4 +1,5 @@
 # Working Title Game(ICS3U Final Project)
 
-Simple light fantasy MUD(Multi-User Dungeon) game.
-Documentation by real humans trust me bro
+Simple light fantasy MUD(Multi-User Dungeon).
+
+To learn more, read the [manual](Manual/world.md)
