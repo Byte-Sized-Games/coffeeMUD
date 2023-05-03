@@ -2,4 +2,4 @@
 
 Simple light fantasy MUD(Multi-User Dungeon).
 
-To learn more, read the [manual](Manual/world.md)
+To learn more, read the [manual](manual/world.md)
