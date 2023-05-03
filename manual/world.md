@@ -5,7 +5,7 @@ Due to the nature of the monsters that arise to cause chaos and evil, heros emer
 
 ## The Story so far...
 
-Life on Batatune II has been peaceful until recently, when the Dragon Lord, a powerful demon with the abilities to bend dragons to his will. He rules over most of Batatune, and continues to seek total conquest of this moon. No heros have been able to surpass the power of the Dragon Lord and his minions, but heros still rise all the same. Will you step up to the challenge? Will you defeat the Dragon Lord before all of Batatune II falls under his dominion?
+Life on Batatune II has been peaceful until recently. When the Dragon Lord, a powerful demon with the abilities to bend dragons to his will appeared, no one could stop him. He now rules over most of Batatune II, and continues to seek total conquest. No heros have been able to surpass the power of the Dragon Lord and his minions, but heros still rise all the same. Will you step up to the challenge? Will you defeat the Dragon Lord before all of Batatune II falls under his dominion?
 
 To learn and see more of Batatune II, please read on.
 
