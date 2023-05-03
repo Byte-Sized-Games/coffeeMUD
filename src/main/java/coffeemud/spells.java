@@ -21,6 +21,8 @@ public class spells {
     int level;
     // How much damage the spell heals or does
     int dmg;
+    // Spell Name
+    String name;
     // A short description of the spell
     String desc;
 
@@ -29,21 +31,22 @@ public class spells {
         level = 0;
         effect = 'n';
     }
-    public spells(char t, int d, char e, int l, String tome) {
-        this.set(t, d, e, l, tome);
+    public spells(char t, int d, char e, int l, String name, String tome) {
+        this.set(t, d, e, l, name, tome);
     }
 
     /* Object functions */
 
-    public void set(char t, int d, char e, int l, String tome) {
+    public void set(char t, int d, char e, int l, String newName, String tome) {
         this.type = t;
         this.dmg = d;
         this.effect = e;
         this.level = l;
+        this.name = newName;
         this.desc = tome;
     }
     public String read() {
-        return desc;
+        return this.name + "\n" + this.desc;
     }
     public void cast() {
         // Currently empty, to be filled when player and inventory programs are more fleshed out
@@ -55,6 +58,8 @@ public class spells {
         if (playerLevel < newSpell.level) {
             logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
             return;
+        } else {
+            logger.debug("Spell learnt. You can now cast " + newSpell.name);
         }
     }
     public static void unlearn(spells oldSpell) {
