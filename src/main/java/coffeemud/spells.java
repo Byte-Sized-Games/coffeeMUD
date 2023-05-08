@@ -48,8 +48,14 @@ public class spells {
     public String read() {
         return this.name + "\n" + this.desc;
     }
-    public void cast() {
-        // Currently empty, to be filled when player and inventory programs are more fleshed out
+    public void cast(Monsters monster[]) {
+        for (Monsters i : monster) {
+            if (this.type == 'd') {
+                i.health -= dmg;
+            } else if (this.type == 'h') {
+                i.health += dmg;
+            }
+        }
     }
     /* Class Functions */
 
