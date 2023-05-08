@@ -59,12 +59,13 @@ public class spells {
     }
     /* Class Functions */
 
-    public static void learn(spells newSpell, int playerLevel) {
+    public static void learn(spells newSpell, int playerLevel, Monsters player) {
         // Empty for now, will contain code to interface with a character's inventory/spellbook, so that they may use it
         if (playerLevel < newSpell.level) {
             logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
         } else {
             logger.debug("Spell learnt. You can now cast " + newSpell.name);
+            player.mInventory.spells.put();
         }
     }
     public static void unlearn(spells oldSpell) {

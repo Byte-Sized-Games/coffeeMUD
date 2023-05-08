@@ -6,6 +6,12 @@ smallItems:
 - mpotions: 0
 - ghpotions: 0
 - gmpotions: 0
+- dragonScroll: 0
+- golemScroll: 0
+- fireScroll: 0
+- iceScroll: 0
+- elecScroll: 0
+- plantScroll: 0
 # weapons
 melee:
 - sword: false
@@ -26,3 +32,18 @@ armor:
 - medium: false
 - heavy: false
 armorEnchant: false
+# spells
+wizard:
+- levelOne:
+- levelTwo:
+- levelThree:
+- levelFour:
+cleric:
+- levelOne:
+- levelTwo:
+- levelThree:
+- levelFour:
+scroll:
+- LevelThree:
+- LevelFour:
+- LevelFive:

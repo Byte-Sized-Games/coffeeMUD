@@ -45,6 +45,7 @@ public class inventory {
             put("heavy", false);
         }
     };
+    // Spells to be added soon
 
     public inventory() throws IOException {
         inventory inv = inventory.getInventory();
