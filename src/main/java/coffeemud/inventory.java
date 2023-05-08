@@ -75,11 +75,18 @@ public class inventory {
         this.gold = g;
     }
 
-    public static inventory getInventory() throws IOException {
+    public void saveInventory() throws IOException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        File file = new File(classLoader.getResource("src/main/resources/inventory.yaml").getFile());
         ObjectMapper map = new ObjectMapper(new YAMLFactory());
-        map.findAndRegisterModules();
-        inventory inv = map.readValue(new File("src/main/resources"), inventory.class);
-        return inv;
+        map.writeValue(file, this);
+    }
+
+    public static inventory getInventory() throws IOException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        File file = new File(classLoader.getResource("src/main/resources/inventory.yaml").getFile());
+        ObjectMapper map = new ObjectMapper(new YAMLFactory());
+        return map.readValue(file, inventory.class);
     }
 
 }
