@@ -25,6 +25,6 @@ public class Monsters {
 
         //if monsters can heal, they will heal by this much
         int heal;
-
+        inventory mInventory;
 
 }
