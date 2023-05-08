@@ -1,5 +1,7 @@
 package coffeemud;
 
+import java.io.IOException;
+
 //unit 6 demonstration
 public class Monsters {
 
@@ -26,5 +28,9 @@ public class Monsters {
         //if monsters can heal, they will heal by this much
         int heal;
         inventory mInventory;
+
+        public void initInventory() throws IOException {
+                this.mInventory = new inventory(); 
+        }
 
 }
