@@ -1,7 +1,7 @@
 # The World of Batatune II
 
 Batatune II is the second moon of Drogiphus, the sixth farthest planet from the sun. Batatune II is a lush moon full of wonder and magic, as well as terrifying monsters.
-Due to the nature of the monsters that arise to cause chaos and evil, heros emerge to stop their rampages. Powerful mages, champion fighters, devoute clerics, and trickster rougues work together to stop forces of evil.
+Due to the nature of the monsters that arise to cause chaos and evil, heros emerge to stop their rampages. Powerful mages, champion fighters, devoute clerics, and trickster rogues work together to stop forces of evil.
 
 ## The Story so far...
 
