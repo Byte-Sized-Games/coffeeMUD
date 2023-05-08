@@ -48,7 +48,7 @@ public class spells {
     public String read() {
         return this.name + "\n" + this.desc;
     }
-    public void cast(Monsters monster[]) {
+    public void cast(Monsters[] monster) {
         for (Monsters i : monster) {
             if (this.type == 'd') {
                 i.health -= dmg;
@@ -63,7 +63,6 @@ public class spells {
         // Empty for now, will contain code to interface with a character's inventory/spellbook, so that they may use it
         if (playerLevel < newSpell.level) {
             logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
-            return;
         } else {
             logger.debug("Spell learnt. You can now cast " + newSpell.name);
         }
