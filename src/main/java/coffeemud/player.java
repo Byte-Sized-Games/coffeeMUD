@@ -1,5 +1,7 @@
 package coffeemud;
-
+/*
+ * To be deleted/merged with monster class
+ */
 public class player {
     // General Stats
     int level;
