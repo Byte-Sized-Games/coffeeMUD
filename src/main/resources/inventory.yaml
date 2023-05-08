@@ -1,0 +1,28 @@
+---
+# Inventory Nonsense
+gold: 0
+smallItems:
+- hpotions: 0
+- mpotions: 0
+- ghpotions: 0
+- gmpotions: 0
+# weapons
+melee:
+- sword: false
+- dagger: false
+- axe: false
+- mace: false
+- hammer: false
+- greatsword: false
+ranged:
+- shortBow: false
+- longBow: false
+- lightCrossbow: false
+- heavyCrossbow: false
+weaponEnchant: false
+# armor
+armor:
+- light: false
+- medium: false
+- heavy: false
+armorEnchant: false
