@@ -3,7 +3,8 @@ package coffeemud;
 //unit 6 demonstration
 public class Monsters {
 
-        //the name of the monster
+        //the name of the monsterss
+        //amoung
         String name;
 
         //the type of the monster, some monsters are weaker against others
