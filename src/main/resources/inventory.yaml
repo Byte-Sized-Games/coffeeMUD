@@ -1,49 +1,19 @@
 ---
 # Inventory Nonsense
-gold: 0
-smallItems:
-- hpotions: 0
-- mpotions: 0
-- ghpotions: 0
-- gmpotions: 0
-- dragonScroll: 0
-- golemScroll: 0
-- fireScroll: 0
-- iceScroll: 0
-- elecScroll: 0
-- plantScroll: 0
-# weapons
-melee:
-- sword: false
-- dagger: false
-- axe: false
-- mace: false
-- hammer: false
-- greatsword: false
-ranged:
-- shortBow: false
-- longBow: false
-- lightCrossbow: false
-- heavyCrossbow: false
+gold: 20
+hpotions: 0
+mpotions: 0
+ghpotions: 0
+gmpotions: 0
+dragonScroll: 0
+golemScroll: 0
+fireScroll: 0
+iceScroll: 0
+elecScroll: 0
+plantScroll: 0
+# weapons & armor
 weaponEnchant: false
-# armor
-armor:
-- light: false
-- medium: false
-- heavy: false
 armorEnchant: false
-# spells
-wizard:
-- levelOne:
-- levelTwo:
-- levelThree:
-- levelFour:
-cleric:
-- levelOne:
-- levelTwo:
-- levelThree:
-- levelFour:
-scroll:
-- LevelThree:
-- LevelFour:
-- LevelFive:
+dmgMin: 0
+dmgMax: 3
+armor: 1

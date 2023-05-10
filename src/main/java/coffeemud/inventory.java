@@ -8,72 +8,76 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 public class inventory {
-    int gold = 0;
-    boolean weaponEnchant = false;
-    boolean armorEnchant = false;
-
-    Map<String, Integer> smallItems = new HashMap<String, Integer>() {
-        {
-            put("hpotions", 0);
-            put("mpotions", 0);
-            put("ghpotions", 0);
-            put("gmpotions", 0);
-        }
-    };
-    Map<String, Boolean> melee = new HashMap<String, Boolean>() {
-        {
-            put("sword", false);
-            put("dagger", false);
-            put("axe", false);
-            put("mace", false);
-            put("hammer", false);
-            put("greatsword", false);
-        }
-    };
-    Map<String, Boolean> ranged = new HashMap<String, Boolean>() {
-        {
-            put("shortBow", false);
-            put("longBow", false);
-            put("lightCrossbow", false);
-            put("heavyCrossbow", false);
-        }
-    };
-    Map<String, Boolean> armor = new HashMap<String, Boolean>() {
-        {
-            put("light", false);
-            put("medium", false);
-            put("heavy", false);
-        }
-    };
-    // Spells to be added soon
+    int gold;
+    boolean weaponEnchant;
+    boolean armorEnchant;
+    int dmgMin;
+    int dmgMax;
+    int armor;
+    String weapon;
+    String armorType;
+    // Potions
+    int hpotions;
+    int mpotions;
+    int ghpotions;
+    int gmpotions;
+    // Spell Scrolls
+    int dragonScroll;
+    int golemScroll;
+    int fireScroll;
+    int iceScroll;
+    int elecScroll;
+    int plantScroll;
 
     public inventory() throws IOException {
         inventory inv = inventory.getInventory();
-        this.setWeapons(inv.melee, inv.ranged, inv.weaponEnchant);
-        this.setArmor(inv.armor, inv.armorEnchant);
-        this.setItems(inv.smallItems, inv.gold);
+        this.setItems(inv);
+        this.setArms(inv);
     }
 
     public inventory(inventory inv) {
-        this.setWeapons(inv.melee, inv.ranged, inv.weaponEnchant);
-        this.setArmor(inv.armor, inv.armorEnchant);
-        this.setItems(inv.smallItems, inv.gold);
+        this.setItems(inv);
+        this.setArms(inv);
     }
 
-    public void setWeapons(Map<String, Boolean> mle, Map<String, Boolean> rng, Boolean enc) {
-        this.melee = mle;
-        this.ranged = rng;
-        this.weaponEnchant = enc;
+    public void setItems(inventory inv) {
+        this.gold = inv.gold;
+        this.setPotions(inv);
+        this.setScrolls(inv);
     }
 
-    public void setArmor(Map<String, Boolean> arm, Boolean enc) {
-        this.armor = arm;
-        this.armorEnchant = enc;
+    public void setPotions(inventory inv) {
+        this.hpotions = inv.hpotions;
+        this.hpotions = inv.mpotions;
+        this.ghpotions = inv.ghpotions;
+        this.gmpotions = inv.gmpotions;
     }
 
-    public void setItems(Map<String, Integer> sm, int g) {
-        this.smallItems = sm;
-        this.gold = g;
+    public void setArms(inventory inv) {
+        this.setArmor(inv);
+        this.setWeapon(inv);
+    }
+
+    public void setArmor(inventory inv) {
+        this.armor = inv.armor;
+        this.armorEnchant = inv.armorEnchant;
+        this.armorType = inv.armorType;
+    }
+
+    public void setWeapon(inventory inv) {
+        this.dmgMax = inv.dmgMax;
+        this.dmgMin = inv.dmgMin;
+        this.weaponEnchant = inv.weaponEnchant;
+        this.weapon = inv.weapon;
+    }
+
+    public void setScrolls(inventory inv) {
+        this.fireScroll = inv.fireScroll;
+        this.iceScroll = inv.iceScroll;
+        this.elecScroll = inv.elecScroll;
+        this.plantScroll = inv.plantScroll;
+        this.golemScroll = inv.golemScroll;
+        this.dragonScroll = inv.dragonScroll;
     }
 
     public void saveInventory() throws IOException {
