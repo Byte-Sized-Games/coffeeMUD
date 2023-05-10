@@ -1,6 +1,6 @@
 package coffeemud;
 public class spell {
-    // Type of spell. Types: d = damage, h = heal, b = buff, d = debuff
+    // Type of spell. Types: d = damage, h = heal, b = buff, x = debuff
     char type;
     // Element/effect of spell, used for spells that inflict buffs/debuffs or have an element
     /*
@@ -47,8 +47,8 @@ public class spell {
     public String read() {
         return this.name + "\n" + this.desc;
     }
-    public void cast(Monsters[] monster) {
-        for (Monsters i : monster) {
+    public void cast(monsters[] monster) {
+        for (monsters i : monster) {
             if (this.type == 'd') {
                 i.health -= dmg;
             } else if (this.type == 'h') {
@@ -58,7 +58,7 @@ public class spell {
     }
     /* Class Functions */
 
-    public static void learn(spell newSpell, int playerLevel, Monsters player) {
+    public static void learn(spell newSpell, int playerLevel, monsters player) {
         // Empty for now, will contain code to interface with a character's inventory/spellbook, so that they may use it
         if (playerLevel < newSpell.level) {
             logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
