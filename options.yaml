@@ -1,0 +1,6 @@
+shellPath: "/bin/zsh"
+testMode: false
+gameOptions:
+  peaceful: false,
+  enableSkip: false,
+  selectionScreen: false

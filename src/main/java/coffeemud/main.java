@@ -1,6 +1,6 @@
 package coffeemud;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
         for(String arg : args) {
             switch(arg) {
