@@ -69,7 +69,7 @@ Aside from above spells here are some unique spells found only in spell scrolls:
 
 - Summon Golem [Level 3] (Summon a powerful creature of metal to fight for you)
 - Fire Storm [Level 4] (Master level fire elemental spell)
-- Ice Blast [Level 4] (Master level water elemental spell)
+- Ice Storm [Level 4] (Master level water elemental spell)
 - ThunderStorm [Level 4] (Master level electric elemental spell)
 - Vines [Level 4] (Master level plants elemental spell)
 - Summon Dragon [Level 5] (Summon a dragon to fight by your side)
