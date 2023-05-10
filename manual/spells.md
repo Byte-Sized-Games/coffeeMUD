@@ -15,21 +15,21 @@ Clerics and mages have access to various spells that allow them to perform vario
 
 ### Level 2
 
-- Lesser Command (Take control of a weak monster)
+- Confuse (Turn a monster on its enemies)
 - Psionic Blast (Advanced damage spell)
 - Sleep (Send enemies to sleep)
 
 ### Level 3
 
-- Fire Ball (advanced fire elemental spell)
-- Ice Bolt (advanced ice elemental spell)
-- Lighting Bolt (advanced electric elemental spell)
+- FireBall (advanced fire elemental spell)
+- Ice Blast (advanced ice elemental spell)
+- Lightning Bolt (advanced electric elemental spell)
 - Roots (advanced plants elemental spell)
 - Barrier (Powerful, longer lasting protection)
 
 ### Level 4
 
-- Greater Command (Take control of a powerful monster)
+- Mage armor (Increase armor by a massive amount)
 - Summon Elemental (Summon a powerful being embodying one of the four elements)
 
 ## Cleric Spells
