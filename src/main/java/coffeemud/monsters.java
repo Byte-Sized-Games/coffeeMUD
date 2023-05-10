@@ -3,7 +3,7 @@ package coffeemud;
 import java.io.IOException;
 
 //unit 6 demonstration
-public class Monsters {
+public class monsters {
 
         //the name of the monsterss
         //amoung
