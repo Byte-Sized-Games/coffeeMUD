@@ -1,20 +1,19 @@
 package coffeemud;
-public class spells {
+public class spell {
     // Type of spell. Types: d = damage, h = heal, b = buff, d = debuff
     char type;
-    // Element/effect of spell
+    // Element/effect of spell, used for spells that inflict buffs/debuffs or have an element
     /*
-     * n = null, no effect
-     * m = magic, generic spell
-     * f = fire, good againt plants
-     * w = water, good against fire
-     * e = electricity, good against water
-     * p = plants, good against electricity
+     * n = no effect, spell does not buff/debuff
      * b = banisher, remove an enemy entirely from combat
      * p = protect, defend against one attack
      * B = bless, increase armor temporarily
      * s = summon, create an ally
      * a = change alignment of creature, changes who they can attack
+     * f = fire
+     * i = ice
+     * P = plants
+     * e = electricity
      */
     char effect;
     // Level, what level you need to be for the spell
@@ -26,12 +25,12 @@ public class spells {
     // A short description of the spell
     String desc;
 
-    public spells() {
+    public spell() {
         type = 'b';
         level = 0;
         effect = 'n';
     }
-    public spells(char t, int d, char e, int l, String name, String tome) {
+    public spell(char t, int d, char e, int l, String name, String tome) {
         this.set(t, d, e, l, name, tome);
     }
 
@@ -59,16 +58,16 @@ public class spells {
     }
     /* Class Functions */
 
-    public static void learn(spells newSpell, int playerLevel, Monsters player) {
+    public static void learn(spell newSpell, int playerLevel, Monsters player) {
         // Empty for now, will contain code to interface with a character's inventory/spellbook, so that they may use it
         if (playerLevel < newSpell.level) {
             logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
         } else {
             logger.debug("Spell learnt. You can now cast " + newSpell.name);
-            player.mInventory.spells.put();
+
         }
     }
-    public static void unlearn(spells oldSpell) {
+    public static void unlearn(spell oldSpell) {
         // Also empty, will interact with player inventory to remove spells
     }
 }
