@@ -21,7 +21,11 @@ public class spellbook {
             new spell('b', 0, 's', 4, "Summon elemental", "Summon a powerful elemental to fight by your side")
         };
     }
-    public class cleric {}
+    public class cleric {
+        spell[] spells = new spell[] {
+            new spell(),
+        };
+    }
     public class scroll {
         spell[] spells = new spell[] {
             new spell('d', 35, 'f', 4, "Fire Storm", "A powerful fire spell. Destructive againt creatures of ice"),
