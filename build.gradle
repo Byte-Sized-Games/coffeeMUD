@@ -10,20 +10,17 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
+    mavenCentral()
 }
 
 dependencies {
-    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0'
-    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0'
 }
 
 group = 'org.bytesizedgames'
 version = '0.1.0'
-description = 'gs-maven'
+description = 'bsg-maven'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
