@@ -1,6 +1,6 @@
-build/
-.gradle/
-# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+target/
+dependency-reduced-pom.xml
+
 
 
 # Eclipse m2e generated files
