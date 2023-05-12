@@ -1,0 +1,19 @@
+---
+# Inventory Nonsense
+gold: 20
+hpotions: 0
+mpotions: 0
+ghpotions: 0
+gmpotions: 0
+dragonScroll: 0
+golemScroll: 0
+fireScroll: 0
+iceScroll: 0
+elecScroll: 0
+plantScroll: 0
+# weapons & armor
+weaponEnchant: false
+armorEnchant: false
+dmgMin: 0
+dmgMax: 3
+armor: 1
