@@ -14,7 +14,12 @@ public class entities{
 
         //were not using an array for all these different stats as that would be confusing
         //using int so they can all nicely interoperate
+
+        //the current health of the entity
         int health;
+
+        //the maximum health of the entity
+        int maxHealth;
         int armour;
 
         //attackLow and attackHigh form a range of damages that a monster could do on a turn, selected randomly from that range
@@ -33,7 +38,16 @@ public class entities{
         public void attack(entities enemy){
                 Random random = new Random();
              int damage = attackMultip*(attackLow + (random.nextInt(attackHigh-attackLow))) - armour;
+             if (damage < 0)
+                     damage = 0;
              enemy.health -= damage;
+        }
+
+        public void heal(){
+                if (this.health + this.heal > this.maxHealth)
+                        this.health = this.maxHealth;
+                else
+                        this.health += this.heal;
         }
 
 
