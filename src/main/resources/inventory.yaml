@@ -17,3 +17,37 @@ armorEnchant: false
 dmgMin: 0
 dmgMax: 3
 armor: 1
+
+spells:
+- Magic Missle: false
+- Sheild: false
+- Fire Bolt: false
+- Spark: false
+- Ice Bolt: false
+- Thorns: false
+- Confuse: false
+- Psionic Blast: false
+- Sleep: false
+- FireBall: false
+- Ice Blast: false
+- Lightning Bolt: false
+- Roots: false
+- Barrier: false
+- Mage armor: false
+- Summon Elemental: false
+- Cure Light Wounds: false
+- Faith Shield: false
+- Turn Undead: false
+- Bless: false
+- Confuse: false
+- Rage: false
+- Summon Lesser Spirit: false
+- Lesser Healing Aura: false
+- Inflict Light Wounds: false
+- Destroy Fiend: false
+- Cure Greater Wounds: false
+- Banish: false
+- Divine Intervention: false
+- Summon Greater Spirit: false
+- Greater Healing Aura: false
+- Inflict Greater Wounds: false

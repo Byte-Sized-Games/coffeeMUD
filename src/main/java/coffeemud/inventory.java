@@ -28,6 +28,43 @@ public class inventory {
     int iceScroll;
     int elecScroll;
     int plantScroll;
+    // Spells
+    Map<String, Boolean> spells = new HashMap<String, Boolean>() {
+        {
+            put("Magic Missle", false);
+            put("Shield", false);
+            put("Fire Bolt", false);
+            put("Spark", false);
+            put("Ice Bolt", false);
+            put("Thorns", false);
+            put("Confuse", false);
+            put("Psionic Blast", false);
+            put("Sleep", false);
+            put("FireBall", false);
+            put("Ice Blast", false);
+            put("Lightning Bolt", false);
+            put("Roots", false);
+            put("Barrier", false);
+            put("Mage Armor", false);
+            put("Summon Elemental", false);
+            put("Cure Light Wounds", false);
+            put("Faith Shield", false);
+            put("Turn Undead", false);
+            put("Bless", false);
+            put("Confuse", false);
+            put("Rage", false);
+            put("Summon Lesser Spirit", false);
+            put("Lesser Healing Aura", false);
+            put("Inflict Light Wounds", false);
+            put("Destroy Fiend", false);
+            put("Cure Greater Wounds", false);
+            put("Banish", false);
+            put("Divine Intervention", false);
+            put("Summon Greater Spirit", false);
+            put("Greater Healing Aura", false);
+            put("Inflict Greater Wounds", false);
+        }
+    };
 
     public inventory() throws IOException {
         inventory inv = inventory.getInventory();
@@ -40,6 +77,7 @@ public class inventory {
         this.setArms(inv);
     }
 
+    // Setters
     public void setItems(inventory inv) {
         this.gold = inv.gold;
         this.setPotions(inv);
@@ -80,6 +118,7 @@ public class inventory {
         this.dragonScroll = inv.dragonScroll;
     }
 
+    // Getters
     public void saveInventory() throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         File file = new File(classLoader.getResource("src/main/resources/inventory.yaml").getFile());

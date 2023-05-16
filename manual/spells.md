@@ -37,7 +37,7 @@ Clerics and mages have access to various spells that allow them to perform vario
 ### Level 1
 
 - Cure Light Wounds (basic healing spell)
-- Faith Sheild (defend self or allies from an attack)
+- Faith Shield (defend self or allies from an attack)
 - Turn Undead (Destroy undead creatures)
 - Bless (Boost heros armor)
 - Confuse (Cause Enemy to attack itself and its allies)

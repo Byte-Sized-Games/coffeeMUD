@@ -23,15 +23,22 @@ public class spellbook {
     }
     public class cleric {
         spell[] spells = new spell[] {
-            new spell(),
+            new spell('h', 4, 'n', 1, "Cure light wounds", "Heal minor wounds on yourself and allies"),
+            new spell('b', 2, 'p', 1, "Faith Shield", "Protect your allies from harm"),
+            new spell('x', 4, 'b', 1, "Turn Undead", "Destroy or turn undead creatures"),
+            new spell('b', 5, 'B', 1, "Bless", "Allow allies to better resist attacks"),
+            new spell('x', 0, 'a', 1, "Confuse", "Confuse an enemy, making it attack itself and its friends"),
+            new spell('b', 0, 'r', 2, "Rage", "Increase an allies attack temporarily"),
+            new spell('b', 0, 's', 2, "Summon Lesser Spirit", "Summon a minor spirit to fight by your side"),
+            new spell('h', 2, 'n', 2, "Lesser Healing Aura", "Heal all allies"),
         };
     }
     public class scroll {
         spell[] spells = new spell[] {
-            new spell('d', 35, 'f', 4, "Fire Storm", "A powerful fire spell. Destructive againt creatures of ice"),
-            new spell('d', 35, 'e', 4, "Thunder Storm", "A powerful electricity spell. Destructive againt creatures of fire"),
-            new spell('d', 35, 'i', 4, "Ice Storm", "A powerful ice spell. Destructive againt creatures of earth"),
-            new spell('d', 35, 'P', 4, "Vines", "A powerful earth spell. Destructive againt creatures of electricity"),
+            new spell('d', 35, 'f', 4, "Fire Storm", "A powerful fire spell. Destructive against creatures of ice"),
+            new spell('d', 35, 'e', 4, "Thunder Storm", "A powerful electricity spell. Destructive against creatures of fire"),
+            new spell('d', 35, 'i', 4, "Ice Storm", "A powerful ice spell. Destructive against creatures of earth"),
+            new spell('d', 35, 'P', 4, "Vines", "A powerful earth spell. Destructive against creatures of electricity"),
         };
     }
 }

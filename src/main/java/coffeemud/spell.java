@@ -1,4 +1,6 @@
 package coffeemud;
+
+import java.io.IOException;
 public class spell {
     // Type of spell. Types: d = damage, h = heal, b = buff, x = debuff
     char type;
@@ -14,6 +16,7 @@ public class spell {
      * i = ice
      * P = plants
      * e = electricity
+     * r = rage, increase attack
      */
     char effect;
     // Level, what level you need to be for the spell
@@ -47,8 +50,8 @@ public class spell {
     public String read() {
         return this.name + "\n" + this.desc;
     }
-    public void cast(monsters[] monster) {
-        for (monsters i : monster) {
+    public void cast(entities[] creatures) {
+        for (entities i : creatures) {
             if (this.type == 'd') {
                 i.health -= dmg;
             } else if (this.type == 'h') {
@@ -58,16 +61,18 @@ public class spell {
     }
     /* Class Functions */
 
-    public static void learn(spell newSpell, int playerLevel, monsters player) {
+    public static void learn(spell newSpell, int playerLevel, inventory inv) throws IOException {
         // Empty for now, will contain code to interface with a character's inventory/spellbook, so that they may use it
         if (playerLevel < newSpell.level) {
             logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
         } else {
             logger.debug("Spell learnt. You can now cast " + newSpell.name);
+            inv.spells.put(newSpell.name, true);
 
         }
     }
-    public static void unlearn(spell oldSpell) {
+    public static void unlearn(spell oldSpell, inventory inv) throws IOException {
         // Also empty, will interact with player inventory to remove spells
+        inv.spells.put(oldSpell.name, false);
     }
 }
