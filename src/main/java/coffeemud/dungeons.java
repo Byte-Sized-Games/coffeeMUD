@@ -11,4 +11,19 @@ public class dungeons {
     }
     
     room[][] dungeonRooms;
+    room currentRoom;
+    int x;
+    int y;
+    public void moveRooms(char dir) {
+        switch(dir) {
+            case 'n':
+                currentRoom = dungeonRooms[x][(y+1)];
+            case 's':
+                currentRoom = dungeonRooms[x][(y-1)];
+            case 'e':
+                currentRoom = dungeonRooms[x+1][y];
+            case 'w':
+                currentRoom = dungeonRooms[x-1][y];
+        }
+    }
 }
