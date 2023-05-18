@@ -132,5 +132,8 @@ public class inventory {
         ObjectMapper map = new ObjectMapper(new YAMLFactory());
         return map.readValue(file, inventory.class);
     }
-
+    // functions
+    public static void listInv(inventory inv) {
+        
+    }
 }
