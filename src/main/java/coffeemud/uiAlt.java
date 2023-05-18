@@ -1,20 +1,109 @@
 package coffeemud;
 
-public class uiAlt {
-    // Menu for managing inventory
-    public class invMenu {
+import java.util.Scanner;
+import java.lang.StringBuilder;
 
+public class uiAlt {
+
+    public class display {
+        prompt gamePrompt;
+
+        public void clear() {
+
+        }
+
+        public void show(menu m) {
+
+            gamePrompt.print(null);
+        }
+
+        public void show(battle m) {
+
+        }
+
+        public void show(String m) {
+            gamePrompt.print(m);
+        }
     }
-    // Second most used menu. Used when fighting monsters
+
+    // Menu, shows a list
+    public class menu {
+        public String numberedList(String[] x) {
+            StringBuilder numBld = new StringBuilder();
+            for (int i = 0; i < x.length; i++) {
+                numBld.append((i + 1) + x[i] + "\n");
+            }
+            return numBld.toString();
+        }
+
+        public String numberedList(String[] x, int[] y) {
+            StringBuilder numBld = new StringBuilder();
+            for (int i = 0; i < x.length; i++) {
+                numBld.append((i + 1) + ". " + x[i] + ": " + y[i] + "\n");
+            }
+            return numBld.toString();
+        }
+
+        public String unNumList(String[] x) {
+            StringBuilder numBld = new StringBuilder();
+            for (String i : x) {
+                numBld.append("- " + i + "\n");
+            }
+            return numBld.toString();
+        }
+
+        public String unNumList(String[] x, int[] y) {
+            StringBuilder numBld = new StringBuilder();
+            for (int i = 0; i < x.length; i++) {
+                numBld.append("- " + x[i] + ": " + y[i] + "\n");
+            }
+            return numBld.toString();
+        }
+    }
+
+    // Used when fighting monsters
     public class battle {
 
     }
-    // The most used screen/menu. Used when in dungeons and towns
-    public class explorationMenu {
 
-    }
-    // Automate Dialogue from characters and world
-    public class dialogue {
+    public class prompt {
+        String back;
+        String mid;
+        String front;
+        Scanner scn = new Scanner(System.in);
 
+        public prompt(String b, String m, String f) {
+            this.set(b, m, f);
+        }
+
+        public void set(String b, String m, String f) {
+            this.back = b;
+            this.mid = m;
+            this.front = f;
+        }
+
+        public void set(String x, int part) {
+            switch (part) {
+                case 1:
+                    this.back = x;
+                case 2:
+                    this.mid = x;
+                case 3:
+                    this.front = x;
+            }
+        }
+
+        public void display() {
+            System.out.print(back + mid + front + " ");
+        }
+
+        public String read() {
+            return scn.nextLine();
+        }
+
+        public void print(String text) {
+            System.out.print(text);
+            display();
+        }
     }
 }
