@@ -11,16 +11,9 @@ public class uiAlt {
             System.out.print("\033[H\033[2J");
             System.out.flush();
         }
-
-        public void show(menu m) {
-
-            gamePrompt.print(null);
-        }
-
         public void show(battle m) {
 
         }
-
         public void show(String m) {
             gamePrompt.print(m);
         }
