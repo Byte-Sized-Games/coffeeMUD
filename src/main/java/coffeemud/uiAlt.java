@@ -3,7 +3,7 @@ package coffeemud;
 import java.util.Scanner;
 
 public class uiAlt {
-
+    // Used to display items to players
     public class display {
         prompt gamePrompt;
 
@@ -21,6 +21,7 @@ public class uiAlt {
 
     // Menu, shows a list
     public class menu {
+        // Numbered lists, either for Item values or for a checklist
         public String numberedList(String[] x) {
             StringBuilder numBld = new StringBuilder();
             for (int i = 0; i < x.length; i++) {
@@ -36,7 +37,7 @@ public class uiAlt {
             }
             return numBld.toString();
         }
-
+        // Unumbered list, for inventories and graphics
         public String unNumList(String[] x) {
             StringBuilder numBld = new StringBuilder();
             for (String i : x) {
@@ -58,7 +59,7 @@ public class uiAlt {
     public class battle {
 
     }
-
+    // A prompt for players to input text into
     public class prompt {
         String back;
         String mid;
