@@ -1,7 +1,6 @@
 package coffeemud;
 
 import java.util.Scanner;
-import java.lang.StringBuilder;
 
 public class uiAlt {
 
@@ -9,7 +8,8 @@ public class uiAlt {
         prompt gamePrompt;
 
         public void clear() {
-
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
         }
 
         public void show(menu m) {
@@ -86,10 +86,15 @@ public class uiAlt {
             switch (part) {
                 case 1:
                     this.back = x;
+                    break;
                 case 2:
                     this.mid = x;
+                    break;
                 case 3:
                     this.front = x;
+                    break;
+                default:
+                    break;
             }
         }
 
