@@ -37,7 +37,7 @@ public class ui {
         }
     }
     public class fightScene extends stage {
-        public fightScene(String name, ArrayList<monsters> monsters) {
+        public fightScene(String name, ArrayList<entities> monsters) {
             this.name = name;
             statusBar = true;
             contents.add(new panel(true));

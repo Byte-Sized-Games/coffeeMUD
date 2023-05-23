@@ -1,5 +1,6 @@
 package coffeemud;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class uiAlt {
@@ -57,7 +58,7 @@ public class uiAlt {
 
     // Used when fighting monsters
     public class battle {
-
+        ArrayList<entities> monsters;
     }
     // A prompt for players to input text into
     public class prompt {
