@@ -12,6 +12,15 @@ public class entities{
         //whether the character is a monster or not
         boolean monster;
 
+        // Players class. Used for spell lists and abilities
+        /*
+         * f = fighter
+         * w = wizard
+         * r = rogue
+         * c = cleric
+         */
+        char characterClass;
+
         //were not using an array for all these different stats as that would be confusing
         //using int so they can all nicely interoperate
 
