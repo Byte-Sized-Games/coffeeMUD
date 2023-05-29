@@ -4,14 +4,15 @@ public class dungeons {
     public class roomTraps extends spell {
 
     }
-    public class room {
+    public static class room {
+        public String name;
         entities[] monsters; // Monsters in room
         roomTraps[] traps; // Any potential traps
         int gold; // Gold gained for beating room
     }
     
     room[][] dungeonRooms;
-    room currentRoom;
+    public static room currentRoom;
     int x;
     int y;
     public void moveRooms(char dir) {
