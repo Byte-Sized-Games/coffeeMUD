@@ -1,8 +1,8 @@
 package coffeemud;
 
 public class spellbook {
-    public class wizard {
-        spell[] spells = new spell[] {
+    public static class wizard {
+        static final spell[] spells = new spell[] {
             new spell('d', 4, 'n', 1, "Magic Missle", "A minor damage spell"),
             new spell('b', 0, 'p', 1, "Shield", "Temporary protection from one attack"),
             new spell('d', 6, 'f', 1, "Fire Bolt", "A minor fire spell. Good against creatures of ice"),
@@ -21,8 +21,8 @@ public class spellbook {
             new spell('b', 0, 's', 4, "Summon elemental", "Summon a powerful elemental to fight by your side")
         };
     }
-    public class cleric {
-        spell[] spells = new spell[] {
+    public static class cleric {
+        static final spell[] spells = new spell[] {
             new spell('h', 4, 'n', 1, "Cure light wounds", "Heal minor wounds on yourself and allies"),
             new spell('b', 2, 'p', 1, "Faith Shield", "Protect your allies from harm"),
             new spell('x', 4, 'b', 1, "Turn Undead", "Destroy or turn undead creatures"),
@@ -33,8 +33,8 @@ public class spellbook {
             new spell('h', 2, 'n', 2, "Lesser Healing Aura", "Heal all allies"),
         };
     }
-    public class scroll {
-        spell[] spells = new spell[] {
+    public static class scroll {
+        static final spell[] spells = new spell[] {
             new spell('d', 35, 'f', 4, "Fire Storm", "A powerful fire spell. Destructive against creatures of ice"),
             new spell('d', 35, 'e', 4, "Thunder Storm", "A powerful electricity spell. Destructive against creatures of fire"),
             new spell('d', 35, 'i', 4, "Ice Storm", "A powerful ice spell. Destructive against creatures of earth"),
