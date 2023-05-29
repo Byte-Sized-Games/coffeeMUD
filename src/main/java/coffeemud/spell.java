@@ -1,6 +1,7 @@
 package coffeemud;
 
 import java.io.IOException;
+import java.util.ArrayList;
 public class spell {
     // Type of spell. Types: d = damage, h = heal, b = buff, x = debuff
     char type;
@@ -50,7 +51,7 @@ public class spell {
     public String read() {
         return this.name + "\n" + this.desc;
     }
-    public void cast(entities[] creatures) {
+    public void cast(ArrayList<entities> creatures) {
         for (entities i : creatures) {
             if (this.type == 'd') {
                 i.health -= dmg;
