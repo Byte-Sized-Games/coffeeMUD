@@ -1,6 +1,5 @@
 package coffeemud;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class uiAlt {
@@ -12,9 +11,11 @@ public class uiAlt {
             System.out.print("\033[H\033[2J");
             System.out.flush();
         }
+
         public void show(battle m) {
 
         }
+
         public void show(String m) {
             gamePrompt.print(m);
         }
@@ -38,6 +39,7 @@ public class uiAlt {
             }
             return numBld.toString();
         }
+
         // Unumbered list, for inventories and graphics
         public String unNumList(String[] x) {
             StringBuilder numBld = new StringBuilder();
@@ -56,10 +58,8 @@ public class uiAlt {
         }
     }
 
-    // Used when fighting monsters
-    public class battle {
-        ArrayList<entities> monsters;
-    }
+
+
     // A prompt for players to input text into
     public class prompt {
         String back;
