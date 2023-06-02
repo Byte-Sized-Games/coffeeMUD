@@ -8,7 +8,7 @@ public class battle {
     int round;
     int playerInitiative;
     int monsterInitiative;
-    uiAlt.prompt battlePrompt;
+    uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ", colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
 
     public battle(ArrayList<entities> p, ArrayList<entities> m, int pInitiative, int mInitiative) {
         this.init(p, m, pInitiative, mInitiative);
@@ -23,6 +23,7 @@ public class battle {
     }
 
     public void turn() {
+        checkEffects;
         if (playerInitiative >= monsterInitiative) {
             for (entities i : players) {
                 playerTurn(i);
@@ -36,6 +37,18 @@ public class battle {
             }
             for (entities i : players) {
                 playerTurn(i);
+            }
+        }
+    }
+
+    public void checkEffects() {
+        for (entities i : players) {
+            i.tempHP = i.tempHP/4;
+            for (char x : i.effects) {
+                switch(x) {
+                    case 'x':
+                        i.health =- 2;  
+                }
             }
         }
     }
@@ -59,6 +72,23 @@ public class battle {
         }
     }
 
+    public void playerTurn(String bugCommand) {
+        String command = bugCommand.substring(0, bugCommand.indexOf(" ") + 1);
+        String target = bugCommand.substring(bugCommand.indexOf(" "));
+        switch (command) {
+            case "ATTACK":
+                player.attack(monsters.get(getMonster(target)));
+            case "CAST":
+                castSpell(target);
+            case "DEFEND":
+                players.get(getPlayer(target)).armour += 2;
+            case "":
+                battlePrompt.print("No command chosen, please try again");
+            default:
+                battlePrompt.print("Command not recognized");
+        }
+    }
+
     public void monsterTurn(entities monster) {
         if (monster.health <= (monster.maxHealth / 4)) {
             monster.health += monster.heal;
@@ -69,6 +99,16 @@ public class battle {
 
     public void castSpell(String target, entities player) {
         spell targetSpell = getSpell(target, player.characterClass);
+        battlePrompt.print("Select your targets: ");
+        String[] getTargets = battlePrompt.read().split(" ");
+        ArrayList<entities> targets = new ArrayList<entities>();
+        for (int i = 0; i < getTargets.length; i++) {
+            targets.set(i, monsters.get(getEntities(getTargets[i])));
+        }
+        targetSpell.cast(targets);
+    }
+    public void castSpell(String target) {
+        spell targetSpell = spellbook.wizard.spells[0];
         battlePrompt.print("Select your targets: ");
         String[] getTargets = battlePrompt.read().split(" ");
         ArrayList<entities> targets = new ArrayList<entities>();

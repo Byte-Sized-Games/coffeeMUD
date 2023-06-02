@@ -61,7 +61,7 @@ public class uiAlt {
 
 
     // A prompt for players to input text into
-    public class prompt {
+    public static class prompt {
         String back;
         String mid;
         String front;
