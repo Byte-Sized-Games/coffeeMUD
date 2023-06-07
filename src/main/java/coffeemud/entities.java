@@ -1,5 +1,6 @@
 package coffeemud;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 //unit 6 demonstration im crying
@@ -21,11 +22,17 @@ public class entities{
          */
         char characterClass;
 
+        // Effects on entity
+        ArrayList<Character> effects;
+
         //were not using an array for all these different stats as that would be confusing
         //using int so they can all nicely interoperate
 
         //the current health of the entity
         int health;
+
+        // Bonus health, reset every round
+        int tempHP;
 
         //the maximum health of the entity
         int maxHealth;

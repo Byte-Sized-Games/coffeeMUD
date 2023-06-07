@@ -2,6 +2,7 @@ package coffeemud;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.lang.Math;
 public class spell {
     // Type of spell. Types: d = damage, h = heal, b = buff, x = debuff
     char type;
@@ -53,10 +54,33 @@ public class spell {
     }
     public void cast(ArrayList<entities> creatures) {
         for (entities i : creatures) {
-            if (this.type == 'd') {
+            switch(this.type) {
+                case 'd':
                 i.health -= dmg;
-            } else if (this.type == 'h') {
+                case 'h':
                 i.health += dmg;
+                case 'b':
+                    switch(this.effect) {
+                        case 'p':
+                            i.tempHP += this.dmg;
+                        case 'B':
+                            i.tempHP += (int) (Math.random() * (dmg - (dmg/4) + 1) + (dmg/4));
+                        case 's':
+                        case 'a':
+                            if (i.monster) {
+                                i.monster = false;
+                            } else i.monster = true;
+                    }
+                case 'x':
+                    switch(this.effect) {
+                        case 'b':
+                            i.health = 0;
+                        default:
+                            i.effects.add('x');
+                    }
+                default:
+                i.health -= dmg;
+
             }
         }
     }
