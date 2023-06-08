@@ -52,9 +52,10 @@ public class ui {
                 textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
                 iterator++;
             }
-            textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + 21/*health*/);
-            textGraphics.putString(new TerminalPosition(0,3),"₤ " + /*money */ 12 );
-            textGraphics.putString(new TerminalPosition(0,4), "⮹ " + /*level*/ + 10);
+            player.inv = new inventory();
+            textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + player.health);
+            textGraphics.putString(new TerminalPosition(0,3),"G " + player.inv.gold);
+            textGraphics.putString(new TerminalPosition(0,4), "⮹ " + player.level);
             terminal.refresh();
         }
 

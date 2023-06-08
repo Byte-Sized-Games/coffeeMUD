@@ -5,16 +5,25 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class player {
-    int health = 100;
-    int maxHealth = 100;
-    int tempHealth = 0;
-    String name;
-    int armour = 5;
-    int attackLow = 1;
-    int attackHigh = 20;
-    int level = 1;
-    inventory inv;
-    ArrayList<Character> effects;
+    public static int health = 100;
+    public static int maxHealth = 100;
+    public static int tempHealth = 0;
+    public static String name;
+    public static int armour = 5;
+    public static int attackLow = 1;
+    public static int attackHigh = 20;
+    public static int level = 1;
+    public static inventory inv;
+
+    static {
+        try {
+            inv = new inventory();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ArrayList<Character> effects;
 
     // Players class. Used for spell lists and abilities
         /*
@@ -23,7 +32,7 @@ public class player {
          * r = rogue
          * c = cleric
          */
-        char characterClass;
+        public static char characterClass;
 
     public player( String n, char c) throws IOException {
         this.init(n, c);
