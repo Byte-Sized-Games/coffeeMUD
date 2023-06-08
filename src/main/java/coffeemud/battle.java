@@ -11,11 +11,11 @@ public class battle {
     uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ",
             colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
 
-    public battle(ArrayList<entities> p, ArrayList<entities> m, int pInitiative, int mInitiative) {
-        this.init(p, m, pInitiative, mInitiative);
+    public battle(ArrayList<entities> m, int pInitiative, int mInitiative) {
+        this.init(m, pInitiative, mInitiative);
     }
 
-    public void init(ArrayList<entities> p, ArrayList<entities> m, int pI, int mI) {
+    public void init(ArrayList<entities> m, int pI, int mI) {
         this.monsters = m;
         this.round = 0;
         this.playerInitiative = pI;
