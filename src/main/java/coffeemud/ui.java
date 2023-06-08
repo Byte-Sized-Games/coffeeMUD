@@ -22,6 +22,7 @@ public class ui {
 
     public static stage currentStage;
     public static TerminalScreen terminal;
+    public static boolean typing = false;
     public static TextGraphics textGraphics;
 
     public static class stage implements uiMethods {
@@ -53,7 +54,7 @@ public class ui {
             }
             textGraphics.putString(new TerminalPosition(0, 2), "You ♥" + 21/*health*/);
             textGraphics.putString(new TerminalPosition(0,3),"₤ " + /*money */ 12 );
-            textGraphics.putString(new TerminalPosition(0,4), "☒ " + /*max dealable damage*/ + 10);
+            textGraphics.putString(new TerminalPosition(0,4), "⮹ " + /*level*/ + 10);
             terminal.refresh();
         }
 
@@ -86,10 +87,6 @@ public class ui {
         }
 
     }
-
-    public void createMenu() {
-        logger.debug("Creating menu");
-    }
     public static class fightScene extends stage {
         public fightScene(String name, ArrayList<entities> monsters, status status, HashMap<String, Callable<Void>> menuItems) {
             super(status, menuItems);
@@ -110,7 +107,7 @@ public class ui {
             logger.debug("Drawing menu");
             for(byte i = 0; i < items.size(); i++) {
                 logger.debug("Drawing menu item "  + i);
-                textGraphics.putString(new TerminalPosition(0, rows - 5 + i), (selectedIndex == i ? "*": "> ") + " " + items.keySet().toArray()[i].toString() + " ");
+                textGraphics.putString(new TerminalPosition(0, rows - 6 + i), (selectedIndex == i ? "*": "> ") + " " + items.keySet().toArray()[i].toString() + " ");
             }
         }
         public void call() {
