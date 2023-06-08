@@ -8,11 +8,22 @@ import java.util.Random;
 public class entities{
         //the name of the monsters
         //phoenix bad
+        // die
         String name;
 
         //whether the character is a monster or not
         boolean monster;
 
+        ui.menu options;
+
+        // Players class. Used for spell lists and abilities
+        /*
+         * f = fighter
+         * w = wizard
+         * r = rogue
+         * c = cleric
+         */
+        char characterClass;
 
         // Effects on entity
         ArrayList<Character> effects;
@@ -44,6 +55,16 @@ public class entities{
         int heal;
 
         public void attack(player enemy){
+
+        }
+        public entities(String name, int health) {
+                this.name = name;
+                this.health = health;
+        }
+        public entities() {
+
+        }
+        public void attack(entities enemy){
                 Random random = new Random();
              int damage = attackMultip*(attackLow + (random.nextInt(attackHigh-attackLow))) - armour;
              if (damage < 0)
@@ -58,6 +79,9 @@ public class entities{
                         this.health += this.heal;
         }
 
+        public entities(String name, ui.menu options, boolean monster, int maxHealth) {
 
+        }
 
 }
+

@@ -33,11 +33,9 @@ public class main {
         }
         HashMap<String, Callable<Void>> menuThing = new HashMap<>();
         menuThing.put("Start Game", () -> {
-            logger.info("Piss ball");
             return null;
         });
         menuThing.put("Quit Game", () -> {
-            logger.info("Piss ball");
             System.exit(0);
             return null;
         });

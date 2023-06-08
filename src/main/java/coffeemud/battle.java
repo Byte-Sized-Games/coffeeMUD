@@ -3,19 +3,23 @@ package coffeemud;
 import java.util.ArrayList;
 
 public class battle {
-    player isekai;
+    ArrayList<entities> players;
     ArrayList<entities> monsters;
     int round;
     int playerInitiative;
     int monsterInitiative;
-    uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ",
-            colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
+    uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ", colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
 
     public battle(ArrayList<entities> m, int pInitiative, int mInitiative) {
         this.init(m, pInitiative, mInitiative);
     }
 
+<<<<<<< HEAD
     public void init(ArrayList<entities> m, int pI, int mI) {
+=======
+    public void init(ArrayList<entities> p, ArrayList<entities> m, int pI, int mI) {
+        this.players = p;
+>>>>>>> 70c3ef5ff2308b406db65a9c2881ef60e03f165d
         this.monsters = m;
         this.round = 0;
         this.playerInitiative = pI;
@@ -64,7 +68,7 @@ public class battle {
             if (isekai.health <= 0) {
                 isekai.die();
             }
-        
+
         for (entities i : monsters) {
             i.tempHP = i.tempHP / 4;
             for (char x : i.effects) {
