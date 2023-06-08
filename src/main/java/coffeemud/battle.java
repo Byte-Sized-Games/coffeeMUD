@@ -23,7 +23,7 @@ public class battle {
     }
 
     public void turn() {
-        checkEffects;
+//        checkEffects;
         if (playerInitiative >= monsterInitiative) {
             for (entities i : players) {
                 playerTurn(i);
@@ -77,7 +77,7 @@ public class battle {
         String target = bugCommand.substring(bugCommand.indexOf(" "));
         switch (command) {
             case "ATTACK":
-                player.attack(monsters.get(getMonster(target)));
+//                player.attack(monsters.get(getMonster(target)));
             case "CAST":
                 castSpell(target);
             case "DEFEND":

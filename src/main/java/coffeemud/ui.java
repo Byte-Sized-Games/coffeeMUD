@@ -6,11 +6,13 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.Callable;
 // ♥
-//
+// 🎒
+// 🏹
 public class ui {
     interface uiMethods {
         public void draw(byte rows, byte columns) throws IOException;
@@ -33,6 +35,10 @@ public class ui {
                 logger.info("Terminal unusable due to size");
                 return;
             }
+            ArrayList<entities> monsters = new ArrayList<>();
+            monsters.add(new entities("Goblin", 10));
+            byte iterator = 1;
+
             terminal.clear();
             headsUp(currentMessage, rows, columns);
             byte day = 0;
@@ -41,6 +47,13 @@ public class ui {
             textGraphics.putString(new TerminalPosition(0, 0), "Home");
             textGraphics.putString(new TerminalPosition(columns - days.length(), 0), days);
             menuItems.draw(rows);
+            for(entities monster : monsters) {
+                textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
+                iterator++;
+            }
+            textGraphics.putString(new TerminalPosition(0, 2), "You ♥" + 21/*health*/);
+            textGraphics.putString(new TerminalPosition(0,3),"₤ " + /*money */ 12 );
+            textGraphics.putString(new TerminalPosition(0,4), "☒ " + /*max dealable damage*/ + 10);
             terminal.refresh();
         }
 
@@ -53,7 +66,13 @@ public class ui {
 //        public Terminal buildTerminal;
         public static String currentMessage = "Welcome to Batatune II";
         public static void headsUp(String message, byte rows, byte columns) {
-            textGraphics.putString(new TerminalPosition(columns/2 - message.length()/2, rows - 7), (currentMessage = message));
+            byte lines = (byte) Math.ceil((double)message.length()/(double)columns);
+            String pushMsg;
+            for(byte i = 0; i < lines; i++) {
+                pushMsg = message.substring(i*(message.length()/lines),(i + 1) * message.length()/lines);
+                textGraphics.putString(new TerminalPosition(columns/2 - pushMsg.length()/2,rows - (10 - i)),pushMsg);
+            }
+//            textGraphics.putString(new TerminalPosition(columns/2 - message.length()/2, rows - 7), (currentMessage = message));
         }
         public status status;
 
