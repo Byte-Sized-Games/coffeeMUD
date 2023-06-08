@@ -2,7 +2,7 @@ package coffeemud;
 
 import java.util.Scanner;
 
-public class uiAlt {
+public class  uiAlt {
     // Used to display items to players
     public class display {
         prompt gamePrompt;
