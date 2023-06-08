@@ -22,26 +22,10 @@ public class battle {
         this.monsterInitiative = mI;
     }
 
-    public void turn() {
-        checkEffects();
-        if (playerInitiative >= monsterInitiative) {
-            playerTurn();
-            for (entities i : monsters) {
-                monsterTurn(i);
-            }
-        } else {
-            for (entities i : monsters) {
-                monsterTurn(i);
-            }
-            playerTurn();
-
-        }
-    }
-
     public void turn(String command) {
         checkEffects();
         if (playerInitiative >= monsterInitiative) {
-            playerTurn();
+            playerTurn(command);
             for (entities i : monsters) {
                 monsterTurn(i);
             }
@@ -49,7 +33,7 @@ public class battle {
             for (entities i : monsters) {
                 monsterTurn(i);
             }
-            playerTurn();
+            playerTurn(command);
         }
     }
 
@@ -79,26 +63,7 @@ public class battle {
         }
     }
 
-    public void playerTurn() {
-        String input = battlePrompt.read();
-        input = input.toUpperCase();
-        String command = input.substring(0, input.indexOf(" ") + 1);
-        String target = input.substring(input.indexOf(" "));
-        switch (command) {
-            case "ATTACK":
-            monsters.get(getMonster(target)).health -= isekai.attack();
-            case "CAST":
-                castSpell(target);
-            case "DEFEND":
-                isekai.armour += 2;
-            case "":
-                battlePrompt.print("No command chosen, please try again");
-            default:
-                battlePrompt.print("Command not recognized");
-        }
-    }
-
-    public void playerTurn(entities player, String bugCommand) {
+    public void playerTurn(String bugCommand) {
         String command = bugCommand.substring(0, bugCommand.indexOf(" ") + 1);
         String target = bugCommand.substring(bugCommand.indexOf(" "));
         switch (command) {

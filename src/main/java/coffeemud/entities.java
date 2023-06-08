@@ -35,7 +35,7 @@ public class entities{
         int health;
 
         // Bonus health, reset every round
-        int tempHP;
+        int tempHP = 0;
 
         //the maximum health of the entity
         int maxHealth;
@@ -46,20 +46,22 @@ public class entities{
         int attackHigh;
 
         //a higher or lower attack that will be done on some special turns
-        int attackMultip;
+        int attackMultip = 1;
 
         //a special thing that some monsters can do
-        spell specialAbility;
+        spell specialAbility = spellbook.wizard.spells[9];
 
         //if monsters can heal, they will heal by this much
-        int heal;
+        int heal = health/6;
 
         public void attack(player enemy){
 
         }
-        public entities(String name, int health) {
+        public entities(String name, int health, int low, int high, int prot) {
                 this.name = name;
-                this.health = health;
+                this.maxHealth = health;
+                this.health = this.maxHealth;
+                this.armour = prot;
         }
         public entities() {
 

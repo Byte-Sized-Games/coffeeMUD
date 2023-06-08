@@ -36,13 +36,13 @@ public class ui {
                 return;
             }
             ArrayList<entities> monsters = new ArrayList<>();
-            monsters.add(new entities("Goblin", 10));
+            monsters.add(monsterbook.goblin);
             byte iterator = 1;
 
             terminal.clear();
             headsUp(currentMessage, rows, columns);
             byte day = 0;
-            String days = "Day " + 1 + " of 7";
+            String days = "Day " + day + " of 7";
             textGraphics = terminal.newTextGraphics();
             textGraphics.putString(new TerminalPosition(0, 0), "Home");
             textGraphics.putString(new TerminalPosition(columns - days.length(), 0), days);
@@ -51,7 +51,7 @@ public class ui {
                 textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
                 iterator++;
             }
-            textGraphics.putString(new TerminalPosition(0, 2), "You ♥" + 21/*health*/);
+            textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + 21/*health*/);
             textGraphics.putString(new TerminalPosition(0,3),"₤ " + /*money */ 12 );
             textGraphics.putString(new TerminalPosition(0,4), "☒ " + /*max dealable damage*/ + 10);
             terminal.refresh();

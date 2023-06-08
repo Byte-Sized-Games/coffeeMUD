@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class player {
-    int health;
-    int maxHealth;
-    int tempHealth;
+    int health = 100;
+    int maxHealth = 100;
+    int tempHealth = 0;
     String name;
-    int armour;
-    int attackLow;
-    int attackHigh;
-    int level;
+    int armour = 5;
+    int attackLow = 1;
+    int attackHigh = 20;
+    int level = 1;
     inventory inv;
     ArrayList<Character> effects;
 
@@ -25,19 +25,13 @@ public class player {
          */
         char characterClass;
 
-    public player(int h, int mh, String n, int a, int al, int ah) throws IOException {
-        this.init(h, mh, n, a, al, ah);
+    public player( String n, char c) throws IOException {
+        this.init(n, c);
     }
 
-    public void init(int h, int mh, String n, int a, int al, int ah) throws IOException {
-        this.health = h;
-        this.maxHealth = mh;
+    public void init(String n, char c) throws IOException {
         this.name = n;
-        this.armour = a;
-        this.attackLow = al;
-        this.attackHigh = ah;
-        this.level = 0;
-        this.tempHealth = 0;
+        this.characterClass = c;
         this.inv = new inventory();
     }
 
@@ -51,5 +45,14 @@ public class player {
 
     public void die() {
         logger.info("You are dead.");
+    }
+
+    public void levelUP() {
+        level++;
+        this.maxHealth = maxHealth + (25*level);
+        this.health = maxHealth;
+        this.attackLow = 1*level;
+        this.attackHigh = 15*level;
+        this.armour = 5*level;
     }
 }
