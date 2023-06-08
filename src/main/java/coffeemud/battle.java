@@ -3,19 +3,19 @@ package coffeemud;
 import java.util.ArrayList;
 
 public class battle {
-    ArrayList<entities> players;
+    player isekai;
     ArrayList<entities> monsters;
     int round;
     int playerInitiative;
     int monsterInitiative;
-    uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ", colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
+    uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ",
+            colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
 
     public battle(ArrayList<entities> p, ArrayList<entities> m, int pInitiative, int mInitiative) {
         this.init(p, m, pInitiative, mInitiative);
     }
 
     public void init(ArrayList<entities> p, ArrayList<entities> m, int pI, int mI) {
-        this.players = p;
         this.monsters = m;
         this.round = 0;
         this.playerInitiative = pI;
@@ -23,11 +23,9 @@ public class battle {
     }
 
     public void turn() {
-        checkEffects;
+        checkEffects();
         if (playerInitiative >= monsterInitiative) {
-            for (entities i : players) {
-                playerTurn(i);
-            }
+            playerTurn();
             for (entities i : monsters) {
                 monsterTurn(i);
             }
@@ -35,36 +33,64 @@ public class battle {
             for (entities i : monsters) {
                 monsterTurn(i);
             }
-            for (entities i : players) {
-                playerTurn(i);
+            playerTurn();
+
+        }
+    }
+
+    public void turn(String command) {
+        checkEffects();
+        if (playerInitiative >= monsterInitiative) {
+            playerTurn();
+            for (entities i : monsters) {
+                monsterTurn(i);
             }
+        } else {
+            for (entities i : monsters) {
+                monsterTurn(i);
+            }
+            playerTurn();
         }
     }
 
     public void checkEffects() {
-        for (entities i : players) {
-            i.tempHP = i.tempHP/4;
-            for (char x : i.effects) {
-                switch(x) {
+            isekai.tempHealth = isekai.tempHealth / 4;
+            for (char x : isekai.effects) {
+                switch (x) {
                     case 'x':
-                        i.health =- 2;  
+                        isekai.health = -2;
                 }
+            }
+            if (isekai.health <= 0) {
+                isekai.die();
+            }
+        
+        for (entities i : monsters) {
+            i.tempHP = i.tempHP / 4;
+            for (char x : i.effects) {
+                switch (x) {
+                    case 'x':
+                        i.health = -2;
+                }
+            }
+            if (i.health <= 0) {
+                monsters.remove(i);
             }
         }
     }
 
-    public void playerTurn(entities player) {
+    public void playerTurn() {
         String input = battlePrompt.read();
         input = input.toUpperCase();
         String command = input.substring(0, input.indexOf(" ") + 1);
         String target = input.substring(input.indexOf(" "));
         switch (command) {
             case "ATTACK":
-                player.attack(monsters.get(getMonster(target)));
+            monsters.get(getMonster(target)).health -= isekai.attack();
             case "CAST":
-                castSpell(target, player);
+                castSpell(target);
             case "DEFEND":
-                players.get(getPlayer(target)).armour += 2;
+                isekai.armour += 2;
             case "":
                 battlePrompt.print("No command chosen, please try again");
             default:
@@ -72,16 +98,16 @@ public class battle {
         }
     }
 
-    public void playerTurn(String bugCommand) {
+    public void playerTurn(entities player, String bugCommand) {
         String command = bugCommand.substring(0, bugCommand.indexOf(" ") + 1);
         String target = bugCommand.substring(bugCommand.indexOf(" "));
         switch (command) {
             case "ATTACK":
-                player.attack(monsters.get(getMonster(target)));
+            monsters.get(getMonster(target)).health -= isekai.attack();
             case "CAST":
                 castSpell(target);
             case "DEFEND":
-                players.get(getPlayer(target)).armour += 2;
+                isekai.armour += 2;
             case "":
                 battlePrompt.print("No command chosen, please try again");
             default:
@@ -93,12 +119,12 @@ public class battle {
         if (monster.health <= (monster.maxHealth / 4)) {
             monster.health += monster.heal;
         } else {
-            monster.attack(players.get((int) (Math.random() * (players.size() - 1)) + 1));
+            monster.attack(isekai);
         }
     }
 
     public void castSpell(String target, entities player) {
-        spell targetSpell = getSpell(target, player.characterClass);
+        spell targetSpell = getSpell(target, isekai.characterClass);
         battlePrompt.print("Select your targets: ");
         String[] getTargets = battlePrompt.read().split(" ");
         ArrayList<entities> targets = new ArrayList<entities>();
@@ -107,6 +133,7 @@ public class battle {
         }
         targetSpell.cast(targets);
     }
+
     public void castSpell(String target) {
         spell targetSpell = spellbook.wizard.spells[0];
         battlePrompt.print("Select your targets: ");
@@ -129,24 +156,10 @@ public class battle {
         return i;
     }
 
-    public int getPlayer(String target) {
-        int i = 0;
-        for (entities x : players) {
-            if (x.name.equals(target)) {
-                break;
-            } else
-                i++;
-        }
-        return i;
-    }
-
     public int getEntities(String target) {
         ArrayList<entities> battleEntities = new ArrayList<entities>();
         int i = 0;
         for (entities x : monsters) {
-            battleEntities.add(x);
-        }
-        for (entities x : players) {
             battleEntities.add(x);
         }
         for (entities x : battleEntities) {

@@ -13,14 +13,6 @@ public class entities{
         //whether the character is a monster or not
         boolean monster;
 
-        // Players class. Used for spell lists and abilities
-        /*
-         * f = fighter
-         * w = wizard
-         * r = rogue
-         * c = cleric
-         */
-        char characterClass;
 
         // Effects on entity
         ArrayList<Character> effects;
@@ -51,7 +43,7 @@ public class entities{
         //if monsters can heal, they will heal by this much
         int heal;
 
-        public void attack(entities enemy){
+        public void attack(player enemy){
                 Random random = new Random();
              int damage = attackMultip*(attackLow + (random.nextInt(attackHigh-attackLow))) - armour;
              if (damage < 0)
