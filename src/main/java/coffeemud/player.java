@@ -15,14 +15,6 @@ public class player {
     public static int level = 1;
     public static inventory inv;
 
-    static {
-        try {
-            inv = new inventory();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static ArrayList<Character> effects;
 
     // Players class. Used for spell lists and abilities

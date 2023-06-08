@@ -121,14 +121,14 @@ public class inventory {
     // Getters
     public void saveInventory() throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        File file = new File(classLoader.getResource("src/main/resources/inventory.yaml").getFile());
+        File file = new File(Objects.requireNonNull(classLoader.getResource("src/main/resources/inventory.yaml")).getFile());
         ObjectMapper map = new ObjectMapper(new YAMLFactory());
         map.writeValue(file, this);
     }
 
     public static inventory getInventory() throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        File file = new File(classLoader.getResource("src/main/resources/inventory.yaml").getFile());
+        File file = new File(Objects.requireNonNull(classLoader.getResource("src/main/resources/inventory.yaml")).getFile());
         ObjectMapper map = new ObjectMapper(new YAMLFactory());
         return map.readValue(file, inventory.class);
     }

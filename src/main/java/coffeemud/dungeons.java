@@ -3,20 +3,27 @@ package coffeemud;
 import java.util.Random;
 
 public class dungeons {
-    public class roomTraps extends spell {
-
-    }
     public static class room {
-        public String name;
+        public static String name;
+        public static boolean battle;
+        public static boolean empty;
         entities[] monsters; // Monsters in room
-        roomTraps[] traps; // Any potential traps
         int gold; // Gold gained for beating room
+
+        public room(String n, boolean b, boolean e,entities[] m) {
+            name = n;
+            battle = b;
+            empty = e;
+            monsters = m;
+            gold = 10;
+        }
         public void describe() {
 
         }
+
     }
     
-    room[][] dungeonRooms;
+    public static room[][] dungeonRooms = new room[20][20];
     public static room currentRoom;
     int x;
     int y;
@@ -30,6 +37,13 @@ public class dungeons {
                 currentRoom = dungeonRooms[x+1][y];
             case 'w':
                 currentRoom = dungeonRooms[x-1][y];
+        }
+    }
+    public void genDungeon() {
+        for (int i = 0; i < 20; i++) {
+            for (int y = 0; y < 20; y++) {
+                dungeonRooms[i][y] = new room();
+            }
         }
     }
 }
