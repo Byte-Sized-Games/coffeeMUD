@@ -48,7 +48,7 @@ public class battle {
             if (isekai.health <= 0) {
                 isekai.die();
             }
-        
+
         for (entities i : monsters) {
             i.tempHP = i.tempHP / 4;
             for (char x : i.effects) {
