@@ -1,5 +1,7 @@
 package coffeemud;
 
+import java.util.Random;
+
 public class dungeons {
     public class roomTraps extends spell {
 
@@ -9,6 +11,9 @@ public class dungeons {
         entities[] monsters; // Monsters in room
         roomTraps[] traps; // Any potential traps
         int gold; // Gold gained for beating room
+        public void describe() {
+
+        }
     }
     
     room[][] dungeonRooms;

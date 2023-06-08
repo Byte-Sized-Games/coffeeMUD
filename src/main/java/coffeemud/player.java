@@ -43,7 +43,7 @@ public class player {
 
     public int attack() {
         Random random = new Random();
-        int damage = level * (attackLow + (random.nextInt(attackHigh - attackLow))) - armour;
+        int damage = level * (attackLow + (random.nextInt(attackHigh - attackLow)));
         if (damage < 0)
             damage = 0;
         return damage;
