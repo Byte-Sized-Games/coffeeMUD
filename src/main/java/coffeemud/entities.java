@@ -54,6 +54,9 @@ public class entities{
         //if monsters can heal, they will heal by this much
         int heal;
 
+        public void attack(player enemy){
+
+        }
         public entities(String name, int health) {
                 this.name = name;
                 this.health = health;
