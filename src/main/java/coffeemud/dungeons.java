@@ -3,7 +3,7 @@ package coffeemud;
 import java.util.Random;
 
 public class dungeons {
-    public class roomTraps extends spell {
+    public class roomTraps {
         //all traps are a math problem that has to be solved
         String description; //so the problem can be identified
         String problem; //the problem to solve
@@ -15,10 +15,10 @@ public class dungeons {
         number representing difficulty (1-4),
         second lowercase letter if there are multiple questions with the same area and difficulty
 
-        Areas of math: (A)lgebra, (G)raphing/geometry, (C)alculations/arithmatic
+        Areas of math: (A)lgebra, g(R)aphing/geometry, (C)alculations/arithmatic
 
          */
-        String[][] chooseProblem = {
+        public static String[][] chooseProblem = {
                 {"C1a", "Calculate 40+3", "43"},
                 {"C1b", "Calculate 9/3", "3"},
                 {"C1c", "Calculate 2.5 - 1.5", "1"},
@@ -74,11 +74,45 @@ public class dungeons {
 
     }
     public class room {
+        boolean complete;
         entities[] monsters; // Monsters in room
-        roomTraps[] traps; // Any potential traps
+        String[][] traps; // Any potential traps
         int gold; // Gold gained for beating room
-        public void describe() {
-
+        String description;
+        public room() {
+            Random rand = new Random();
+            int maxEntities = rand.nextInt((3 - 0) + 1) + 0;
+            if (maxEntities == 0) {
+                int maxTraps = rand.nextInt((2 - 1) + 1) + 1;
+                for (int i = 0; i < maxTraps; i++) {
+                    traps[i] = roomTraps.chooseProblem[rand.nextInt(((roomTraps.chooseProblem.length-1) + 0) + 1) + 0];
+                }
+                gold = rand.nextInt((50 - 5) + 1) + 5;
+            } else {
+                for (int i = 0; i < maxEntities; i++) {
+                    int x = rand.nextInt((4 - 0) + 1) + 0;
+                    switch(x) {
+                        case 0:
+                        monsters[i] = monsterbook.bat;
+                        case 1:
+                        monsters[i] = monsterbook.goblin;
+                        case 2:
+                        monsters[i] = monsterbook.skeleton;
+                        case 3:
+                        monsters[i] = monsterbook.troll;
+                        case 4:
+                        monsters[i] = monsterbook.witch;
+                    }
+                    gold = rand.nextInt((50 - 5) + 1) + 5;
+                }
+            }
+            complete = false;
+            
+        }
+        public int giveGold() {
+            if (complete) {
+                return gold;
+            } else return 0;
         }
 
     }
@@ -103,7 +137,7 @@ public class dungeons {
     public void genDungeon() {
         for (int i = 0; i < 20; i++) {
             for (int y = 0; y < 20; y++) {
-//                dungeonRooms[i][y] = new room();
+                dungeonRooms[i][y] = new room();
             }
         }
     }
