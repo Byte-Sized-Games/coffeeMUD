@@ -40,10 +40,16 @@ public class player {
 
     public void levelUP() {
         level++;
-        this.maxHealth = maxHealth + (25*level);
-        this.health = maxHealth;
-        this.attackLow = 1*level;
-        this.attackHigh = 15*level;
-        this.armour = 5*level;
+        maxHealth = maxHealth + (25*level);
+        health = maxHealth;
+        attackLow = 1*level;
+        attackHigh = 15*level;
+        armour = 5*level;
+        try {
+            inv = new inventory();
+        }
+        catch(IOException e) {
+            System.exit(1);
+        }
     }
 }
