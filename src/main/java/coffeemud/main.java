@@ -50,7 +50,7 @@ public class main {
             }
         }
 //        dungeons.currentRoom.name = "Home";
-        Terminal terminalThing = new DefaultTerminalFactory().createTerminal();
+        Terminal terminalThing = new DefaultTerminalFactory().createTerminalEmulator();
         ui.terminal = new TerminalScreen(terminalThing);
         ui.textGraphics = ui.terminal.newTextGraphics();
         ui.terminal.startScreen();
