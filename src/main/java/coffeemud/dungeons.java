@@ -168,14 +168,23 @@ public class dungeons {
     public void moveRooms(char dir) {
         switch (dir) {
             case 'n':
-                currentRoom = dungeonRooms[x][(y + 1)];
+            if (y > 19) {
+                y = 19;
+            } else y++;
             case 's':
-                currentRoom = dungeonRooms[x][(y - 1)];
+            if (y < 0) {
+                y = 0;
+            } else y--;
             case 'e':
-                currentRoom = dungeonRooms[x + 1][y];
+            if (x > 19) {
+                x = 19;
+            } else x++;
             case 'w':
-                currentRoom = dungeonRooms[x - 1][y];
+            if (x < 0) {
+                x = 0;
+            } else x--;
         }
+        currentRoom = dungeonRooms[x][y];
     }
 
     public void genDungeon() {
@@ -187,6 +196,9 @@ public class dungeons {
     }
     public dungeons() {
         genDungeon();
+        x = 9;
+        y = 9;
+        currentRoom = dungeonRooms[x][y];
     }
     public int randRange(int low, int high) {
         Random rand = new Random();
