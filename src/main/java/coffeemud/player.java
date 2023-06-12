@@ -14,6 +14,7 @@ public class player {
     public static int attackHigh = 20;
     public static int level = 1;
     public static inventory inv;
+    
 
     public static ArrayList<Character> effects;
 
@@ -25,6 +26,16 @@ public class player {
          * c = cleric
          */
         public static char characterClass;
+
+    public player(char c) {
+        characterClass = c;
+        try {
+            inv = new inventory();
+        }
+        catch(IOException e) {
+            logger.info(e.getMessage());
+        }
+    }
 
     public int attack() {
         Random random = new Random();
@@ -45,11 +56,5 @@ public class player {
         attackLow = 1*level;
         attackHigh = 15*level;
         armour = 5*level;
-        try {
-            inv = new inventory();
-        }
-        catch(IOException e) {
-            logger.info(e.getMessage());
-        }
     }
 }
