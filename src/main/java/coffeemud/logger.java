@@ -10,4 +10,7 @@ public class logger {
             info(colours.blue + message);
         }
     }
+    public static void error(String message) {
+        System.out.println(colours.red + "[ERROR]\t" + message + colours.reset);
+    }
 }
