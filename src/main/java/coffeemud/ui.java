@@ -2,6 +2,7 @@ package coffeemud;
 
 
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
@@ -29,7 +30,7 @@ public class ui {
         public menu menuItems = new menu();
         public void updateMenu(menu menu) throws IOException {
             menuItems = menu;
-            draw((byte) terminal.getTerminalSize().getRows(), (byte) terminal.getTerminalSize().getColumns());
+            draw((short) terminal.getTerminalSize().getRows(), (short) terminal.getTerminalSize().getColumns());
         }
         public void draw(short rows, short columns) throws IOException {
             logger.debug("Columns " + columns + " " + (columns < 60));
@@ -50,7 +51,7 @@ public class ui {
             byte day = 0;
             String days = "Day " + day + " of 7";
             textGraphics = terminal.newTextGraphics();
-            textGraphics.putString(new TerminalPosition(0, 0), "Home");
+            textGraphics.putString(new TerminalPosition(0, 0), TextColor.ANSI.BLUE + dungeons.currentRoom.name);
             textGraphics.putString(new TerminalPosition(columns - days.length(), 0), days);
             menuItems.draw(rows);
             for(entities monster : monsters) {
@@ -140,9 +141,4 @@ public class ui {
 //    public stage createStage() {
 //        return new stage(new status());
 //    }
-    public static void show(stage stage) throws IOException, InterruptedException {
-        String cmd = "echo \"$LINES\""; // Replace with your desired command
-
-        Process process = new ProcessBuilder("/bin/bash", "-c", cmd).start();
-    }
 }

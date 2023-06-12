@@ -49,11 +49,12 @@ public class main {
                     break;
             }
         }
-
-        Terminal terminalThing = new DefaultTerminalFactory().createTerminalEmulator();
+        dungeons.currentRoom.name = "Home";
+        Terminal terminalThing = new DefaultTerminalFactory().createTerminal();
         ui.terminal = new TerminalScreen(terminalThing);
         ui.textGraphics = ui.terminal.newTextGraphics();
         ui.terminal.startScreen();
+        ui.terminal.setCursorPosition(new TerminalPosition(100,terminalThing.getTerminalSize().getRows() +2));
         titleScreen();
         doResizeStuff(terminalThing, terminalThing.getTerminalSize());
         terminalThing.addResizeListener(main::doResizeStuff);
