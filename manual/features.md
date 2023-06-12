@@ -16,5 +16,4 @@
 - 100% free and open source
 - procedurally generated world
 - trap system with challenging & engaging math problems
-- user-extensible & persistent spell system
 - alternate UI for classic RPG fans
