@@ -15,7 +15,7 @@ public class dungeons {
         number representing difficulty (1-4),
         second lowercase letter if there are multiple questions with the same area and difficulty
 
-        Areas of math: (A)lgebra, (G)raphing/geometry, (C)alculations/arithmatic
+        Areas of math: (A)lgebra, g(R)aphing/geometry, (C)alculations/arithmatic
 
          */
         public static String[][] chooseProblem = {
