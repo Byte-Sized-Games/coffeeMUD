@@ -39,10 +39,12 @@ public class main {
         ui.currentStage = new ui.stage(new ui.status(),menuThing);
     }
     public static void main(String[] args) throws IOException {
+        logger.debuggable = false;
         for (String arg : args) {
             switch (arg) {
                 case "--debug":
                     logger.debug("Debug mode enabled");
+                    logger.debuggable = true;
                     break;
                 default:
                     logger.info("Unknown argument: " + arg);
