@@ -49,7 +49,7 @@ public class main {
                     break;
             }
         }
-        dungeons.currentRoom.name = "Home";
+//        dungeons.currentRoom.name = "Home";
         Terminal terminalThing = new DefaultTerminalFactory().createTerminal();
         ui.terminal = new TerminalScreen(terminalThing);
         ui.textGraphics = ui.terminal.newTextGraphics();
@@ -76,7 +76,7 @@ public class main {
                         }
                         case ' ', '\n' -> ui.currentStage.menuItems.call();
                     }
-                    ui.currentStage.menuItems.draw((byte) ui.terminal.getTerminalSize().getRows());
+                    ui.currentStage.menuItems.draw((short) ui.terminal.getTerminalSize().getRows());
                 } else {
                     char character = keyStroke.getCharacter();
                     if(character == '\n') {

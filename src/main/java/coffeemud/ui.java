@@ -51,7 +51,7 @@ public class ui {
             byte day = 0;
             String days = "Day " + day + " of 7";
             textGraphics = terminal.newTextGraphics();
-            textGraphics.putString(new TerminalPosition(0, 0), TextColor.ANSI.BLUE + dungeons.currentRoom.name);
+            textGraphics.putString(new TerminalPosition(0, 0), TextColor.ANSI.BLUE + "Home");
             textGraphics.putString(new TerminalPosition(columns - days.length(), 0), days);
             menuItems.draw(rows);
             for(entities monster : monsters) {
@@ -74,11 +74,12 @@ public class ui {
 //        public Terminal buildTerminal;
         public static String currentMessage = "Welcome to Batatune II, Mr. Hudson! Remember to check out our manual and demo video for a full rundown of the features. Feel free to contact us with any questions you may have.";
         public static void headsUp(String message, short rows, short columns) {
-            byte lines = (byte) Math.ceil((double)message.length()/(double)columns);
+            short lines = (short) Math.ceil((double)message.length()/(double)columns);
             String pushMsg;
             for(byte i = 0; i < lines; i++) {
                 pushMsg = message.substring(i*(message.length()/lines),(i + 1) * message.length()/lines);
                 textGraphics.putString(new TerminalPosition(columns/2 - pushMsg.length()/2,rows - (10 - i)),pushMsg);
+
             }
 //            textGraphics.putString(new TerminalPosition(columns/2 - message.length()/2, rows - 7), (currentMessage = message));
         }
@@ -115,6 +116,7 @@ public class ui {
             for(byte i = 0; i < items.size(); i++) {
                 logger.debug("Drawing menu item "  + i);
                 textGraphics.putString(new TerminalPosition(0, rows - 6 + i), (selectedIndex == i ? "*": "> ") + " " + items.keySet().toArray()[i].toString() + " ");
+                if(selectedIndex == i) terminal.setCursorPosition(new TerminalPosition(0, rows - 6 + i));
             }
         }
         public void call() {

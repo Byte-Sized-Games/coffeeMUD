@@ -8,7 +8,7 @@ public class credits {
     static Callable<Void> filler = () -> {
         return null;
     };
-    static String[] credits = {"Frontend by Phoenix Barr", "Backend by Michael Ward, Phoenix Barr, and Brandon Thomas", "Gameplay design by Brandon Thomas","Awful terminal graphics library that barely works by the Lanterna developers"};
+    static String[] credits = {"Frontend by Phoenix Barr", "Backend by Michael Ward, Phoenix Barr, and Brandon Thomas", "Gameplay design by Brandon Thomas and Michael Ward","Awful terminal graphics library that barely works by the Lanterna developers"};
     static HashMap<String, Callable<Void>> menu = new HashMap<>();
     public static void show() throws IOException {
         for(String credit : credits) menu.put(credit, filler);
