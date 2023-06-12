@@ -15,11 +15,28 @@ public class main {
     public static void doResizeStuff(Terminal terminal, TerminalSize terminalSize) {
         try {
             ui.terminal.doResizeIfNecessary();
-            ui.currentStage.draw((byte) terminalSize.getRows(), (byte) terminalSize.getColumns());
+            ui.currentStage.draw((short) terminalSize.getRows(), (short) terminalSize.getColumns());
             logger.debug(terminalSize.getColumns() + "");
+            logger.debug(terminalSize.getRows() + "");
+            logger.debug((terminalSize.getColumns() < 60 || terminalSize.getRows() < 20) + "");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void titleScreen() {
+        HashMap<String, Callable<Void>> menuThing = new HashMap<>();
+        menuThing.put("Start Game", () -> {
+            return null;
+        });
+        menuThing.put("Quit Game", () -> {
+            System.exit(0);
+            return null;
+        });
+        menuThing.put("Credits", () -> {
+            credits.show();
+            return null;
+        });
+        ui.currentStage = new ui.stage(new ui.status(),menuThing);
     }
     public static void main(String[] args) throws IOException {
         for (String arg : args) {
@@ -32,32 +49,13 @@ public class main {
                     break;
             }
         }
-        HashMap<String, Callable<Void>> menuThing = new HashMap<>();
-        menuThing.put("Start Game", () -> {
-            return null;
-        });
-        menuThing.put("Quit Game", () -> {
-            System.exit(0);
-            return null;
-        });
-        menuThing.put("Credits", () -> {
-            HashMap<String, Callable<Void>> items1 = new HashMap<>();
-//            items1.putAll(new String[] {"Frontend by Phoenix Barr","Backend by Michael Ward and Brandon Thomas","Concept and story by Michael Ward"},Callable[]);
-
-            ui.currentStage = new ui.stage(new ui.status(),items1);
-            return null;
-        });
-        menuThing.put("Fortnite balls", () -> {
-            return null;
-        });
-        menuThing.put("Fortnite ballasds", () -> {
-            return null;
-        });
-        Terminal terminalThing = new DefaultTerminalFactory().createTerminalEmulator();
+        dungeons.currentRoom.name = "Home";
+        Terminal terminalThing = new DefaultTerminalFactory().createTerminal();
         ui.terminal = new TerminalScreen(terminalThing);
         ui.textGraphics = ui.terminal.newTextGraphics();
         ui.terminal.startScreen();
-        ui.currentStage = new ui.stage(new ui.status(),menuThing);
+        ui.terminal.setCursorPosition(new TerminalPosition(100,terminalThing.getTerminalSize().getRows() +2));
+        titleScreen();
         doResizeStuff(terminalThing, terminalThing.getTerminalSize());
         terminalThing.addResizeListener(main::doResizeStuff);
         KeyStroke keyStroke;

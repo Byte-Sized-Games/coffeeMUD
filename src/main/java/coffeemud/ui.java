@@ -2,6 +2,7 @@ package coffeemud;
 
 
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
@@ -15,7 +16,7 @@ import java.util.concurrent.Callable;
 // 🏹
 public class ui {
     interface uiMethods {
-        public void draw(byte rows, byte columns) throws IOException;
+        public void draw(short rows, short columns) throws IOException;
 
         public void update();
     }
@@ -29,15 +30,20 @@ public class ui {
         public menu menuItems = new menu();
         public void updateMenu(menu menu) throws IOException {
             menuItems = menu;
-            draw((byte) terminal.getTerminalSize().getRows(), (byte) terminal.getTerminalSize().getColumns());
+            draw((short) terminal.getTerminalSize().getRows(), (short) terminal.getTerminalSize().getColumns());
         }
-        public void draw(byte rows, byte columns) throws IOException {
-            if (columns < 20 || rows < 10) {
+        public void draw(short rows, short columns) throws IOException {
+            logger.debug("Columns " + columns + " " + (columns < 60));
+            if (columns < 60 || rows < 20) {
                 logger.info("Terminal unusable due to size");
                 return;
             }
             ArrayList<entities> monsters = new ArrayList<>();
             monsters.add(monsterbook.goblin);
+            monsters.add(monsterbook.troll);
+            monsters.add(monsterbook.witch);
+            monsters.add(monsterbook.skeleton);
+            monsters.add(monsterbook.skeleton);
             byte iterator = 1;
 
             terminal.clear();
@@ -45,16 +51,16 @@ public class ui {
             byte day = 0;
             String days = "Day " + day + " of 7";
             textGraphics = terminal.newTextGraphics();
-            textGraphics.putString(new TerminalPosition(0, 0), "Home");
+            textGraphics.putString(new TerminalPosition(0, 0), TextColor.ANSI.BLUE + dungeons.currentRoom.name);
             textGraphics.putString(new TerminalPosition(columns - days.length(), 0), days);
             menuItems.draw(rows);
             for(entities monster : monsters) {
                 textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
                 iterator++;
             }
-            player.inv = new inventory();
+//            player.inv = new inventory();
             textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + player.health);
-            textGraphics.putString(new TerminalPosition(0,3),"G " + player.inv.gold);
+//            textGraphics.putString(new TerminalPosition(0,3),"G " + player.inv.gold);
             textGraphics.putString(new TerminalPosition(0,4), "⮹ " + player.level);
             terminal.refresh();
         }
@@ -66,8 +72,8 @@ public class ui {
 
         public String name;
 //        public Terminal buildTerminal;
-        public static String currentMessage = "Welcome to Batatune II";
-        public static void headsUp(String message, byte rows, byte columns) {
+        public static String currentMessage = "Welcome to Batatune II, Mr. Hudson! Remember to check out our manual and demo video for a full rundown of the features. Feel free to contact us with any questions you may have.";
+        public static void headsUp(String message, short rows, short columns) {
             byte lines = (byte) Math.ceil((double)message.length()/(double)columns);
             String pushMsg;
             for(byte i = 0; i < lines; i++) {
@@ -104,7 +110,7 @@ public class ui {
         public menu() {
             this.items = new HashMap<>();
         }
-        public void draw(byte rows) {
+        public void draw(short rows) {
             logger.debug("Drawing menu");
             for(byte i = 0; i < items.size(); i++) {
                 logger.debug("Drawing menu item "  + i);
@@ -135,9 +141,4 @@ public class ui {
 //    public stage createStage() {
 //        return new stage(new status());
 //    }
-    public static void show(stage stage) throws IOException, InterruptedException {
-        String cmd = "echo \"$LINES\""; // Replace with your desired command
-
-        Process process = new ProcessBuilder("/bin/bash", "-c", cmd).start();
-    }
 }
