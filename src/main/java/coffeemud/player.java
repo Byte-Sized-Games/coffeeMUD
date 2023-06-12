@@ -26,16 +26,6 @@ public class player {
          */
         public static char characterClass;
 
-    public player( String n, char c) throws IOException {
-        this.init(n, c);
-    }
-
-    public void init(String n, char c) throws IOException {
-        this.name = n;
-        this.characterClass = c;
-        this.inv = new inventory();
-    }
-
     public int attack() {
         Random random = new Random();
         int damage = level * (attackLow + (random.nextInt(attackHigh - attackLow)));
