@@ -42,7 +42,7 @@ public class dungeons {
     public void genDungeon() {
         for (int i = 0; i < 20; i++) {
             for (int y = 0; y < 20; y++) {
-                dungeonRooms[i][y] = new room();
+//                dungeonRooms[i][y] = new room();
             }
         }
     }
