@@ -49,7 +49,7 @@ public class player {
             inv = new inventory();
         }
         catch(IOException e) {
-            System.exit(1);
+            logger.info(e.getMessage());
         }
     }
 }
