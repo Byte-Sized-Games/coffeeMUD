@@ -26,6 +26,7 @@ public class main {
     public static void titleScreen() {
         HashMap<String, Callable<Void>> menuThing = new HashMap<>();
         menuThing.put("Start Game", () -> {
+            game.start();
             return null;
         });
         menuThing.put("Quit Game", () -> {
