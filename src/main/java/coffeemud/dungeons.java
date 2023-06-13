@@ -169,15 +169,31 @@ public class dungeons {
     public void moveRooms(int dir) {
         switch (dir) {
             case 1:
+                if (y == 19) {
+                    y = 18;
+                    logger.error("You have reached a wall. You cannot go any further");
+                }
                 y = y + 1;
                 break;
             case 4:
+                if (y == 0) {
+                    y = 1;
+                    logger.error("You have reached a wall. You cannot go any further");
+                }
                 y = y - 1;
                 break;
             case 2:
+                if (x == 19) {
+                    x = 18;
+                    logger.error("You have reached a wall. You cannot go any further");
+                }
                 x = x + 1;
                 break;
             case 3:
+                if (x == 0) {
+                    x = 1;
+                    logger.error("You have reached a wall. You cannot go any further");
+                }
                 x = x - 1;
                 break;
             default:
