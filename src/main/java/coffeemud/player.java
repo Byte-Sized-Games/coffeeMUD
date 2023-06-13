@@ -13,7 +13,7 @@ public class player {
     public static int attackLow = 1;
     public static int attackHigh = 20;
     public static int level = 1;
-    public static inventory inv;
+    // public static inventory inv;
     
 
     public static ArrayList<Character> effects;
@@ -29,12 +29,12 @@ public class player {
 
     public player(char c) {
         characterClass = c;
-        try {
+        /*try {
             inv = new inventory();
         }
         catch(IOException e) {
             logger.info(e.getMessage());
-        }
+        }*/
     }
 
     public int attack() {
