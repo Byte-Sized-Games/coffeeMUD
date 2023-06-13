@@ -11,11 +11,13 @@ public class game {
     static String name;
     static player protag;
     static dungeons gameDungeon;
+    public static int pX = 9;
+    public static int pY = 9;
 
     public static void start() throws IOException{
         // Load dungeon & player
         logger.debug("Starting game");
-        gameDungeon = new dungeons();
+        gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
         for (int i = 0; i < gameDungeon.dungeonRooms.length ; i++) {
             for (int x = 0; x < gameDungeon.dungeonRooms[i].length; x++) {
@@ -46,6 +48,11 @@ public class game {
         dungeonMenu.put("South", () -> {
             gameDungeon.moveRooms(4);
             update(dungeonMenu);
+            return null;
+        });
+        dungeonMenu.put("Quit", () -> {
+            main.titleScreen();
+            ui.currentStage.draw((short) ui.terminal.getTerminalSize().getRows(), (short) ui.terminal.getTerminalSize().getColumns());
             return null;
         });
         update(dungeonMenu);
