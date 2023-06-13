@@ -72,26 +72,45 @@ public class game {
         HashMap<String, Callable<Void>> dungeonMenu = new HashMap<>();
         dungeonMenu.put("North", () -> {
             gameDungeon.moveRooms(1);
-            update(dungeonMenu, "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            Thread.sleep(2 * 1000);
+            update(mainMenu());
             return null;
         });
         dungeonMenu.put("East", () -> {
             gameDungeon.moveRooms(2);
-            update(dungeonMenu, "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            Thread.sleep(2 * 1000);
+            update(mainMenu());
             return null;
         });
         dungeonMenu.put("West", () -> {
             gameDungeon.moveRooms(3);
-            update(dungeonMenu, "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            Thread.sleep(2 * 1000);
+            update(mainMenu());
             return null;
         });
         dungeonMenu.put("South", () -> {
             gameDungeon.moveRooms(4);
-            update(dungeonMenu, "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+            Thread.sleep(2 * 1000);
+            update(mainMenu());
             return null;
         });
         dungeonMenu.put("Back", () -> {
             update(mainMenu());
+            return null;
+        });
+        return dungeonMenu;
+    }
+    public static HashMap<String, Callable<Void>> blankMenu() {
+        HashMap<String, Callable<Void>> dungeonMenu = new HashMap<>();
+        dungeonMenu.put(" ", () -> {
+            return null;
+        });
+        dungeonMenu.put(" ", () -> {
+
             return null;
         });
         return dungeonMenu;
