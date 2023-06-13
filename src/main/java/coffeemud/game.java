@@ -14,18 +14,18 @@ public class game {
 
     public static void start() throws IOException{
         // Load dungeon & player
-        logger.info("Starting game");
+        logger.debug("Starting game");
         gameDungeon = new dungeons();
-        logger.info("Generating dungeons");
+        logger.debug("Generating dungeons");
         for (int i = 0; i < gameDungeon.dungeonRooms.length ; i++) {
             for (int x = 0; x < gameDungeon.dungeonRooms[i].length; x++) {
-                logger.info("x:"+ i + ", y:" + x + " | " + gameDungeon.dungeonRooms[i][x].description);
+                logger.debug("x:"+ i + ", y:" + x + " | " + gameDungeon.dungeonRooms[i][x].description);
             }
         }
-        logger.info("Dungeons generated");
-        logger.info("Loading Player");
+        logger.debug("Dungeons generated");
+        logger.debug("Loading Player");
         protag = new player('f');
-        logger.info("Player loaded");
+        logger.debug("Player loaded");
         // Init graphics
         HashMap<String, Callable<Void>> dungeonMenu = new HashMap<>();
         dungeonMenu.put("North", () -> {
