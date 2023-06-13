@@ -82,8 +82,9 @@ public class dungeons {
                         "100" },
 
         };
+
         public roomTraps() {
-            int probNumb = randRange(0, chooseProblem.length -1);
+            int probNumb = randRange(0, chooseProblem.length - 1);
             problem = chooseProblem[probNumb][1];
             answer = chooseProblem[probNumb][2];
             description = chooseProblem[probNumb][0];
@@ -144,7 +145,8 @@ public class dungeons {
         }
 
         public String setDescription(int monsters, int traps) {
-            String[] adjective = { "Fancy", "Dusty", "Old", "Well Kept", "Grimey", "Odd", "Suspicious", "Magical", "Overgrown", "Warm", "Cold", "Freezing", "Burning", "Dark", "Bright"};
+            String[] adjective = { "Fancy", "Dusty", "Old", "Well Kept", "Grimey", "Odd", "Suspicious", "Magical",
+                    "Overgrown", "Warm", "Cold", "Freezing", "Burning", "Dark", "Bright" };
             StringBuilder desc = new StringBuilder("The room is " + adjective[randRange(0, adjective.length - 1)]);
             if (monsters == 0 && traps > 0) {
                 desc.append(", there appear to be " + traps + " traps that you'll need to solve to get through.");
@@ -157,7 +159,6 @@ public class dungeons {
             return desc.toString();
         }
 
-
     }
 
     room[][] dungeonRooms = new room[20][20];
@@ -168,23 +169,18 @@ public class dungeons {
     public void moveRooms(char dir) {
         switch (dir) {
             case 'n':
-            if (y > 19) {
-                y = 19;
-            } else y++;
+                y++;
             case 's':
-            if (y < 0) {
-                y = 0;
-            } else y--;
+                y--;
             case 'e':
-            if (x > 19) {
-                x = 19;
-            } else x++;
+                x++;
             case 'w':
-            if (x < 0) {
-                x = 0;
-            } else x--;
+                x--;
+            default:
+                logger.error("No input given");
         }
         currentRoom = dungeonRooms[x][y];
+        logger.info("X: " + x + ", Y: " + y + " [Desc]\t" + currentRoom.description);
     }
 
     public void genDungeon() {
@@ -194,12 +190,14 @@ public class dungeons {
             }
         }
     }
+
     public dungeons() {
         genDungeon();
         x = 9;
         y = 9;
         currentRoom = dungeonRooms[x][y];
     }
+
     public int randRange(int low, int high) {
         Random rand = new Random();
         return rand.nextInt((high - low) + 1) + low;
