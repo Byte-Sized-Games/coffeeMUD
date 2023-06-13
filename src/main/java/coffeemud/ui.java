@@ -88,7 +88,7 @@ public class ui {
         }
 
         public String name;
-        public static String currentMessage = "Welcome to Batatune II, Mr. Hudson! Remember to check out our manual and demo video for a full rundown of the features. Feel free to contact us with any questions you may have.";
+        public static String currentMessage = "Best Dungeon System Movement";
 
         // Draw the heads-up display with a given message
         public static void headsUp(String message, short rows, short columns) {

@@ -42,6 +42,7 @@ public class main {
             credits.show();
             return null;
         });
+        ui.stage.currentMessage = "Welcome to Batatune II, Mr. Hudson! Remember to check out our manual and demo video for a full rundown of the features. Feel free to contact us with any questions you may have.";
         ui.currentStage = new ui.stage(new ui.status(), menuThing);
     }
 
