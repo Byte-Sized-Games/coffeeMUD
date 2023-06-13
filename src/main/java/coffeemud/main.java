@@ -49,7 +49,7 @@ public class main {
         logger.debuggable = false;
         for (String arg : args) {
             switch (arg) {
-                case "--debug":
+                case "--debug", "-D", "-d":
                     logger.debug("Debug mode enabled");
                     logger.debuggable = true;
                     break;
