@@ -166,16 +166,20 @@ public class dungeons {
     int x;
     int y;
 
-    public void moveRooms(char dir) {
+    public void moveRooms(int dir) {
         switch (dir) {
-            case 'n':
-                y++;
-            case 's':
-                y--;
-            case 'e':
-                x++;
-            case 'w':
-                x--;
+            case 1:
+                y = y + 1;
+                break;
+            case 4:
+                y = y - 1;
+                break;
+            case 2:
+                x = x + 1;
+                break;
+            case 3:
+                x = x - 1;
+                break;
             default:
                 logger.error("No input given");
         }

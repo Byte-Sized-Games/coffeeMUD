@@ -29,22 +29,22 @@ public class game {
         // Init graphics
         HashMap<String, Callable<Void>> dungeonMenu = new HashMap<>();
         dungeonMenu.put("North", () -> {
-            gameDungeon.moveRooms('n');
+            gameDungeon.moveRooms(1);
             update(dungeonMenu);
             return null;
         });
         dungeonMenu.put("East", () -> {
-            gameDungeon.moveRooms('e');
+            gameDungeon.moveRooms(2);
             update(dungeonMenu);
             return null;
         });
         dungeonMenu.put("West", () -> {
-            gameDungeon.moveRooms('w');
+            gameDungeon.moveRooms(3);
             update(dungeonMenu);
             return null;
         });
         dungeonMenu.put("South", () -> {
-            gameDungeon.moveRooms('s');
+            gameDungeon.moveRooms(4);
             update(dungeonMenu);
             return null;
         });
