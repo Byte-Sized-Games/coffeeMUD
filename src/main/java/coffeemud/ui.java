@@ -8,6 +8,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.concurrent.Callable;
 
 public class ui {
@@ -106,7 +107,7 @@ public class ui {
             logger.debug("Size changed");
         }
         // constructor for stage creation
-        public stage(status status, HashMap<String, Callable<Void>> menuItems) {
+        public stage(status status, TreeMap<String, Callable<Void>> menuItems) {
             this.menuItems = new menu(menuItems);
             this.status = status;
         }
@@ -114,21 +115,21 @@ public class ui {
     }
     // scrapped fightscene template
     public static class fightScene extends stage {
-        public fightScene(String name, ArrayList<entities> monsters, status status, HashMap<String, Callable<Void>> menuItems) {
+        public fightScene(String name, ArrayList<entities> monsters, status status, TreeMap<String, Callable<Void>> menuItems) {
             super(status, menuItems);
             this.name = name;
         }
     }
     // class for multiple-choice menus
     public static class menu {
-        public HashMap<String, Callable<Void>> items;
+        public TreeMap<String, Callable<Void>> items;
         public byte selectedIndex = 0;
-        public menu(HashMap<String, Callable<Void>> items) {
+        public menu(TreeMap<String, Callable<Void>> items) {
             logger.debug("Creating menu");
             this.items = items;
         }
         public menu() {
-            this.items = new HashMap<>();
+            this.items = new TreeMap<>();
         }
         // draws menu items and places the cursor next to the selected item
         public void draw(short rows) {

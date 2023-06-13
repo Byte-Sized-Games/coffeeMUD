@@ -2,6 +2,7 @@ package coffeemud;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.concurrent.Callable;
 
 public class credits {
@@ -18,6 +19,7 @@ public class credits {
             return null;
         });
         ui.stage.currentMessage = "Thanks for playing coffeeDungeon!";
-        (ui.currentStage = new ui.stage(new ui.status(),menu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
+        TreeMap<String, Callable<Void>> sortedMenu = new TreeMap<>(menu);
+        (ui.currentStage = new ui.stage(new ui.status(),sortedMenu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
     }
 }

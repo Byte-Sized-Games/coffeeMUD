@@ -2,6 +2,7 @@ package coffeemud;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.concurrent.Callable;
 
 public class game {
@@ -29,6 +30,16 @@ public class game {
         protag = new player('f');
         logger.debug("Player loaded");
         // Init graphics
+        update(initMenu());
+    }
+
+    public static void update(HashMap<String, Callable<Void>> menu) throws IOException{
+        TreeMap<String, Callable<Void>> sortedMenu = new TreeMap<>(initMenu());
+        ui.stage.currentMessage = gameDungeon.currentRoom.description;
+        (ui.currentStage = new ui.stage(new ui.status(), sortedMenu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
+
+    }
+    public static HashMap<String, Callable<Void>> initMenu() {
         HashMap<String, Callable<Void>> dungeonMenu = new HashMap<>();
         dungeonMenu.put("North", () -> {
             gameDungeon.moveRooms(1);
@@ -55,12 +66,6 @@ public class game {
             ui.currentStage.draw((short) ui.terminal.getTerminalSize().getRows(), (short) ui.terminal.getTerminalSize().getColumns());
             return null;
         });
-        update(dungeonMenu);
-    }
-
-    public static void update(HashMap<String, Callable<Void>> menu) throws IOException{
-        ui.stage.currentMessage = gameDungeon.currentRoom.description;
-        (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
-
+        return dungeonMenu;
     }
 }
