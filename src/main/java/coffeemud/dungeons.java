@@ -195,10 +195,10 @@ public class dungeons {
         }
     }
 
-    public dungeons() {
+    public dungeons(int a, int b) {
         genDungeon();
-        x = 9;
-        y = 9;
+        x = a;
+        y = b;
         currentRoom = dungeonRooms[x][y];
     }
 
