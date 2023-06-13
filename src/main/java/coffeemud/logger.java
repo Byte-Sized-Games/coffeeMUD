@@ -2,6 +2,7 @@ package coffeemud;
 
 public class logger {
     public static boolean debuggable = true;
+    public static boolean sneaky = false;
     public static void info(String message) {
         System.out.println(colours.magenta + "[INFO]\t" + message + colours.reset);
     }

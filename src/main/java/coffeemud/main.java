@@ -60,6 +60,10 @@ public class main {
                     System.out.println("CoffeeDungeon\nVERSION 0.1.0\n");
                     System.exit(0);
                     break;
+                case "--test", "--cheat", "-t", "-c", "konami", "uuddlrlrba":
+                    logger.sneaky = true;
+                    logger.error("CHEAT MODE ENABLED. YOU BETTER KNOW WHAT YOU'RE DOING");
+                    break;
                 default:
                     logger.info("Unknown argument: " + arg);
                     break;
