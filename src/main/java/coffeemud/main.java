@@ -53,6 +53,10 @@ public class main {
                     logger.debug("Debug mode enabled");
                     logger.debuggable = true;
                     break;
+                case "--version", "-v":
+                    System.out.println("CoffeeDungeon\nVERSION 0.1.0\n");
+                    System.exit(0);
+                    break;
                 default:
                     logger.info("Unknown argument: " + arg);
                     break;
