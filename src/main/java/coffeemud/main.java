@@ -44,7 +44,7 @@ public class main {
             return null;
         });
         TreeMap<String, Callable<Void>> sortedMenu = new TreeMap<>(menuThing);
-        ui.stage.currentMessage = "Welcome to Batatune II, Mr. Hudson! Remember to check out our manual and demo video for a full rundown of the features. Feel free to contact us with any questions you may have.";
+        ui.stage.currentMessage = "Welcome to Batatune II, if you need help, consult the manual included in the game files";
         ui.currentStage = new ui.stage(new ui.status(), sortedMenu);
     }
 
