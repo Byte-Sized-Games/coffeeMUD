@@ -99,7 +99,7 @@ public class battle {
 
     public void castSpell(String target, entities player) {
         spell targetSpell = getSpell(target, isekai.characterClass);
-        battlePrompt.print("Select your targets: ");
+        logger.debug("Select your targets: ");
         String[] getTargets = battlePrompt.read().split(" ");
         ArrayList<entities> targets = new ArrayList<entities>();
         for (int i = 0; i < getTargets.length; i++) {
@@ -110,7 +110,7 @@ public class battle {
 
     public void castSpell(String target) {
         spell targetSpell = spellbook.wizard.spells[0];
-        battlePrompt.print("Select your targets: ");
+        logger.debug("Select your targets: ");
         String[] getTargets = battlePrompt.read().split(" ");
         ArrayList<entities> targets = new ArrayList<entities>();
         for (int i = 0; i < getTargets.length; i++) {
@@ -161,13 +161,13 @@ public class battle {
                         }
                     }
                 case 'r':
-                    battlePrompt.print("You can't cast spells silly! You're the sneaky one");
+                    logger.debug("You can't cast spells silly! You're the sneaky one");
                     return null;
                 case 'f':
-                    battlePrompt.print("You can't cast spells silly! You hit things with a sword");
+                    logger.debug("You can't cast spells silly! You hit things with a sword");
                     return null;
                 default:
-                    battlePrompt.print("No spell specified, try again");
+                    logger.debug("No spell specified, try again");
             }
         }
     }
