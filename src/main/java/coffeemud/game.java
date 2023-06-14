@@ -58,7 +58,8 @@ public class game {
             return null;
         });
         menu.put("Solve", () -> {
-            logger.error("Nuh-uh-uh! It's not finished yet");
+            logger.error("In progress. Expect Bugs");
+            solver.puzzle(gameDungeon.currentRoom.traps);
             return null;
         });
         menu.put("Quit", () -> {
