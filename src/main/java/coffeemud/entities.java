@@ -66,12 +66,12 @@ public class entities{
         public entities() {
 
         }
-        public void attack(entities enemy){
+        public void attack(){
                 Random random = new Random();
              int damage = attackMultip*(attackLow + (random.nextInt(attackHigh-attackLow))) - armour;
              if (damage < 0)
                      damage = 0;
-             enemy.health -= damage;
+             player.health -= damage;
         }
 
         public void heal(){

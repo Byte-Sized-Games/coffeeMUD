@@ -93,7 +93,7 @@ public class battle {
         if (monster.health <= (monster.maxHealth / 4)) {
             monster.health += monster.heal;
         } else {
-            monster.attack(isekai);
+            monster.attack();
         }
     }
 
