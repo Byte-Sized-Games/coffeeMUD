@@ -1,12 +1,12 @@
 package coffeemud;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.HashMap;
 import java.util.TreeMap;
 
 public class battle {
-    player isekai;
     ArrayList<entities> monsters;
     int round;
     int playerInitiative;
@@ -25,33 +25,32 @@ public class battle {
         this.monsterInitiative = mI;
     }
 
-    public void turn(String command) {
-        ui.stage.currentMessage = battleMessage();
-        checkEffects();
-        if (playerInitiative >= monsterInitiative) {
-            playerTurn(command);
-            for (entities i : monsters) {
-                monsterTurn(i);
+    public boolean fight() throws IOException {
+        while (true) {
+            turn();
+            if (monsters.size() <= 0) {
+                break;
             }
-        } else {
-            for (entities i : monsters) {
-                monsterTurn(i);
-            }
-            playerTurn(command);
         }
+        return true;
+    }
+
+    public void turn() throws IOException {
+        checkEffects();
+        game.update(battleMenu(), battleMessage());
     }
 
     public void checkEffects() {
-            player.tempHealth = player.tempHealth / 4;
-            for (char x : player.effects) {
-                switch (x) {
-                    case 'x':
-                        player.health = -2;
-                }
+        player.tempHealth = player.tempHealth / 4;
+        for (char x : player.effects) {
+            switch (x) {
+                case 'x':
+                    player.health = -2;
             }
-            if (player.health <= 0) {
-                player.die();
-            }
+        }
+        if (player.health <= 0) {
+            player.die();
+        }
 
         for (entities i : monsters) {
             i.tempHP = i.tempHP / 4;
@@ -72,8 +71,8 @@ public class battle {
         String target = bugCommand.substring(bugCommand.indexOf(" "));
         switch (command) {
             case "ATTACK":
-            monsters.get(getMonster(target)).health -= isekai.attack();
-            break;
+                monsters.get(getMonster(target)).health -= player.attack();
+                break;
             case "CAST":
                 castSpell(target);
                 break;
@@ -87,18 +86,21 @@ public class battle {
                 logger.error("Command not recognized");
                 break;
         }
+        monsterTurn();
     }
 
-    public void monsterTurn(entities monster) {
-        if (monster.health <= (monster.maxHealth / 4)) {
-            monster.health += monster.heal;
-        } else {
-            monster.attack();
+    public void monsterTurn() {
+        for (entities i : monsters) {
+            if (i.health <= (i.maxHealth / 4)) {
+                i.health += i.heal;
+            } else {
+                i.attack();
+            }
         }
     }
 
     public void castSpell(String target, entities player) {
-        spell targetSpell = getSpell(target, isekai.characterClass);
+        spell targetSpell = getSpell(target, player.characterClass);
         logger.debug("Select your targets: ");
         String[] getTargets = battlePrompt.read().split(" ");
         ArrayList<entities> targets = new ArrayList<entities>();
@@ -171,6 +173,7 @@ public class battle {
             }
         }
     }
+
     public String battleMessage() {
         StringBuilder message = new StringBuilder("There are " + monsters.size() + " monsters. ");
         for (entities i : monsters) {
@@ -179,6 +182,7 @@ public class battle {
 
         return message.toString();
     }
+
     public HashMap<String, Callable<Void>> battleMenu() {
         logger.error("In progress. Expect Bugs");
         HashMap<String, Callable<Void>> menu = new HashMap<>();
@@ -187,10 +191,12 @@ public class battle {
             return null;
         });
         menu.put("Defend", () -> {
-            
+            playerTurn("DEFEND");
             return null;
         });
         menu.put("Cast", () -> {
+            // To be implemented
+            // playerTurn("CAST");
             return null;
         });
 

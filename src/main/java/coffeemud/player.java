@@ -37,7 +37,7 @@ public class player {
         }*/
     }
 
-    public int attack() {
+    public static int attack() {
         Random random = new Random();
         int damage = level * (attackLow + (random.nextInt(attackHigh - attackLow)));
         if (damage < 0)
@@ -50,7 +50,7 @@ public class player {
         System.exit(0);
     }
 
-    public void levelUP() {
+    public static void levelUP() {
         level++;
         maxHealth = maxHealth + (25*level);
         health = maxHealth;
