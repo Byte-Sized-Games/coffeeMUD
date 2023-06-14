@@ -1,6 +1,9 @@
 package coffeemud;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 public class battle {
     player isekai;
@@ -23,6 +26,7 @@ public class battle {
     }
 
     public void turn(String command) {
+        ui.stage.currentMessage = battleMessage();
         checkEffects();
         if (playerInitiative >= monsterInitiative) {
             playerTurn(command);
@@ -38,15 +42,15 @@ public class battle {
     }
 
     public void checkEffects() {
-            isekai.tempHealth = isekai.tempHealth / 4;
-            for (char x : isekai.effects) {
+            player.tempHealth = player.tempHealth / 4;
+            for (char x : player.effects) {
                 switch (x) {
                     case 'x':
-                        isekai.health = -2;
+                        player.health = -2;
                 }
             }
-            if (isekai.health <= 0) {
-                isekai.die();
+            if (player.health <= 0) {
+                player.die();
             }
 
         for (entities i : monsters) {
@@ -69,14 +73,19 @@ public class battle {
         switch (command) {
             case "ATTACK":
             monsters.get(getMonster(target)).health -= isekai.attack();
+            break;
             case "CAST":
                 castSpell(target);
+                break;
             case "DEFEND":
-                isekai.armour += 2;
-            case "":
-                battlePrompt.print("No command chosen, please try again");
+                player.armour += 2;
+                break;
+            case "", " ":
+                logger.debug("No command chosen, please try again");
+                break;
             default:
-                battlePrompt.print("Command not recognized");
+                logger.error("Command not recognized");
+                break;
         }
     }
 
@@ -162,4 +171,30 @@ public class battle {
             }
         }
     }
+    public String battleMessage() {
+        StringBuilder message = new StringBuilder("There are " + monsters.size() + " monsters. ");
+        for (entities i : monsters) {
+            message.append("There is a " + i.name + ". It currently has " + i.health + " health remaining");
+        }
+
+        return message.toString();
+    }
+    public HashMap<String, Callable<Void>> battleMenu() {
+        logger.error("In progress. Expect Bugs");
+        HashMap<String, Callable<Void>> menu = new HashMap<>();
+        menu.put("Attack", () -> {
+            playerTurn("ATTACK");
+            return null;
+        });
+        menu.put("Defend", () -> {
+            
+            return null;
+        });
+        menu.put("Cast", () -> {
+            return null;
+        });
+
+        return menu;
+    }
+
 }

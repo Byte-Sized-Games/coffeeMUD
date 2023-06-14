@@ -45,8 +45,9 @@ public class player {
         return damage;
     }
 
-    public void die() {
-        logger.info("You are dead.");
+    public static void die() {
+        logger.info("You have died.");
+        System.exit(0);
     }
 
     public void levelUP() {
