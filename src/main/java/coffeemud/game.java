@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.concurrent.Callable;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 public class game {
     static Callable<Void> filler = () -> {
         return null;
@@ -54,7 +55,9 @@ public class game {
             return null;
         });
         menu.put("Fight", () -> {
-            logger.error("Nuh-uh-uh! It's not finished yet");
+            logger.error("In progress. Expect Bugs");
+            battle roomBattle = new battle(new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
+            gameDungeon.currentRoom.complete = roomBattle.fight();
             return null;
         });
         menu.put("Solve", () -> {

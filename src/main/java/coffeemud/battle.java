@@ -4,25 +4,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 public class battle {
     ArrayList<entities> monsters;
     int round;
-    int playerInitiative;
-    int monsterInitiative;
     uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ",
             colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
 
-    public battle(ArrayList<entities> m, int pInitiative, int mInitiative) {
-        this.init(m, pInitiative, mInitiative);
+    public battle(ArrayList<entities> m) {
+        this.init(m);
     }
 
-    public void init(ArrayList<entities> m, int pI, int mI) {
+    public void init(ArrayList<entities> m) {
         this.monsters = m;
         this.round = 0;
-        this.playerInitiative = pI;
-        this.monsterInitiative = mI;
     }
 
     public boolean fight() throws IOException {
