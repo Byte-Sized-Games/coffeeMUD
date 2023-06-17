@@ -11,11 +11,11 @@ public class solver {
         // Variable setup
         int totalComplete = 0;
         for (dungeons.roomTraps i : traps) {
-            logger.info("Trap: " + i.description + ". Answer = " + i.answer);
-            logger.info("# of traps: " + traps.length + ". Traps complete: " + totalComplete);
+            logger.debug("Trap: " + i.description + ". Answer = " + i.answer);
+            logger.debug("# of traps: " + traps.length + ". Traps complete: " + totalComplete);
             game.update(game.blankMenu(), i.problem);
             totalComplete = totalComplete + submitGuess(typing(), i);
-            logger.info(totalComplete);
+            logger.debug(totalComplete);
         }
         ui.typing = false;
         if (totalComplete == traps.length) {
