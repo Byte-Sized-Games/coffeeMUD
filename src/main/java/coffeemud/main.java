@@ -9,8 +9,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
-import java.util.TreeMap;
-import java.util.HashMap;
 import java.util.concurrent.Callable;
 
 public class main {
