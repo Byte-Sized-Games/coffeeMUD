@@ -19,7 +19,11 @@ public class solver {
         }
         ui.typing = false;
         if (totalComplete == traps.length) {
-            game.update(game.mainMenu());
+            try {
+                game.update(game.mainMenu());
+            } catch(Exception e) {
+
+            }
             return true;
         } else
             return solver.puzzle(traps);

@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
 public class ui {
     // Interface for UI methods
     interface uiMethods {
-        public void draw(short rows, short columns) throws IOException;
+        public void draw(short rows, short columns) throws Exception;
 
         public void update();
     }
@@ -52,11 +52,10 @@ public class ui {
 
             // Prepare data for drawing
             ArrayList<entities> monsters = new ArrayList<>();
-            monsters.add(monsterbook.goblin);
-            monsters.add(monsterbook.troll);
-            monsters.add(monsterbook.witch);
-            monsters.add(monsterbook.skeleton);
-            monsters.add(monsterbook.skeleton);
+            monsters.add(monsterbook.createGoblin());
+            monsters.add(monsterbook.createTroll());
+            monsters.add(monsterbook.createWitch());
+            monsters.add(monsterbook.createSkeleton());
             byte iterator = 1;
 
             // Clear the terminal screen
