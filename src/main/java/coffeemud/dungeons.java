@@ -101,7 +101,7 @@ public class dungeons {
         int gold; // Gold gained for beating room
         String description; // Short description of the room
 
-        public room() {
+        public room() throws Exception {
             int maxEntities = randRange(0, 3);
             int maxTraps = randRange(0, 2);
             if (maxEntities == 0 && maxTraps > 0) {
@@ -110,31 +110,32 @@ public class dungeons {
                     traps[i] = new roomTraps();
                 }
                 gold = randRange(5, 50);
-                complete = false;
             } else if (maxTraps == 0 && maxEntities > 0) {
                 monsters = new entities[maxEntities];
                 for (int i = 0; i < maxEntities; i++) {
                     int x = randRange(0, 4);
                     switch (x) {
                         case 0:
-                            monsters[i] = monsterbook.bat;
+                            monsters[i] = monsterbook.createBat();
                         case 1:
-                            monsters[i] = monsterbook.goblin;
+                            monsters[i] = monsterbook.createGoblin();
                         case 2:
-                            monsters[i] = monsterbook.skeleton;
+                            monsters[i] = monsterbook.createSkeleton();
                         case 3:
-                            monsters[i] = monsterbook.troll;
+                            monsters[i] = monsterbook.createTroll();
                         case 4:
-                            monsters[i] = monsterbook.witch;
+                            monsters[i] = monsterbook.createWitch();
                     }
                 }
                 gold = randRange(5, 50);
-                complete = false;
             } else {
                 gold = randRange(5, 50);
-                complete = true;
             }
             description = setDescription(maxEntities, maxTraps);
+            if (traps.length == 0 && monsters.length == 0) {
+                complete = true;
+            } else complete = false;
+
         }
 
         // Gives the player gold when the room is complete (no traps or enemies left)
@@ -167,30 +168,30 @@ public class dungeons {
     int x;
     int y;
 
-    public void moveRooms(char dir) {
+    public void moveRooms(int dir) {
         switch (dir) {
-            case 'n':
+            case 1:
                 if (y == 19) {
                     y = 18;
                     logger.error("You have reached a wall. You cannot go any further");
                 }
                 y = y + 1;
                 break;
-            case 's':
+            case 4:
                 if (y == 0) {
                     y = 1;
                     logger.error("You have reached a wall. You cannot go any further");
                 }
                 y = y - 1;
                 break;
-            case 'e':
+            case 2:
                 if (x == 19) {
                     x = 18;
                     logger.error("You have reached a wall. You cannot go any further");
                 }
                 x = x + 1;
                 break;
-            case 'w':
+            case 3:
                 if (x == 0) {
                     x = 1;
                     logger.error("You have reached a wall. You cannot go any further");
@@ -204,7 +205,7 @@ public class dungeons {
         logger.info("X: " + x + ", Y: " + y + " [Desc]\t" + currentRoom.description + ". Complete = " + currentRoom.complete);
     }
 
-    public void genDungeon() {
+    public void genDungeon() throws Exception {
         for (int i = 0; i < 20; i++) {
             for (int a = 0; a < 20; a++) {
                 dungeonRooms[i][a] = new room();
@@ -213,7 +214,7 @@ public class dungeons {
         }
     }
 
-    public dungeons(int a, int b) {
+    public dungeons(int a, int b) throws Exception {
         genDungeon();
         x = a;
         y = b;

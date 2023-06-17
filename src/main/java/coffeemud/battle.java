@@ -3,7 +3,7 @@ package coffeemud;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class battle {
     ArrayList<entities> monsters;
@@ -20,7 +20,7 @@ public class battle {
         this.round = 0;
     }
 
-    public boolean fight() throws IOException {
+    public boolean fight() throws Exception {
         while (true) {
             turn();
             if (monsters.size() <= 0) {
@@ -30,7 +30,7 @@ public class battle {
         return true;
     }
 
-    public void turn() throws IOException {
+    public void turn() throws Exception {
         checkEffects();
         game.update(battleMenu(), battleMessage());
     }
@@ -178,26 +178,23 @@ public class battle {
         return message.toString();
     }
 
-    public TreeMap<String, Callable<Void>> battleMenu() {
+    public HashMap<String, Callable<Void>> battleMenu() {
         logger.error("In progress. Expect Bugs");
-        TreeMap<String, Callable<Void>> menu;
-        String[] commands = {"Attack", "Defend", "Cast"};
-        Callable[] callables = {
-            () -> {
-                playerTurn("ATTACK");
-                return null;
-            },
-            () -> {
-                playerTurn("DEFEND");
-                return null;
-            },
-            () -> {
-                // To be implemented
-                // playerTurn("CAST");
-                return null;
-            }
-        };
-        menu = ui.createMap(commands, callables);
+        HashMap<String, Callable<Void>> menu = new HashMap<>();
+        menu.put("Attack", () -> {
+            playerTurn("ATTACK");
+            return null;
+        });
+        menu.put("Defend", () -> {
+            playerTurn("DEFEND");
+            return null;
+        });
+        menu.put("Cast", () -> {
+            // To be implemented
+            // playerTurn("CAST");
+            return null;
+        });
+
         return menu;
     }
 
