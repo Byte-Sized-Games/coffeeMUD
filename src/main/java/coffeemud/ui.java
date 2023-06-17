@@ -7,7 +7,6 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.concurrent.Callable;
 
@@ -18,7 +17,13 @@ public class ui {
 
         public void update();
     }
-
+    public static TreeMap<String,Callable<Void>> createMap(String[] menuItems, Callable<Void>[] menuActions) {
+        TreeMap<String,Callable<Void>> menu = new TreeMap<>();
+        for(int i = 0; i < menuItems.length; i++) {
+            menu.put(i + menuItems[i],menuActions[i]);
+        }
+        return menu;
+    }
     // Current stage of the UI
     public static stage currentStage;
 
@@ -136,17 +141,19 @@ public class ui {
             logger.debug("Drawing menu");
             for(byte i = 0; i < items.size(); i++) {
                 logger.debug("Drawing menu item "  + i);
-                textGraphics.putString(new TerminalPosition(0, rows - 6 + i), (selectedIndex == i ? "*": "> ") + " " + items.keySet().toArray()[i].toString() + " ");
+                textGraphics.putString(new TerminalPosition(0, rows - 6 + i), (selectedIndex == i ? "*": "> ") + " " + items.keySet().toArray()[i].toString().substring(1) + " ");
                 if(selectedIndex == i) terminal.setCursorPosition(new TerminalPosition(0, rows - 6 + i));
             }
         }
-        // runs a meny item's callable if possible
+        // runs a menu item's callable if possible
         public void call() {
             logger.debug("Calling menu item " + selectedIndex);
             try {
                 items.get(items.keySet().toArray()[selectedIndex].toString()).call();
             } catch (Exception e) {
-                logger.debug(e.getStackTrace().toString());
+                for(StackTraceElement line : e.getStackTrace()) {
+                    logger.error(line.toString());
+                }
             }
         }
     }
