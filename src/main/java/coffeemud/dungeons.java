@@ -201,13 +201,14 @@ public class dungeons {
                 logger.error("No input given");
         }
         currentRoom = dungeonRooms[x][y];
-        logger.info("X: " + x + ", Y: " + y + " [Desc]\t" + currentRoom.description);
+        logger.info("X: " + x + ", Y: " + y + " [Desc]\t" + currentRoom.description + ". Complete = " + currentRoom.complete);
     }
 
     public void genDungeon() {
         for (int i = 0; i < 20; i++) {
-            for (int y = 0; y < 20; y++) {
-                dungeonRooms[i][y] = new room();
+            for (int a = 0; a < 20; a++) {
+                dungeonRooms[i][a] = new room();
+                logger.debug("x:" + i + ", y:" + a + " | " + dungeonRooms[i][a].description + "Complete = " + dungeonRooms[i][a].complete);
             }
         }
     }

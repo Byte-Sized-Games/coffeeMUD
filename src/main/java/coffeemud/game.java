@@ -21,11 +21,6 @@ public class game {
         logger.debug("Starting game");
         gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
-        for (int i = 0; i < gameDungeon.dungeonRooms.length; i++) {
-            for (int x = 0; x < gameDungeon.dungeonRooms[i].length; x++) {
-                logger.debug("x:" + i + ", y:" + x + " | " + gameDungeon.dungeonRooms[i][x].description);
-            }
-        }
         logger.debug("Dungeons generated");
         logger.debug("Loading Player");
         protag = new player('f');
@@ -53,6 +48,7 @@ public class game {
         TreeMap<String, Callable<Void>> menu;
         String[] commands = { "Move", "Fight", "Solve", "Quit" };
         Callable[] callables = { () -> {
+            logger.info("Complete = " + gameDungeon.currentRoom.complete);
             if (gameDungeon.currentRoom.complete || logger.sneaky) {
                 update(moveMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
             } else {
