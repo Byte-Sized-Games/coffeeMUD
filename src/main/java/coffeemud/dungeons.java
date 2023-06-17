@@ -110,6 +110,7 @@ public class dungeons {
                     traps[i] = new roomTraps();
                 }
                 gold = randRange(5, 50);
+                complete = false;
             } else if (maxTraps == 0 && maxEntities > 0) {
                 monsters = new entities[maxEntities];
                 for (int i = 0; i < maxEntities; i++) {
@@ -128,13 +129,12 @@ public class dungeons {
                     }
                 }
                 gold = randRange(5, 50);
+                complete = false;
             } else {
                 gold = randRange(5, 50);
+                complete = true;
             }
             description = setDescription(maxEntities, maxTraps);
-            if (traps.length == 0 && monsters.length == 0) {
-                complete = true;
-            } else complete = false;
 
         }
 
