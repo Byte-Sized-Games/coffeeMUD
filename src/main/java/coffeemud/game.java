@@ -95,28 +95,28 @@ public class game {
         Callable[] callables = { () -> {
             gameDungeon.moveRooms('n');
             update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-            Thread.sleep(2 * 1000);
+            Thread.sleep(1 * 1000);
             update(mainMenu());
             return null;
         },
                 () -> {
                     gameDungeon.moveRooms('e');
                     update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-                    Thread.sleep(2 * 1000);
+                    Thread.sleep(1 * 1000);
                     update(mainMenu());
                     return null;
                 },
                 () -> {
                     gameDungeon.moveRooms('s');
                     update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-                    Thread.sleep(2 * 1000);
+                    Thread.sleep(1 * 1000);
                     update(mainMenu());
                     return null;
                 },
                 () -> {
                     gameDungeon.moveRooms('w');
                     update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-                    Thread.sleep(2 * 1000);
+                    Thread.sleep(1 * 1000);
                     update(mainMenu());
                     return null;
                 },
