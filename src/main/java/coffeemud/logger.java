@@ -14,4 +14,15 @@ public class logger {
     public static void error(String message) {
         System.out.println(colours.red + "[ERROR]\t" + message + colours.reset);
     }
+    public static void info(int message) {
+        System.out.println(colours.magenta + "[INFO]\t" + message + colours.reset);
+    }
+    public static void debug(int message) {
+        if(debuggable /*implement options check*/) {
+            info(colours.blue + message);
+        }
+    }
+    public static void error(int message) {
+        System.out.println(colours.red + "[ERROR]\t" + message + colours.reset);
+    }
 }

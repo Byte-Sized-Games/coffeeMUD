@@ -132,9 +132,7 @@ public class dungeons {
                 gold = randRange(5, 50);
             }
             description = setDescription(maxEntities, maxTraps);
-            if (traps.length == 0 && monsters.length == 0) {
-                complete = true;
-            } else complete = false;
+            complete = false;
 
         }
 
