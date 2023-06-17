@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import java.util.concurrent.Callable;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class game {
     static Callable<Void> filler = () -> {
         return null;
@@ -19,14 +20,8 @@ public class game {
     public static void start() throws IOException, Exception {
         // Load dungeon & player
         logger.debug("Starting game");
-        gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
-
-        for (int i = 0; i < gameDungeon.dungeonRooms.length ; i++) {
-            for (int x = 0; x < gameDungeon.dungeonRooms[i].length; x++) {
-                logger.debug("x:"+ i + ", y:" + x + " | " + gameDungeon.dungeonRooms[i][x].description);
-            }
-        }
+        gameDungeon = new dungeons(pX, pY);
         logger.debug("Dungeons generated");
         logger.debug("Loading Player");
         protag = new player('f');
@@ -35,14 +30,17 @@ public class game {
         update(mainMenu());
     }
 
-    public static void update(TreeMap<String, Callable<Void>> menu) throws IOException, Exception{
+    public static void update(TreeMap<String, Callable<Void>> menu) throws IOException, Exception {
         ui.stage.currentMessage = gameDungeon.currentRoom.description;
-        (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
+        (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),
+                (short) ui.terminal.getTerminalSize().getColumns());
 
     }
-    public static void update(TreeMap<String, Callable<Void>> menu, String message) throws IOException{
+
+    public static void update(TreeMap<String, Callable<Void>> menu, String message) throws IOException {
         ui.stage.currentMessage = message;
-        (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
+        (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),
+                (short) ui.terminal.getTerminalSize().getColumns());
 
     }
 
@@ -85,6 +83,7 @@ public class game {
         menu = ui.createMap(commands, callables);
         return menu;
     }
+
     public static TreeMap<String, Callable<Void>> moveMenu() {
         TreeMap<String, Callable<Void>> menu;
         String[] directions = { "North", "East", "South", "West", "Back" };
@@ -123,7 +122,8 @@ public class game {
         };
         menu = ui.createMap(directions, callables);
         return menu;
-    }    
+    }
+
     public static TreeMap<String, Callable<Void>> blankMenu() {
         return new TreeMap<>();
     }

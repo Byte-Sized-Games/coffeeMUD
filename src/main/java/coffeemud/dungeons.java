@@ -209,7 +209,7 @@ public class dungeons {
         for (int i = 0; i < 20; i++) {
             for (int a = 0; a < 20; a++) {
                 dungeonRooms[i][a] = new room();
-                logger.debug("x:" + i + ", y:" + a + " | " + dungeonRooms[i][a].description + "Complete = " + dungeonRooms[i][a].complete);
+                logger.debug("x:" + i + ", y:" + a + " | " + dungeonRooms[i][a].description + ". Complete = " + dungeonRooms[i][a].complete);
             }
         }
     }
