@@ -21,10 +21,7 @@ public class battle {
     }
 
     public boolean fight() throws Exception {
-        while (monsters.size() > 0) {
             turn();
-
-        }
         return true;
     }
 
