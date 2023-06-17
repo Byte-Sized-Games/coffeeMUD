@@ -30,22 +30,17 @@ public class main {
 
     // Set up the title screen with menu options
     public static void titleScreen() {
-        HashMap<String, Callable<Void>> menuThing = new HashMap<>();
-        menuThing.put("Start Game", () -> {
+        ui.stage.currentMessage = "Welcome to Batatune II, if you need help, consult the manual included in the game files";
+        ui.currentStage = new ui.stage(new ui.status(), ui.createMap(new String[] {"Start Game", "Quit Game", "Credits"}, new Callable[] {() -> {
             game.start();
             return null;
-        });
-        menuThing.put("Quit Game", () -> {
+        }, () -> {
             System.exit(0);
             return null;
-        });
-        menuThing.put("Credits", () -> {
+        }, () -> {
             credits.show();
             return null;
-        });
-        TreeMap<String, Callable<Void>> sortedMenu = new TreeMap<>(menuThing);
-        ui.stage.currentMessage = "Welcome to Batatune II, if you need help, consult the manual included in the game files";
-        ui.currentStage = new ui.stage(new ui.status(), sortedMenu);
+        }}));
     }
 
     public static void main(String[] args) throws IOException {
