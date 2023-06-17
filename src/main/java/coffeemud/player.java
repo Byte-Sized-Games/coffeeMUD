@@ -16,7 +16,7 @@ public class player {
     // public static inventory inv;
     
 
-    public static ArrayList<Character> effects;
+    public static ArrayList<Character> effects = new ArrayList<>('0');
 
     // Players class. Used for spell lists and abilities
         /*
