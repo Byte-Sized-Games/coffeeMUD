@@ -21,14 +21,12 @@ public class game {
         logger.debug("Starting game");
         gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
-<<<<<<< HEAD
-=======
+
         for (int i = 0; i < gameDungeon.dungeonRooms.length ; i++) {
             for (int x = 0; x < gameDungeon.dungeonRooms[i].length; x++) {
                 logger.debug("x:"+ i + ", y:" + x + " | " + gameDungeon.dungeonRooms[i][x].description);
             }
         }
->>>>>>> 6f9bc139b9e0e23daba9fbb7ac0c162735c14177
         logger.debug("Dungeons generated");
         logger.debug("Loading Player");
         protag = new player('f');
@@ -37,103 +35,96 @@ public class game {
         update(mainMenu());
     }
 
-    public static void update(HashMap<String, Callable<Void>> menu) throws IOException, Exception{
-        TreeMap<String, Callable<Void>> sortedMenu = new TreeMap<>(menu);
+    public static void update(TreeMap<String, Callable<Void>> menu) throws IOException, Exception{
         ui.stage.currentMessage = gameDungeon.currentRoom.description;
-        (ui.currentStage = new ui.stage(new ui.status(), sortedMenu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
+        (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
 
     }
-    public static void update(HashMap<String, Callable<Void>> menu, String message) throws IOException{
-        TreeMap<String, Callable<Void>> sortedMenu = new TreeMap<>(menu);
+    public static void update(TreeMap<String, Callable<Void>> menu, String message) throws IOException{
         ui.stage.currentMessage = message;
-        (ui.currentStage = new ui.stage(new ui.status(), sortedMenu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
+        (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
 
     }
-<<<<<<< HEAD
 
     public static TreeMap<String, Callable<Void>> mainMenu() {
         TreeMap<String, Callable<Void>> menu;
         String[] commands = { "Move", "Fight", "Solve", "Quit" };
         Callable[] callables = { () -> {
-            logger.info("Complete = " + gameDungeon.currentRoom.complete);
-=======
-    public static HashMap<String, Callable<Void>> mainMenu() {
-        HashMap<String, Callable<Void>> menu = new HashMap<>();
-        menu.put("Move", () -> {
->>>>>>> 6f9bc139b9e0e23daba9fbb7ac0c162735c14177
             if (gameDungeon.currentRoom.complete || logger.sneaky) {
                 update(moveMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-            } else logger.error("Room not complete!");
-            return null;
-        });
-        menu.put("Fight", () -> {
-            logger.error("In progress. Expect Bugs");
-            battle roomBattle = new battle(new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
-            gameDungeon.currentRoom.complete = roomBattle.fight();
-            return null;
-        });
-        menu.put("Solve", () -> {
-            logger.error("In progress. Expect Bugs");
-            if (gameDungeon.currentRoom.complete) {
-                logger.error("All traps complete!");
-                update(mainMenu());
             } else {
-                gameDungeon.currentRoom.complete = solver.puzzle(gameDungeon.currentRoom.traps);
+                logger.error("Room not complete!");
             }
             return null;
-        });
-        menu.put("Quit", () -> {
-            main.titleScreen();
-            ui.currentStage.draw((short) ui.terminal.getTerminalSize().getRows(), (short) ui.terminal.getTerminalSize().getColumns());
-            return null;
-        });
+        },
+                () -> {
+                    logger.error("In progress. Expect Bugs");
+                    battle roomBattle = new battle(
+                            new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
+                    gameDungeon.currentRoom.complete = roomBattle.fight();
+                    return null;
+                },
+                () -> {
+                    logger.error("In progress. Expect Bugs");
+                    if (gameDungeon.currentRoom.complete) {
+                        logger.error("All traps complete!");
+                        update(mainMenu());
+                    } else {
+                        gameDungeon.currentRoom.complete = solver.puzzle(gameDungeon.currentRoom.traps);
+                    }
+                    return null;
+                },
+                () -> {
+                    main.titleScreen();
+                    ui.currentStage.draw((short) ui.terminal.getTerminalSize().getRows(),
+                            (short) ui.terminal.getTerminalSize().getColumns());
+                    return null;
+                }
+
+        };
+        menu = ui.createMap(commands, callables);
         return menu;
     }
-    public static HashMap<String, Callable<Void>> moveMenu() {
-        HashMap<String, Callable<Void>> dungeonMenu = new HashMap<>();
-        dungeonMenu.put("North", () -> {
-            gameDungeon.moveRooms(1);
+    public static TreeMap<String, Callable<Void>> moveMenu() {
+        TreeMap<String, Callable<Void>> menu;
+        String[] directions = { "North", "East", "South", "West", "Back" };
+        Callable[] callables = { () -> {
+            gameDungeon.moveRooms('n');
             update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
             Thread.sleep(2 * 1000);
             update(mainMenu());
             return null;
-        });
-        dungeonMenu.put("East", () -> {
-            gameDungeon.moveRooms(2);
-            update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-            Thread.sleep(2 * 1000);
-            update(mainMenu());
-            return null;
-        });
-        dungeonMenu.put("West", () -> {
-            gameDungeon.moveRooms(3);
-            update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-            Thread.sleep(2 * 1000);
-            update(mainMenu());
-            return null;
-        });
-        dungeonMenu.put("South", () -> {
-            gameDungeon.moveRooms(4);
-            update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
-            Thread.sleep(2 * 1000);
-            update(mainMenu());
-            return null;
-        });
-        dungeonMenu.put("Back", () -> {
-            update(mainMenu());
-            return null;
-        });
-        return dungeonMenu;
-    }
-    public static HashMap<String, Callable<Void>> blankMenu() {
-        HashMap<String, Callable<Void>> dungeonMenu = new HashMap<>();
-        dungeonMenu.put(" ", () -> {
-            return null;
-        });
-        dungeonMenu.put(" ", () -> {
-
-            return null;
-        });
-        return dungeonMenu;
+        },
+                () -> {
+                    gameDungeon.moveRooms('e');
+                    update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+                    Thread.sleep(2 * 1000);
+                    update(mainMenu());
+                    return null;
+                },
+                () -> {
+                    gameDungeon.moveRooms('s');
+                    update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+                    Thread.sleep(2 * 1000);
+                    update(mainMenu());
+                    return null;
+                },
+                () -> {
+                    gameDungeon.moveRooms('w');
+                    update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
+                    Thread.sleep(2 * 1000);
+                    update(mainMenu());
+                    return null;
+                },
+                () -> {
+                    update(mainMenu());
+                    return null;
+                }
+        };
+        menu = ui.createMap(directions, callables);
+        return menu;
+    }    
+    public static TreeMap<String, Callable<Void>> blankMenu() {
+        return new TreeMap<>();
     }
 }

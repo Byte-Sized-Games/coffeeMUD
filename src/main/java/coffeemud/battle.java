@@ -3,7 +3,7 @@ package coffeemud;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class battle {
     ArrayList<entities> monsters;
@@ -178,23 +178,26 @@ public class battle {
         return message.toString();
     }
 
-    public HashMap<String, Callable<Void>> battleMenu() {
+    public TreeMap<String, Callable<Void>> battleMenu() {
         logger.error("In progress. Expect Bugs");
-        HashMap<String, Callable<Void>> menu = new HashMap<>();
-        menu.put("Attack", () -> {
-            playerTurn("ATTACK");
-            return null;
-        });
-        menu.put("Defend", () -> {
-            playerTurn("DEFEND");
-            return null;
-        });
-        menu.put("Cast", () -> {
-            // To be implemented
-            // playerTurn("CAST");
-            return null;
-        });
-
+        TreeMap<String, Callable<Void>> menu;
+        String[] commands = {"Attack", "Defend", "Cast"};
+        Callable[] callables = {
+            () -> {
+                playerTurn("ATTACK");
+                return null;
+            },
+            () -> {
+                playerTurn("DEFEND");
+                return null;
+            },
+            () -> {
+                // To be implemented
+                // playerTurn("CAST");
+                return null;
+            }
+        };
+        menu = ui.createMap(commands, callables);
         return menu;
     }
 
