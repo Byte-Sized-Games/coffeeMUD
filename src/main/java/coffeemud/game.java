@@ -129,16 +129,7 @@ public class game {
         return menu;
     }
 
-    public static TreeMap<String, Callable<Void>> blankMenu() {
-        TreeMap<String, Callable<Void>> menu = new TreeMap<>();
-        String[] blank = { " ", " " };
-        Callable[] empty = { () -> {
-            return null;
-        },
-                () -> {
-                    return null;
-                }
-        };
-        return menu;
+    public static TreeMap<String, Callable<Void>> blankMenu() {     
+        return new TreeMap<>();
     }
 }
