@@ -62,7 +62,12 @@ public class game {
         });
         menu.put("Solve", () -> {
             logger.error("In progress. Expect Bugs");
-            solver.puzzle(gameDungeon.currentRoom.traps);
+            if (gameDungeon.currentRoom.complete) {
+                logger.error("All traps complete!");
+                update(mainMenu());
+            } else {
+                gameDungeon.currentRoom.complete = solver.puzzle(gameDungeon.currentRoom.traps);
+            }
             return null;
         });
         menu.put("Quit", () -> {

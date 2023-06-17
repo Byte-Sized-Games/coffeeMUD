@@ -9,19 +9,40 @@ import com.googlecode.lanterna.input.KeyType;
 public class solver {
     public static boolean puzzle(dungeons.roomTraps[] traps) throws IOException {
         // Variable setup
-        KeyStroke keyStroke;
-        String guess = "";
         int totalComplete = 0;
         for (dungeons.roomTraps i : traps) {
-            ui.typing = true;
-            // Get intput
-            while(ui.typing) {
+            logger.info("Trap: " + i.description + ". Answer = " + i.answer);
+            game.update(game.blankMenu(), i.problem);
+            
+            totalComplete += submitGuess(typing(), i);
+        }
+        ui.typing = false;
+        if (totalComplete == traps.length) {
+            return true;
+        } else
+            return solver.puzzle(traps);
+    }
+
+    public static int submitGuess(String guess, dungeons.roomTraps trap) {
+        if (guess.equals(trap.answer)) {
+            return 1;
+        } else
+            return 0;
+    }
+
+    public static String typing() throws IOException {
+        // Variable setup
+        KeyStroke keyStroke;
+        String guess = "";
+        ui.typing = true;
+
+        // Get intput
+        while (ui.typing) {
             keyStroke = ui.terminal.readInput();
             char character = keyStroke.getCharacter();
             // Parse input
             if (character == '\n') {
                 // submit text
-                totalComplete = solver.submitGuess(guess, i);
                 ui.typing = false;
                 break;
             } else {
@@ -39,18 +60,9 @@ public class solver {
                     guess = guess.concat(character + "");
                 }
                 ui.textGraphics.putString(new TerminalPosition(0, 11), guess);
+                ui.terminal.refresh();
             }
         }
-        }
-        ui.typing = false;
-        if (totalComplete == traps.length) {
-            return true;
-        } else
-            return solver.puzzle(traps);
-    }
-    public static int submitGuess(String guess, dungeons.roomTraps trap) {
-        if (guess.equals(trap.answer)) {
-            return 1;
-        } else return 0;
+        return guess;
     }
 }
