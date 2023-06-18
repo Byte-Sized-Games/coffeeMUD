@@ -61,9 +61,8 @@ public class entities {
 
         public void attack() {
                 int damage = (int) ((Math.random() * (attackHigh - attackLow)) + attackLow);
-                if (damage < 0)
-                        damage = 0;
-                player.health -= damage;
+
+                player.health = player.health - damage;
         }
 
         public void heal() {

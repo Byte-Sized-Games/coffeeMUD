@@ -69,12 +69,9 @@ public class battle {
     }
 
     public void monsterTurn() {
+        logger.error("rawr");
         for (entities i : monsters) {
-            if (i.health <= (i.maxHealth / 4)) {
-                i.health += i.heal;
-            } else {
-                i.attack();
-            }
+            i.attack();
         }
     }
 
@@ -155,7 +152,7 @@ public class battle {
         checkEffects();
         TreeMap<String, Callable<Void>> menu;
         if (monsters.size() == 0) {
-            String[] commands = {"Finish"};
+            String[] commands = { "Finish" };
             Callable[] callables = {
                     () -> {
                         game.update(game.mainMenu());
@@ -168,15 +165,22 @@ public class battle {
             Callable[] callables = {
                     () -> {
                         playerTurn("ATTACK");
+                        for (entities i : monsters) {
+                            logger.debug(i.attackHigh);
+                            logger.debug(i.attackLow);
+                            logger.debug(player.health);
+                        }
                         return null;
                     },
                     () -> {
                         playerTurn("DEFEND");
+                        monsterTurn();
                         return null;
                     },
                     () -> {
                         // To be implemented
                         // playerTurn("CAST");
+                        monsterTurn();
                         return null;
                     }
             };
@@ -197,7 +201,6 @@ public class battle {
                 checkEffects();
                 monsters.get(y).health -= player.attack();
                 checkEffects();
-                monsterTurn();
                 game.update(battleMenu(), battleMessage());
                 return null;
             };
