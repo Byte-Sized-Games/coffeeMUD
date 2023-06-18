@@ -21,10 +21,9 @@ public class battle {
     }
 
     public boolean fight() throws IOException {
-        checkEffects();
         game.update(battleMenu(), battleMessage());
         return true;
-        
+
     }
 
     public void checkEffects() {
@@ -66,6 +65,7 @@ public class battle {
                 logger.error("Command not recognized");
                 break;
         }
+        checkEffects();
         monsterTurn();
     }
 
@@ -153,38 +153,70 @@ public class battle {
     }
 
     public TreeMap<String, Callable<Void>> battleMenu() {
+        checkEffects();
         TreeMap<String, Callable<Void>> menu;
-        String[] commands = {"Attack", "Defend", "Cast"};
-        Callable[] callables = {
-            () -> {
-                playerTurn("ATTACK");
-                return null;
-            },
-            () -> {
-                playerTurn("DEFEND");
-                return null;
-            },
-            () -> {
-                // To be implemented
-                // playerTurn("CAST");
-                return null;
-            }
-        };
-        menu = ui.createMap(commands, callables);
+        if (monsters.size() == 0) {
+            String[] commands = {"Finish"};
+            Callable[] callables = {
+                    () -> {
+                        game.update(game.mainMenu());
+                        return null;
+                    }
+            };
+            menu = ui.createMap(commands, callables);
+        } else {
+            String[] commands = { "Attack", "Defend", "Cast" };
+            Callable[] callables = {
+                    () -> {
+                        playerTurn("ATTACK");
+                        return null;
+                    },
+                    () -> {
+                        playerTurn("DEFEND");
+                        return null;
+                    },
+                    () -> {
+                        // To be implemented
+                        // playerTurn("CAST");
+                        return null;
+                    }
+            };
+            menu = ui.createMap(commands, callables);
+        }
+
         return menu;
     }
 
     public TreeMap<String, Callable<Void>> attackMenu() {
-        String[] names = new String[monsters.size()];
-        Callable[] attack = new Callable[monsters.size()];
-        for (int i = 0; i < monsters.size() - 1; i++) {
+        checkEffects();
+        String[] names = new String[monsters.size() + 1];
+        Callable[] attack = new Callable[monsters.size() + 1];
+        for (int i = 0; i < monsters.size(); i++) {
             final int y = i;
             names[i] = monsters.get(i).name;
             attack[i] = () -> {
+                checkEffects();
                 monsters.get(y).health -= player.attack();
+                game.update(battleMenu(), battleMessage());
                 return null;
             };
         }
+        if (monsters.size() == 0) {
+            names[monsters.size()] = "Back";
+            attack[monsters.size()] = () -> {
+                checkEffects();
+                game.update(battleMenu(), battleMessage());
+                return null;
+            };
+        } else {
+            names[monsters.size()] = "Finish";
+            attack[monsters.size()] = () -> {
+                checkEffects();
+                game.update(game.mainMenu(), battleMessage());
+                return null;
+            };
+        }
+
         return ui.createMap(names, attack);
     }
 
