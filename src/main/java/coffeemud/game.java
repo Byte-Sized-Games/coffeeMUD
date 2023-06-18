@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import java.util.concurrent.Callable;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class game {
     static Callable<Void> filler = () -> {
         return null;
@@ -57,8 +58,14 @@ public class game {
         },
                 () -> {
                     logger.error("In progress. Expect Bugs");
-                    battle roomBattle = new battle(new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
-                    gameDungeon.currentRoom.complete = roomBattle.fight();
+                    if (gameDungeon.currentRoom.complete) {
+                        logger.info("All traps complete!");
+                        update(mainMenu());
+                    } else {
+                        battle roomBattle = new battle(
+                                new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
+                        gameDungeon.currentRoom.complete = roomBattle.fight();
+                    }
                     return null;
                 },
                 () -> {
