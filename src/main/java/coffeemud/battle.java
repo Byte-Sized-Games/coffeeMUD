@@ -177,11 +177,12 @@ public class battle {
     public TreeMap<String, Callable<Void>> attackMenu() {
         String[] names = new String[monsters.size()];
         Callable[] attack = new Callable[monsters.size()];
-        for (int i = 0; i < monsters.size() - 1; i++) {
+        for (int i = 0; i < monsters.size(); i++) {
             final int y = i;
             names[i] = monsters.get(i).name;
             attack[i] = () -> {
                 monsters.get(y).health -= player.attack();
+                game.update(battleMenu(), battleMessage());
                 return null;
             };
         }
