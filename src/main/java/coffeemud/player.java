@@ -12,10 +12,8 @@ public class player {
     public static int attackHigh = 20;
     public static int level = 1;
     public static int gold;
-    public static int[] inv;
-    // public static inventory inv;
+    public static inventory inv = new inventory();
     
-
     public static ArrayList<Character> effects = new ArrayList<>('0');
 
     // Players class. Used for spell lists and abilities
@@ -25,16 +23,10 @@ public class player {
          * r = rogue
          * c = cleric
          */
-        public static char characterClass;
+    public static char characterClass;
 
     public player(char c) {
         characterClass = c;
-        /*try {
-            inv = new inventory();
-        }
-        catch(IOException e) {
-            logger.info(e.getMessage());
-        }*/
     }
 
     public static int attack() {
