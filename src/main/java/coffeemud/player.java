@@ -12,6 +12,7 @@ public class player {
     public static int attackHigh = 20;
     public static int level = 1;
     public static int gold;
+    public static int[] inv;
     // public static inventory inv;
     
 

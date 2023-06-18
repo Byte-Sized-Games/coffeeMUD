@@ -84,20 +84,4 @@ public class spell {
             }
         }
     }
-    /* Class Functions */
-
-    public static void learn(spell newSpell, int playerLevel, inventory inv) throws IOException {
-        // Empty for now, will contain code to interface with a character's inventory/spellbook, so that they may use it
-        if (playerLevel < newSpell.level) {
-            logger.debug("You cannot learn this spell! You need to reach level " + newSpell.level + " to learn it!");
-        } else {
-            logger.debug("Spell learnt. You can now cast " + newSpell.name);
-            inv.spells.put(newSpell.name, true);
-
-        }
-    }
-    public static void unlearn(spell oldSpell, inventory inv) throws IOException {
-        // Also empty, will interact with player inventory to remove spells
-        inv.spells.put(oldSpell.name, false);
-    }
 }

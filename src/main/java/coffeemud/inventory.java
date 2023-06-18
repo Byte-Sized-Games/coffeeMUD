@@ -1,139 +1,41 @@
 package coffeemud;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import java.util.ArrayList;
 
 public class inventory {
-    int gold;
-    boolean weaponEnchant;
-    boolean armorEnchant;
-    int dmgMin;
-    int dmgMax;
-    int armor;
-    String weapon;
-    String armorType;
-    // Potions
-    int hpotions;
-    int mpotions;
-    int ghpotions;
-    int gmpotions;
-    // Spell Scrolls
-    int dragonScroll;
-    int golemScroll;
-    int fireScroll;
-    int iceScroll;
-    int elecScroll;
-    int plantScroll;
-    // Spells
-    Map<String, Boolean> spells = new HashMap<String, Boolean>() {
-        {
-            put("Magic Missle", false);
-            put("Shield", false);
-            put("Fire Bolt", false);
-            put("Spark", false);
-            put("Ice Bolt", false);
-            put("Thorns", false);
-            put("Confuse", false);
-            put("Psionic Blast", false);
-            put("Sleep", false);
-            put("FireBall", false);
-            put("Ice Blast", false);
-            put("Lightning Bolt", false);
-            put("Roots", false);
-            put("Barrier", false);
-            put("Mage Armor", false);
-            put("Summon Elemental", false);
-            put("Cure Light Wounds", false);
-            put("Faith Shield", false);
-            put("Turn Undead", false);
-            put("Bless", false);
-            put("Confuse", false);
-            put("Rage", false);
-            put("Summon Lesser Spirit", false);
-            put("Lesser Healing Aura", false);
-            put("Inflict Light Wounds", false);
-            put("Destroy Fiend", false);
-            put("Cure Greater Wounds", false);
-            put("Banish", false);
-            put("Divine Intervention", false);
-            put("Summon Greater Spirit", false);
-            put("Greater Healing Aura", false);
-            put("Inflict Greater Wounds", false);
-        }
-    };
+    String[] items;
 
     public inventory() throws IOException {
-        inventory inv = inventory.getInventory();
-        this.setItems(inv);
-        this.setArms(inv);
+        items = loadInv();
     }
+    public String[] loadInv() throws IOException {
+        BufferedReader reader;
+        ArrayList<String> items = new ArrayList<>();
+            reader = new BufferedReader(new FileReader("inv.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                items.add(line);
+                line = reader.readLine();
+            }
+            reader.close();
 
-    public inventory(inventory inv) {
-        this.setItems(inv);
-        this.setArms(inv);
-    }
 
-    // Setters
-    public void setItems(inventory inv) {
-        this.gold = inv.gold;
-        this.setPotions(inv);
-        this.setScrolls(inv);
-    }
-
-    public void setPotions(inventory inv) {
-        this.hpotions = inv.hpotions;
-        this.hpotions = inv.mpotions;
-        this.ghpotions = inv.ghpotions;
-        this.gmpotions = inv.gmpotions;
-    }
-
-    public void setArms(inventory inv) {
-        this.setArmor(inv);
-        this.setWeapon(inv);
-    }
-
-    public void setArmor(inventory inv) {
-        this.armor = inv.armor;
-        this.armorEnchant = inv.armorEnchant;
-        this.armorType = inv.armorType;
-    }
-
-    public void setWeapon(inventory inv) {
-        this.dmgMax = inv.dmgMax;
-        this.dmgMin = inv.dmgMin;
-        this.weaponEnchant = inv.weaponEnchant;
-        this.weapon = inv.weapon;
-    }
-
-    public void setScrolls(inventory inv) {
-        this.fireScroll = inv.fireScroll;
-        this.iceScroll = inv.iceScroll;
-        this.elecScroll = inv.elecScroll;
-        this.plantScroll = inv.plantScroll;
-        this.golemScroll = inv.golemScroll;
-        this.dragonScroll = inv.dragonScroll;
-    }
-
-    // Getters
-    public void saveInventory() throws IOException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource("src/main/resources/inventory.yaml")).getFile());
-        ObjectMapper map = new ObjectMapper(new YAMLFactory());
-        map.writeValue(file, this);
-    }
-
-    public static inventory getInventory() throws IOException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource("src/main/resources/inventory.yaml")).getFile());
-        ObjectMapper map = new ObjectMapper(new YAMLFactory());
-        return map.readValue(file, inventory.class);
-    }
-    // functions
-    public static void listInv(inventory inv) {
         
+        return items.toArray(new String[items.size()]);
+
+    }
+    public void saveInv() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("inv.txt"));
+        for (String i : items) {
+            writer.write(i);
+            writer.newLine();
+        }
+        writer.close();
+
     }
 }
