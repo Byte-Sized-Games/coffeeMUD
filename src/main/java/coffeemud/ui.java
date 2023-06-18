@@ -49,15 +49,6 @@ public class ui {
                 logger.info("Terminal unusable due to size");
                 return;
             }
-
-            // Prepare data for drawing
-            ArrayList<entities> monsters = new ArrayList<>();
-            monsters.add(monsterbook.createGoblin());
-            monsters.add(monsterbook.createTroll());
-            monsters.add(monsterbook.createWitch());
-            monsters.add(monsterbook.createSkeleton());
-            byte iterator = 1;
-
             // Clear the terminal screen
             terminal.clear();
 
@@ -73,11 +64,6 @@ public class ui {
             // Draw the menu items
             menuItems.draw(rows);
 
-            // Draw the monster information
-            for(entities monster : monsters) {
-                textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
-                iterator++;
-            }
 
             // Draw player information
             textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + player.health);

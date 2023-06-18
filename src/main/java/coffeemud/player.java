@@ -1,8 +1,6 @@
 package coffeemud;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class player {
     public static int health = 100;
@@ -38,8 +36,8 @@ public class player {
     }
 
     public static int attack() {
-        Random random = new Random();
-        int damage = level * (attackLow + (random.nextInt(attackHigh - attackLow)));
+
+        int damage = level * (int) ((Math.random() * (attackHigh - attackLow)) + attackLow);
         if (damage < 0)
             damage = 0;
         return damage;

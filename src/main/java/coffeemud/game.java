@@ -57,8 +57,7 @@ public class game {
         },
                 () -> {
                     logger.error("In progress. Expect Bugs");
-                    battle roomBattle = new battle(
-                            new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
+                    battle roomBattle = new battle(new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
                     gameDungeon.currentRoom.complete = roomBattle.fight();
                     return null;
                 },

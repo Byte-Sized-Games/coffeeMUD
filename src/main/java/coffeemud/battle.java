@@ -20,14 +20,11 @@ public class battle {
         this.round = 0;
     }
 
-    public boolean fight() throws Exception {
-            turn();
-        return true;
-    }
-
-    public void turn() throws IOException {
+    public boolean fight() throws IOException {
         checkEffects();
         game.update(battleMenu(), battleMessage());
+        return true;
+        
     }
 
     public void checkEffects() {
@@ -50,15 +47,14 @@ public class battle {
         }
     }
 
-    public void playerTurn(String bugCommand) {
-        String command = bugCommand.substring(0, bugCommand.indexOf(" ") + 1);
-        String target = bugCommand.substring(bugCommand.indexOf(" "));
+    public void playerTurn(String command) throws IOException {
+
         switch (command) {
             case "ATTACK":
-                monsters.get(getMonster(target)).health -= player.attack();
+                game.update(attackMenu(), battleMessage());
                 break;
             case "CAST":
-                castSpell(target);
+                logger.error("Not yet finished");
                 break;
             case "DEFEND":
                 player.armour += 2;
@@ -81,17 +77,6 @@ public class battle {
                 i.attack();
             }
         }
-    }
-
-    public void castSpell(String target, entities player) {
-        spell targetSpell = getSpell(target, player.characterClass);
-        logger.debug("Select your targets: ");
-        String[] getTargets = battlePrompt.read().split(" ");
-        ArrayList<entities> targets = new ArrayList<entities>();
-        for (int i = 0; i < getTargets.length; i++) {
-            targets.set(i, monsters.get(getEntities(getTargets[i])));
-        }
-        targetSpell.cast(targets);
     }
 
     public void castSpell(String target) {
@@ -161,14 +146,13 @@ public class battle {
     public String battleMessage() {
         StringBuilder message = new StringBuilder("There are " + monsters.size() + " monsters. ");
         for (entities i : monsters) {
-            message.append("There is a " + i.name + ". It currently has " + i.health + " health remaining");
+            message.append("There is a " + i.name + ". It currently has " + i.health + " health remaining. ");
         }
 
         return message.toString();
     }
 
     public TreeMap<String, Callable<Void>> battleMenu() {
-        logger.error("In progress. Expect Bugs");
         TreeMap<String, Callable<Void>> menu;
         String[] commands = {"Attack", "Defend", "Cast"};
         Callable[] callables = {
@@ -188,6 +172,20 @@ public class battle {
         };
         menu = ui.createMap(commands, callables);
         return menu;
+    }
+
+    public TreeMap<String, Callable<Void>> attackMenu() {
+        String[] names = new String[monsters.size()];
+        Callable[] attack = new Callable[monsters.size()];
+        for (int i = 0; i < monsters.size() - 1; i++) {
+            final int y = i;
+            names[i] = monsters.get(i).name;
+            attack[i] = () -> {
+                monsters.get(y).health -= player.attack();
+                return null;
+            };
+        }
+        return ui.createMap(names, attack);
     }
 
 }
