@@ -62,7 +62,7 @@ public class entities {
         }
 
         public void attack() {
-                int damage = (int) ((Math.random() * (attackHigh - attackLow)) + attackLow);
+                int damage = (int) ((Math.random() * (attackHigh - attackLow)) + attackLow) - player.armour;
 
                 player.health = player.health - damage;
         }

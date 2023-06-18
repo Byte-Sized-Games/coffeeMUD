@@ -7,10 +7,11 @@ public class player {
     public static int maxHealth = 100;
     public static int tempHealth = 0;
     public static String name;
-    // public static int armour = 5;
+    public static int armour = 5;
     public static int attackLow = 1;
     public static int attackHigh = 20;
     public static int level = 1;
+    public static int gold;
     // public static inventory inv;
     
 
@@ -54,6 +55,6 @@ public class player {
         health = maxHealth;
         attackLow = 1*level;
         attackHigh = 15*level;
-        // armour = 5*level;
+        armour = 5*level;
     }
 }

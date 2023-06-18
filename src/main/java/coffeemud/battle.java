@@ -23,7 +23,6 @@ public class battle {
     public boolean fight() throws IOException {
         game.update(battleMenu(), battleMessage());
         return true;
-
     }
 
     public void checkEffects() {
@@ -47,7 +46,7 @@ public class battle {
     }
 
     public void playerTurn(String command) throws IOException {
-
+        checkEffects();
         switch (command) {
             case "ATTACK":
                 game.update(attackMenu(), battleMessage());
@@ -56,7 +55,8 @@ public class battle {
                 logger.error("Not yet finished");
                 break;
             case "DEFEND":
-                player.health += 2;
+                player.armour += 2;
+                game.update(battleMenu(), battleMessage());
                 break;
             case "", " ":
                 logger.debug("No command chosen, please try again");

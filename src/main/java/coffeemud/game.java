@@ -51,6 +51,8 @@ public class game {
         String[] commands = { "Move", "Fight", "Solve", "Quit" };
         Callable[] callables = { () -> {
             if (gameDungeon.currentRoom.complete || logger.sneaky) {
+                player.gold += gameDungeon.currentRoom.gold;
+                gameDungeon.currentRoom.gold = 0;
                 update(moveMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
             } else {
                 logger.error("Room not complete!");
