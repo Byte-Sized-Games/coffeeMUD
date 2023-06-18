@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
+import com.sun.source.tree.Tree;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +24,15 @@ public class ui {
             menu.put(i + menuItems[i],menuActions[i]);
         }
         return menu;
+    }
+    public static TreeMap<String, Callable<Void>> createMonsterMap(entities[] monsters) {
+        TreeMap<String, Callable<Void>> monsterMenu = new TreeMap<>();
+        for(byte i = 0; i < monsters.length; i++) {
+            monsterMenu.put(i + monsters[i].name + " ♥" + monsters[i].health + " ", () -> {
+                return null;
+            });
+        }
+        return monsterMenu;
     }
     // Current stage of the UI
     public static stage currentStage;
@@ -51,15 +61,16 @@ public class ui {
             }
 
             // Prepare data for drawing
-            ArrayList<entities> monsters = new ArrayList<>();
-            monsters.add(monsterbook.createGoblin());
-            monsters.add(monsterbook.createTroll());
-            monsters.add(monsterbook.createWitch());
-            monsters.add(monsterbook.createSkeleton());
+//            ArrayList<entities> monsters = new ArrayList<>();
+//            monsters.add(monsterbook.createGoblin());
+//            monsters.add(monsterbook.createTroll());
+//            monsters.add(monsterbook.createWitch());
+//            monsters.add(monsterbook.createSkeleton())//
             byte iterator = 1;
 
             // Clear the terminal screen
             terminal.clear();
+            new monsterMenu(createMonsterMap(new entities[]{monsterbook.createGoblin(),monsterbook.createWitch()})).draw((short) -8, columns);
 
             // Draw the heads-up display
             headsUp(currentMessage, rows, columns);
@@ -67,17 +78,17 @@ public class ui {
             byte day = 0;
             String days = "Day " + day + " of 7";
             textGraphics = terminal.newTextGraphics();
-            textGraphics.putString(new TerminalPosition(0, 0), TextColor.ANSI.BLUE + "Home");
+            textGraphics.putString(new TerminalPosition(0, 0), "Home");
             textGraphics.putString(new TerminalPosition(columns - days.length(), 0), days);
 
             // Draw the menu items
-            menuItems.draw(rows);
+            menuItems.draw(rows,columns);
 
             // Draw the monster information
-            for(entities monster : monsters) {
-                textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
-                iterator++;
-            }
+//            for(entities monster : monsters) {
+//                textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
+//                iterator++;
+//            }
 
             // Draw player information
             textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + player.health);
@@ -136,12 +147,16 @@ public class ui {
             this.items = new TreeMap<>();
         }
         // draws menu items and places the cursor next to the selected item
-        public void draw(short rows) {
+        byte gap = 1;
+        boolean alignment = false;
+        TerminalPosition tpos;
+        public void draw(short rows, short columns) {
             logger.debug("Drawing menu");
             for(byte i = 0; i < items.size(); i++) {
+                tpos = new TerminalPosition((alignment ? (columns - (items.keySet().toArray()[i].toString().length() +1)) : 0), rows - 6*gap + i*gap);
                 logger.debug("Drawing menu item "  + i);
-                textGraphics.putString(new TerminalPosition(0, rows - 6 + i), (selectedIndex == i ? "*": "> ") + " " + items.keySet().toArray()[i].toString().substring(1) + " ");
-                if(selectedIndex == i) terminal.setCursorPosition(new TerminalPosition(0, rows - 6 + i));
+                textGraphics.putString(tpos, (selectedIndex == i ? "*": "> ") + " " + items.keySet().toArray()[i].toString().substring(1) + " ");
+                if(selectedIndex == i) terminal.setCursorPosition(tpos);
             }
         }
         // runs a menu item's callable if possible
@@ -154,6 +169,17 @@ public class ui {
                     logger.error(line.toString());
                 }
             }
+        }
+    }
+    public static class monsterMenu extends menu {
+        public monsterMenu(TreeMap<String, Callable<Void>> items) {
+            super(items);
+            alignment = true;
+            gap = -2;
+        }
+        @Override
+        public void call() {
+            logger.debug("Attacking monster: " + selectedIndex);
         }
     }
     public static class status {

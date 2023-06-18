@@ -98,7 +98,7 @@ public class main {
                         }
                         case ' ', '\n' -> ui.currentStage.menuItems.call();
                     }
-                    ui.currentStage.menuItems.draw((short) ui.terminal.getTerminalSize().getRows());
+                    ui.currentStage.menuItems.draw((short) ui.terminal.getTerminalSize().getRows(),(short) ui.terminal.getTerminalSize().getColumns());
                 } else {
                     // Handle key inputs when typing
                     char character = keyStroke.getCharacter();
