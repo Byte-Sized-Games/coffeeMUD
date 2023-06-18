@@ -21,16 +21,11 @@ public class battle {
     }
 
     public boolean fight() throws Exception {
-        while (true) {
             turn();
-            if (monsters.size() <= 0) {
-                break;
-            }
-        }
         return true;
     }
 
-    public void turn() throws Exception {
+    public void turn() throws IOException {
         checkEffects();
         game.update(battleMenu(), battleMessage());
     }
@@ -49,12 +44,6 @@ public class battle {
 
         for (entities i : monsters) {
             i.tempHP = i.tempHP / 4;
-            for (char x : i.effects) {
-                switch (x) {
-                    case 'x':
-                        i.health = -2;
-                }
-            }
             if (i.health <= 0) {
                 monsters.remove(i);
             }
