@@ -56,7 +56,7 @@ public class battle {
                 logger.error("Not yet finished");
                 break;
             case "DEFEND":
-                player.armour += 2;
+                player.health += 2;
                 break;
             case "", " ":
                 logger.debug("No command chosen, please try again");
@@ -66,7 +66,6 @@ public class battle {
                 break;
         }
         checkEffects();
-        monsterTurn();
     }
 
     public void monsterTurn() {
@@ -148,7 +147,7 @@ public class battle {
         for (entities i : monsters) {
             message.append("There is a " + i.name + ". It currently has " + i.health + " health remaining. ");
         }
-
+        message.append("You have " + player.health + " remaining");
         return message.toString();
     }
 
@@ -197,6 +196,8 @@ public class battle {
             attack[i] = () -> {
                 checkEffects();
                 monsters.get(y).health -= player.attack();
+                checkEffects();
+                monsterTurn();
                 game.update(battleMenu(), battleMessage());
                 return null;
             };

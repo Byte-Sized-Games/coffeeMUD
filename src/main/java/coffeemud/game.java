@@ -35,7 +35,6 @@ public class game {
         ui.stage.currentMessage = gameDungeon.currentRoom.description;
         (ui.currentStage = new ui.stage(new ui.status(), menu)).draw((short) ui.terminal.getTerminalSize().getRows(),
                 (short) ui.terminal.getTerminalSize().getColumns());
-
     }
 
     public static void update(TreeMap<String, Callable<Void>> menu, String message) throws IOException {
