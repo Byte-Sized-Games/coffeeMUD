@@ -44,7 +44,7 @@ public class dungeons {
                 { "A1a", "x + 2 = 2. What is the value of x", "0" },
                 { "A1b", "2x - 4 = 0. What is the value of x", "2" },
                 { "A1c", "2x - 4 = 0. What is the value of x", "2" },
-                { "A2a", "4x + 6 = 0. What is the the value of x as a decimal to the nearest tenth", "-0.67" },
+                { "A2a", "4x + 6 = 0. What is the the value of x as a decimal to the nearest tenth", "-1.5" },
                 { "A2b", "5x = 4. What is the value of x as a simplified fraction in the form a/b with natural numbers",
                         "4/5" },
                 { "A2c", "What number when doubled is 4 and when squared is 4", "2" },

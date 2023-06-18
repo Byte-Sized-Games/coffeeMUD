@@ -8,6 +8,7 @@ import com.sun.source.tree.Tree;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.concurrent.Callable;
 
@@ -51,7 +52,9 @@ public class ui {
             menuItems = menu;
             draw((short) terminal.getTerminalSize().getRows(), (short) terminal.getTerminalSize().getColumns());
         }
-
+//        public void updateMonsters(monsterMenu menu) {
+//
+//        }
         // Draw the UI stage
         public void draw(short rows, short columns) throws IOException {
             logger.debug("Columns " + columns + " " + (columns < 60));
@@ -72,7 +75,7 @@ public class ui {
 
             // Clear the terminal screen
             terminal.clear();
-            new monsterMenu(createMonsterMap(new entities[]{monsterbook.createGoblin(),monsterbook.createWitch()})).draw((short) -8, columns);
+            if(game.running && !Objects.isNull(game.gameDungeon.currentRoom.monsters)) new monsterMenu(createMonsterMap(game.gameDungeon.currentRoom.monsters)).draw((short) ((short) -12 + (2*game.gameDungeon.currentRoom.monsters.length)), columns);
 
             // Draw the heads-up display
             headsUp(currentMessage, rows, columns);
