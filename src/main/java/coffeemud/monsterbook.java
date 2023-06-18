@@ -352,18 +352,18 @@ public class monsterbook {
         }
     }
     public static entities createTroll() {
-        return new entities(genName((byte) 4),100,10,40,10);
+        return new entities("[TROLL] "+genName((byte) 4),100,10,40,10);
     }
     public static entities createSkeleton() {
-        return new entities(genName((byte) 2),50,5,35,5);
+        return new entities("[SKELETON] " + genName((byte) 2),50,5,35,5);
     }
     public static entities createWitch() {
-        return new entities(genName((byte) 3),75,20,50,0);
+        return new entities("[WITCH] " +genName((byte) 3),75,20,50,0);
     }
     public static entities createGoblin() {
-        return new entities(genName((byte) 1),25,1,20,2);
+        return new entities("[GOBLIN] " +genName((byte) 1),25,1,20,2);
     }
     public static entities createBat()  {
-        return new entities("Bat",30,1,10,0);
+        return new entities("[BAT] Bat",30,1,10,0);
     }
 }

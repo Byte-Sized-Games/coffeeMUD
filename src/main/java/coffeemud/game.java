@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class game {
+    public static boolean running = false;
     static Callable<Void> filler = () -> {
         return null;
     };
@@ -20,6 +21,7 @@ public class game {
     public static void start() throws IOException, Exception {
         // Load dungeon & player
         logger.debug("Starting game");
+        running = true;
         gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
         gameDungeon = new dungeons(pX, pY);
