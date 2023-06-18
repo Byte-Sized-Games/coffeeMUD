@@ -202,7 +202,7 @@ public class battle {
                 return null;
             };
         }
-        if (monsters.size() == 0) {
+        if (monsters.size() > 0) {
             names[monsters.size()] = "Back";
             attack[monsters.size()] = () -> {
                 checkEffects();
