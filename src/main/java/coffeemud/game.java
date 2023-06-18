@@ -53,6 +53,16 @@ public class game {
             if (gameDungeon.currentRoom.complete || logger.sneaky) {
                 player.gold += gameDungeon.currentRoom.gold;
                 gameDungeon.currentRoom.gold = 0;
+                if (player.gold >= 50) {
+                    player.levelUP(2);
+                } else if (player.gold >= 100) {
+                    player.levelUP(3);
+                } else if (player.gold >= 150) {
+                    player.levelUP(4);
+                } else if (player.gold >= 1000) {
+                    logger.error("You have won");
+                    System.exit(0);
+                }
                 update(moveMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
             } else {
                 logger.error("Room not complete!");

@@ -7,7 +7,7 @@ public class player {
     public static int maxHealth = 100;
     public static int tempHealth = 0;
     public static String name;
-    public static int armour = 5;
+    public static int armour = 2;
     public static int attackLow = 1;
     public static int attackHigh = 20;
     public static int level = 1;
@@ -49,12 +49,12 @@ public class player {
         System.exit(0);
     }
 
-    public static void levelUP() {
-        level++;
+    public static void levelUP(int i) {
+        level = i;
         maxHealth = maxHealth + (25*level);
         health = maxHealth;
         attackLow = 1*level;
         attackHigh = 15*level;
-        armour = 5*level;
+        armour = 1*level;
     }
 }

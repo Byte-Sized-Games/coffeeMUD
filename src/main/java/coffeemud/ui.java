@@ -97,6 +97,7 @@ public class ui {
             // Draw player information
             textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + player.health);
             textGraphics.putString(new TerminalPosition(0,4), "⮹ " + player.level);
+            textGraphics.putString(new TerminalPosition(0, 6), "Gold: " + player.gold);
 
             // Refresh the terminal screen
             terminal.refresh();
