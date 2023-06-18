@@ -57,6 +57,8 @@ public class entities {
                 this.maxHealth = health;
                 this.health = this.maxHealth;
                 this.armour = prot;
+                this.attackLow = low;
+                this.attackHigh = high;
         }
 
         public void attack() {

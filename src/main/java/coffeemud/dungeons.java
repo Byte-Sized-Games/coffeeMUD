@@ -127,7 +127,7 @@ public class dungeons {
                 gold = randRange(5, 50);
                 complete = false;
             } else {
-                gold = randRange(5, 50);
+                gold = randRange(0, 5);
                 complete = true;
             }
             description = setDescription(maxEntities, maxTraps);
@@ -136,10 +136,7 @@ public class dungeons {
 
         // Gives the player gold when the room is complete (no traps or enemies left)
         public int giveGold() {
-            if (complete) {
-                return gold;
-            } else
-                return 0;
+            return gold;
         }
 
         public String setDescription(int monsters, int traps) {

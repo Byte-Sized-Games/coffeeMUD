@@ -165,11 +165,7 @@ public class battle {
             Callable[] callables = {
                     () -> {
                         playerTurn("ATTACK");
-                        for (entities i : monsters) {
-                            logger.debug(i.attackHigh);
-                            logger.debug(i.attackLow);
-                            logger.debug(player.health);
-                        }
+                        
                         return null;
                     },
                     () -> {
@@ -202,6 +198,7 @@ public class battle {
                 checkEffects();
                 monsters.get(y).health -= player.attack();
                 checkEffects();
+                monsterTurn();
                 game.update(battleMenu(), battleMessage());
                 return null;
             };
