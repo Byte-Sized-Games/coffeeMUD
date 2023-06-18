@@ -115,17 +115,13 @@ public class dungeons {
                 monsters = new entities[maxEntities];
                 for (int i = 0; i < maxEntities; i++) {
                     int x = randRange(0, 4);
+                    logger.debug(x);
                     switch (x) {
-                        case 0:
-                            monsters[i] = monsterbook.createBat();
-                        case 1:
-                            monsters[i] = monsterbook.createGoblin();
-                        case 2:
-                            monsters[i] = monsterbook.createSkeleton();
-                        case 3:
-                            monsters[i] = monsterbook.createTroll();
-                        case 4:
-                            monsters[i] = monsterbook.createWitch();
+                        case 0 -> monsters[i] = monsterbook.createBat();
+                        case 1 -> monsters[i] = monsterbook.createGoblin();
+                        case 2 -> monsters[i] = monsterbook.createSkeleton();
+                        case 3 -> monsters[i] = monsterbook.createTroll();
+                        case 4 -> monsters[i] = monsterbook.createWitch();
                     }
                 }
                 gold = randRange(5, 50);
