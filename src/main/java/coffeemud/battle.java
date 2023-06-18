@@ -27,11 +27,11 @@ public class battle {
     }
 
     public void checkEffects() {
-        player.tempHealth = player.tempHealth / 4;
+        player.tempHealth /= 4;
         for (char x : player.effects) {
             switch (x) {
                 case 'x':
-                    player.health = -2;
+                    player.health -= 2;
             }
         }
         if (player.health <= 0) {
@@ -178,6 +178,7 @@ public class battle {
                         return null;
                     },
                     () -> {
+                        playerTurn("CAST");
                         // To be implemented
                         // playerTurn("CAST");
                         monsterTurn();

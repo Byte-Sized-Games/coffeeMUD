@@ -1,10 +1,8 @@
 package coffeemud;
 
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import com.sun.source.tree.Tree;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,7 +68,6 @@ public class ui {
 //            monsters.add(monsterbook.createTroll());
 //            monsters.add(monsterbook.createWitch());
 //            monsters.add(monsterbook.createSkeleton())//
-            byte iterator = 1;
 
 
             // Clear the terminal screen
