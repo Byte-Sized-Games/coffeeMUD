@@ -47,7 +47,7 @@ public class entities {
         int attackHigh;
 
         // a special thing that some monsters can do
-        spell specialAbility = spellbook.wizard.spells[9];
+        spell specialAbility;
 
         // if monsters can heal, they will heal by this much
         int heal = health / 6;

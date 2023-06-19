@@ -76,14 +76,12 @@ public class battle {
     }
 
     public void castSpell(String target) {
-        spell targetSpell = spellbook.wizard.spells[0];
         logger.debug("Select your targets: ");
         String[] getTargets = battlePrompt.read().split(" ");
         ArrayList<entities> targets = new ArrayList<entities>();
         for (int i = 0; i < getTargets.length; i++) {
             targets.set(i, monsters.get(getEntities(getTargets[i])));
         }
-        targetSpell.cast(targets);
     }
 
     public int getMonster(String target) {
@@ -112,33 +110,6 @@ public class battle {
         return i;
     }
 
-    public spell getSpell(String target, char playerClass) {
-        while (true) {
-            switch (playerClass) {
-                case 'w':
-                    for (spell i : spellbook.wizard.spells) {
-                        if (i.name.equals(target)) {
-                            return i;
-                        }
-                    }
-                case 'c':
-                    for (spell i : spellbook.cleric.spells) {
-                        if (i.name.equals(target)) {
-                            return i;
-                        }
-                    }
-                case 'r':
-                    logger.debug("You can't cast spells silly! You're the sneaky one");
-                    return null;
-                case 'f':
-                    logger.debug("You can't cast spells silly! You hit things with a sword");
-                    return null;
-                default:
-                    logger.debug("No spell specified, try again");
-            }
-        }
-    }
-
     public String battleMessage() {
         StringBuilder message = new StringBuilder("There are " + monsters.size() + " monsters. ");
         for (entities i : monsters) {
@@ -165,7 +136,7 @@ public class battle {
             Callable[] callables = {
                     () -> {
                         playerTurn("ATTACK");
-                        
+
                         return null;
                     },
                     () -> {
@@ -219,6 +190,35 @@ public class battle {
             };
         }
 
+        return ui.createMap(names, attack);
+    }
+
+    public void cast(spell i) throws IOException {
+        player.mana -= i.cost;
+        switch (i.type) {
+            case 'd':
+                game.update(targetMenu(i), battleMessage());
+                break;
+            case 'h':
+                player.health += i.dmg;
+                break;
+            case 'b':
+                player.armour += i.dmg;
+                break;
+        }
+    }
+
+    public TreeMap<String, Callable<Void>> targetMenu(spell x) {
+        String[] names = new String[monsters.size() + 1];
+        Callable[] attack = new Callable[monsters.size() + 1];
+        for (int i = 0; i < monsters.size(); i++) {
+            final int y = i;
+            names[i] = monsters.get(i).name;
+            attack[i] = () -> {
+                monsters.get(y).health -= (x.dmg * player.level);
+                return null;
+            };
+        }
         return ui.createMap(names, attack);
     }
 

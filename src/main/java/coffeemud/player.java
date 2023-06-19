@@ -10,9 +10,11 @@ public class player {
     public static int armour = 2;
     public static int attackLow = 1;
     public static int attackHigh = 20;
+    public static int mana = 30;
     public static int level = 1;
     public static int gold;
     public static inventory inv = new inventory();
+    public static inventory spellList = new inventory("spells.txt");
     
     public static ArrayList<Character> effects = new ArrayList<>('0');
 
@@ -46,6 +48,7 @@ public class player {
         level = i;
         maxHealth = maxHealth + (25*level);
         health = maxHealth;
+        mana = 30*level;
         attackLow = 1*level;
         attackHigh = 15*level;
         armour = 1*level;
