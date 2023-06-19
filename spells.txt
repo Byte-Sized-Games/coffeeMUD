@@ -1,0 +1,28 @@
+Magic missle
+d
+5
+10
+Fire Bolt
+d
+12
+25
+Ice Bolt
+d
+12
+25
+Vine Bolt
+d
+12
+25
+Shock Bolt
+d
+12
+25
+Sheild
+b
+10
+10
+Cure
+h
+15
+20

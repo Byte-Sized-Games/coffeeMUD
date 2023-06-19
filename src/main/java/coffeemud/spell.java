@@ -1,28 +1,15 @@
 package coffeemud;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.lang.Math;
+
+
 public class spell {
     // Type of spell. Types: d = damage, h = heal, b = buff, x = debuff
     char type;
-    // Element/effect of spell, used for spells that inflict buffs/debuffs or have an element
-    /*
-     * n = no effect, spell does not buff/debuff
-     * b = banisher, remove an enemy entirely from combat
-     * p = protect, defend against one attack
-     * B = bless, increase armor temporarily
-     * s = summon, create an ally
-     * a = change alignment of creature, changes who they can attack
-     * f = fire
-     * i = ice
-     * P = plants
-     * e = electricity
-     * r = rage, increase attack
-     */
-    char effect;
     // Level, what level you need to be for the spell
-    int level;
+    int cost;
     // How much damage the spell heals or does
     int dmg;
     // Spell Name
@@ -30,58 +17,29 @@ public class spell {
     // A short description of the spell
     String desc;
 
-    public spell() {
-        type = 'b';
-        level = 0;
-        effect = 'n';
-    }
-    public spell(char t, int d, char e, int l, String name, String tome) {
-        this.set(t, d, e, l, name, tome);
-    }
-
-    /* Object functions */
-
-    public void set(char t, int d, char e, int l, String newName, String tome) {
-        this.type = t;
-        this.dmg = d;
-        this.effect = e;
-        this.level = l;
-        this.name = newName;
-        this.desc = tome;
-    }
-    public String read() {
-        return this.name + "\n" + this.desc;
-    }
-    public void cast(ArrayList<entities> creatures) {
-        for (entities i : creatures) {
-            switch(this.type) {
-                case 'd':
-                i.health -= dmg;
-                case 'h':
-                i.health += dmg;
-                case 'b':
-                    switch(this.effect) {
-                        case 'p':
-                            i.tempHP += this.dmg;
-                        case 'B':
-                            i.tempHP += (int) (Math.random() * (dmg - (dmg/4) + 1) + (dmg/4));
-                        case 's':
-                        case 'a':
-                            if (i.monster) {
-                                i.monster = false;
-                            } else i.monster = true;
-                    }
-                case 'x':
-                    switch(this.effect) {
-                        case 'b':
-                            i.health = 0;
-                        default:
-                            i.effects.add('x');
-                    }
-                default:
-                i.health -= dmg;
-
+    public spell(int startLine) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("spells.txt"));
+            if (startLine == 0) {
+                this.name = reader.readLine();
+                this.type = reader.readLine().charAt(0);
+                this.cost = Integer.valueOf(reader.readLine());
+                this.dmg = Integer.valueOf(reader.readLine());
+            } else {
+                for (int i = 0; i < startLine -2; i++) {
+                    reader.readLine();
+                }
+                this.name = reader.readLine();
+                this.type = reader.readLine().charAt(0);
+                this.cost = Integer.valueOf(reader.readLine());
+                this.dmg = Integer.valueOf(reader.readLine());
             }
+            
+            reader.close();
+
+        } catch (IOException e) {
+
         }
+
     }
 }
