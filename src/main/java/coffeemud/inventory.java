@@ -13,11 +13,32 @@ public class inventory {
     public inventory() {
         items = loadInv();
     }
+
+    public inventory(String file) {
+        items = loadInv(file);
+    }
+
     public String[] loadInv() {
         BufferedReader reader;
         ArrayList<String> items = new ArrayList<>();
         try {
             reader = new BufferedReader(new FileReader("inv.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                items.add(line);
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            
+        }
+        return items.toArray(new String[items.size()]);
+
+    }
+    public String[] loadInv(String file) {
+        ArrayList<String> items = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
             while (line != null) {
                 items.add(line);
