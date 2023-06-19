@@ -26,7 +26,7 @@ public class spell {
                 this.cost = Integer.valueOf(reader.readLine());
                 this.dmg = Integer.valueOf(reader.readLine());
             } else {
-                for (int i = 0; i < startLine -2; i++) {
+                for (int i = 0; i < startLine -1; i++) {
                     reader.readLine();
                 }
                 this.name = reader.readLine();
@@ -37,7 +37,7 @@ public class spell {
             
             reader.close();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 
         }
 

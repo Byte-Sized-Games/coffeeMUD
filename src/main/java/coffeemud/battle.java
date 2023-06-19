@@ -53,6 +53,7 @@ public class battle {
                 break;
             case "CAST":
                 logger.error("Not yet finished");
+                game.update(spellMenu(), battleMessage());
                 break;
             case "DEFEND":
                 player.armour += 2;
@@ -146,8 +147,6 @@ public class battle {
                     },
                     () -> {
                         playerTurn("CAST");
-                        // To be implemented
-                        // playerTurn("CAST");
                         monsterTurn();
                         return null;
                     }
@@ -201,25 +200,46 @@ public class battle {
                 break;
             case 'h':
                 player.health += i.dmg;
+                checkEffects();
+                game.update(battleMenu(), battleMessage());
                 break;
             case 'b':
                 player.armour += i.dmg;
+                checkEffects();
+                game.update(battleMenu(), battleMessage());
                 break;
         }
     }
 
     public TreeMap<String, Callable<Void>> targetMenu(spell x) {
-        String[] names = new String[monsters.size() + 1];
-        Callable[] attack = new Callable[monsters.size() + 1];
+        String[] names = new String[monsters.size()];
+        Callable[] attack = new Callable[monsters.size()];
         for (int i = 0; i < monsters.size(); i++) {
             final int y = i;
             names[i] = monsters.get(i).name;
             attack[i] = () -> {
+                checkEffects();
                 monsters.get(y).health -= (x.dmg * player.level);
+                checkEffects();
+                game.update(battleMenu(), battleMessage());
                 return null;
             };
         }
         return ui.createMap(names, attack);
+    }
+
+    public TreeMap<String, Callable<Void>> spellMenu() {
+        String[] name = new String[player.spellList.size()];
+        Callable[] castables = new Callable[player.spellList.size()];
+        for (int i = 0; i < player.spellList.size(); i++) {
+            final int y = i;
+            name[i] = player.spellList.get(i).name;
+            castables[i] = () -> {
+                cast(player.spellList.get(y));
+                return null;
+            };
+        }
+        return ui.createMap(name, castables);
     }
 
 }
