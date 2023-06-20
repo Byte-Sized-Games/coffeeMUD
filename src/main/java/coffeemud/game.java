@@ -59,11 +59,11 @@ public class game {
                 if (player.skips < 0) player.skips = 0;
                 player.gold += gameDungeon.currentRoom.gold;
                 gameDungeon.currentRoom.gold = 0;
-                if (player.gold >= 50) {
+                if (player.gold >= 100) {
                     player.levelUP(2);
-                } else if (player.gold >= 100) {
+                } else if (player.gold >= 200) {
                     player.levelUP(3);
-                } else if (player.gold >= 150) {
+                } else if (player.gold >= 400) {
                     player.levelUP(4);
                 } else if (player.gold >= 1000) {
                     logger.error("You have won");
