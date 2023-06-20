@@ -44,8 +44,15 @@ public class player {
     }
 
     public static void die() {
-        logger.info("You have died.");
-        System.exit(0);
+        if(lives > 0) {
+            lives--;
+            health = maxHealth;
+            logger.info("You have died. You have " + lives + " lives left.");
+            return;
+        } else {
+            logger.info("You have died.");
+            System.exit(0);
+        }
     }
 
     public static void levelUP(int i) {
