@@ -96,27 +96,20 @@ public class dungeons {
 
     public class room {
         boolean complete; // If the room is complete
-        entities[] monsters; // Monsters in room
+        entity[] monsters; // Monsters in room
         roomTraps[] traps; // Any potential traps
         int gold; // Gold gained for beating room
         String description; // Short description of the room
 
         public room() throws Exception {
-            int maxEntities = randRange(0, 3);
-            int maxTraps = randRange(0, 2);
-            if (maxEntities == 0 && maxTraps > 0) {
-                traps = new roomTraps[maxTraps];
-                for (int i = 0; i < maxTraps; i++) {
-                    traps[i] = new roomTraps();
-                }
-                gold = randRange(5, 50);
-                complete = false;
-            } else if (maxTraps == 0 && maxEntities > 0) {
-                monsters = new entities[maxEntities];
-                for (int i = 0; i < maxEntities; i++) {
-                    int x = randRange(0, 4);
-                    logger.debug(x);
-                    switch (x) {
+            gold = randRange(5, 50);
+            complete = false;
+            byte cnt = (byte) (Math.round(Math.random() * 3) + 1);
+            if(Math.round(Math.random()) == 0) {
+                traps = new roomTraps[]{};
+                monsters = new entity[cnt];
+                for (int i = 0; i < cnt; i++) {
+                    switch (randRange(0, 4)) {
                         case 0 -> monsters[i] = monsterbook.createBat();
                         case 1 -> monsters[i] = monsterbook.createGoblin();
                         case 2 -> monsters[i] = monsterbook.createSkeleton();
@@ -124,13 +117,31 @@ public class dungeons {
                         case 4 -> monsters[i] = monsterbook.createWitch();
                     }
                 }
-                gold = randRange(5, 50);
-                complete = false;
             } else {
-                gold = randRange(0, 5);
-                complete = true;
+                monsters = new entity[]{};
+                traps = new roomTraps[cnt];
+                for (int i = 0; i < cnt; i++) {
+                    traps[i] = new roomTraps();
+                }
             }
-            description = setDescription(maxEntities, maxTraps);
+//            int maxTraps = randRange(0, 2);
+//            if (maxEntities == 0 && maxTraps > 0) {
+//                traps = new roomTraps[maxTraps];
+//                for (int i = 0; i < maxTraps; i++) {
+//                    traps[i] = new roomTraps();
+//                }
+//                gold = randRange(5, 50);
+//                complete = false;
+//            } else if (maxTraps == 0 && maxEntities > 0) {
+//                monsters = new entity[maxEntities];
+//
+//                gold = randRange(5, 50);
+//                complete = false;
+//            } else {
+//                gold = randRange(5, 50);
+//                complete = true;
+//            }
+            description = setDescription(monsters.length, traps.length);
 
         }
 

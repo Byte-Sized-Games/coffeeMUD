@@ -2,26 +2,30 @@ package coffeemud;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.TreeMap;
 
+import static coffeemud.game.*;
+
 public class battle {
-    ArrayList<entities> monsters;
+    public entity attacker;
+    public static ArrayList<entity> monsters;
     int round;
     uiAlt.prompt battlePrompt = new uiAlt.prompt(colours.red + "[BATTLE! - ",
             colours.yellow + "Round: " + colours.reset + this.round, colours.red + "]");;
 
-    public battle(ArrayList<entities> m) {
+    public battle(ArrayList<entity> m) {
         this.init(m);
     }
 
-    public void init(ArrayList<entities> m) {
-        this.monsters = m;
+    public void init(ArrayList<entity> m) {
+        monsters = m;
         this.round = 0;
     }
 
     public boolean fight() throws IOException {
-        game.update(battleMenu(), battleMessage());
+        update(battleMenu(), battleMessage());
         return true;
     }
 
@@ -37,7 +41,7 @@ public class battle {
             player.die();
         }
 
-        for (entities i : monsters) {
+        for (entity i : monsters) {
             i.tempHP = i.tempHP / 4;
             if (i.health <= 0) {
                 monsters.remove(i);
@@ -49,15 +53,15 @@ public class battle {
         checkEffects();
         switch (command) {
             case "ATTACK":
-                game.update(attackMenu(), battleMessage());
+                update(attackMenu(), battleMessage());
                 break;
             case "CAST":
                 logger.error("Not yet finished");
-                game.update(spellMenu(), battleMessage());
+                update(spellMenu(), battleMessage());
                 break;
             case "DEFEND":
                 player.armour += 2;
-                game.update(battleMenu(), battleMessage());
+                update(battleMenu(), battleMessage());
                 break;
             case "", " ":
                 logger.debug("No command chosen, please try again");
@@ -71,15 +75,13 @@ public class battle {
 
     public void monsterTurn() {
         logger.error("rawr");
-        for (entities i : monsters) {
-            i.attack();
-        }
+        (attacker = monsters.get((int) Math.floor(Math.random() * monsters.size()))).attack();
     }
 
     public void castSpell(String target) {
         logger.debug("Select your targets: ");
         String[] getTargets = battlePrompt.read().split(" ");
-        ArrayList<entities> targets = new ArrayList<entities>();
+        ArrayList<entity> targets = new ArrayList<entity>();
         for (int i = 0; i < getTargets.length; i++) {
             targets.set(i, monsters.get(getEntities(getTargets[i])));
         }
@@ -87,7 +89,7 @@ public class battle {
 
     public int getMonster(String target) {
         int i = 0;
-        for (entities x : monsters) {
+        for (entity x : monsters) {
             if (x.name.equals(target)) {
                 break;
             } else
@@ -97,12 +99,10 @@ public class battle {
     }
 
     public int getEntities(String target) {
-        ArrayList<entities> battleEntities = new ArrayList<entities>();
+        ArrayList<entity> battleEntities = new ArrayList<entity>();
         int i = 0;
-        for (entities x : monsters) {
-            battleEntities.add(x);
-        }
-        for (entities x : battleEntities) {
+        battleEntities.addAll(monsters);
+        for (entity x : battleEntities) {
             if (x.name.equals(target)) {
                 break;
             } else
@@ -112,28 +112,62 @@ public class battle {
     }
 
     public String battleMessage() {
-        StringBuilder message = new StringBuilder("There are " + monsters.size() + " monsters. ");
-        for (entities i : monsters) {
+        StringBuilder message = new StringBuilder((player.health != player.maxHealth ? attacker.name + " " + attacker.verb + " you." : "") + "There are " + monsters.size() + " monsters. ");
+        for (entity i : monsters) {
             message.append("There is a " + i.name + ". It currently has " + i.health + " health remaining. ");
         }
         message.append("You have " + player.health + " remaining");
+        if(itemhd) {
+            message = new StringBuilder("You received " + drop.name);
+            itemhd = false;
+        }
         return message.toString();
     }
-
+    boolean itemhd = false;
     public TreeMap<String, Callable<Void>> battleMenu() {
         checkEffects();
         TreeMap<String, Callable<Void>> menu;
+
         if (monsters.size() == 0) {
-            String[] commands = { "Finish" };
-            Callable[] callables = {
-                    () -> {
-                        game.update(game.mainMenu());
-                        return null;
-                    }
-            };
-            menu = ui.createMap(commands, callables);
+            if(game.gameDungeon.currentRoom.monsters.length > 2) {
+                byte rand = (byte) Math.round(Math.random() * 3);
+                byte efficacy = (byte) ((byte) Math.round(Math.random() * 3));
+                drop = new item(rand, item.genName(game.gameDungeon.currentRoom.monsters[0].name,rand,efficacy),efficacy);
+                ui.stage.headsUp("You received " + drop.name);
+                itemhd = true;
+                menu = ui.createMap(new String[] { "Receive","Ignore" },
+                        new Callable[] { () -> {
+                            byte iterator = 0;
+                            for(item slot : player.inventory) {
+                                iterator++;
+                                if(Objects.isNull(slot)) {
+                                    player.inventory[iterator] = new item(drop.type,drop.name,drop.efficacy);
+                                    slot = new item(drop.type,drop.name,drop.efficacy);
+                                    drop.get();
+                                    drop = null;
+                                    update(mainMenu());
+                                    logger.debug("item received" + player.inventory[iterator].name);
+                                    return null;
+                                }
+                            }
+                            game.itemDeleteMenu();
+                            return null;
+                        }, () -> {
+                            update(mainMenu());
+                            return null;
+                        } });
+            } else {
+                String[] commands = { "Finish" };
+                Callable[] callables = {
+                        () -> {
+                            update(mainMenu());
+                            return null;
+                        }
+                };
+                menu = ui.createMap(commands, callables);
+            }
         } else {
-            String[] commands = { "Attack", "Defend", "Cast" };
+            String[] commands = { "Attack", "Defend", "Cast", "Use item(doesn't take a turn)" };
             Callable[] callables = {
                     () -> {
                         playerTurn("ATTACK");
@@ -148,6 +182,10 @@ public class battle {
                     () -> {
                         playerTurn("CAST");
                         monsterTurn();
+                        return null;
+                    },
+                    () -> {
+                        game.itemUseMenu();
                         return null;
                     }
             };
@@ -167,9 +205,10 @@ public class battle {
             attack[i] = () -> {
                 checkEffects();
                 monsters.get(y).health -= player.attack();
+                ui.currentStage.draw((short) ui.terminal.getTerminalSize().getRows(), (short) ui.terminal.getTerminalSize().getColumns());
                 checkEffects();
                 monsterTurn();
-                game.update(battleMenu(), battleMessage());
+                update(battleMenu(), battleMessage());
                 return null;
             };
         }
@@ -177,14 +216,14 @@ public class battle {
             names[monsters.size()] = "Back";
             attack[monsters.size()] = () -> {
                 checkEffects();
-                game.update(battleMenu(), battleMessage());
+                update(battleMenu(), battleMessage());
                 return null;
             };
         } else {
             names[monsters.size()] = "Finish";
             attack[monsters.size()] = () -> {
                 checkEffects();
-                game.update(game.mainMenu(), battleMessage());
+                update(mainMenu(), battleMessage());
                 return null;
             };
         }
@@ -196,17 +235,17 @@ public class battle {
         player.mana -= i.cost;
         switch (i.type) {
             case 'd':
-                game.update(targetMenu(i), battleMessage());
+                update(targetMenu(i), battleMessage());
                 break;
             case 'h':
                 player.health += i.dmg;
                 checkEffects();
-                game.update(battleMenu(), battleMessage());
+                update(battleMenu(), battleMessage());
                 break;
             case 'b':
                 player.armour += i.dmg;
                 checkEffects();
-                game.update(battleMenu(), battleMessage());
+                update(battleMenu(), battleMessage());
                 break;
         }
     }
@@ -221,7 +260,7 @@ public class battle {
                 checkEffects();
                 monsters.get(y).health -= (x.dmg * player.level);
                 checkEffects();
-                game.update(battleMenu(), battleMessage());
+                update(battleMenu(), battleMessage());
                 return null;
             };
         }

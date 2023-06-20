@@ -166,7 +166,7 @@ public class monsterbook {
             },
             {
                     () -> {
-                        return "Skeleton " + genName((byte) 0) + "the " + genName((byte) 6);
+                        return "Skeleton King " + genName((byte) 0) + "the " + genName((byte) 6);
                     },
                     () -> {
                         return "Jams 1";
@@ -343,7 +343,7 @@ public class monsterbook {
 
             }
     };
-    static String genName(byte monsterType) {
+    public static String genName(byte monsterType) {
         try {
             return (String) names[monsterType][(int) (Math.random() * (names[monsterType].length))].call();
         } catch (Exception e) {
@@ -351,19 +351,22 @@ public class monsterbook {
             return "ERROR";
         }
     }
-    public static entities createTroll() {
-        return new entities("[TROLL] "+genName((byte) 4),100,10,40,10);
+    public static entity createTroll() {
+        return new entity("[TROLL] "+genName((byte) 4),100,10,40,10,"clubbed");
     }
-    public static entities createSkeleton() {
-        return new entities("[SKELETON] " + genName((byte) 2),50,5,35,5);
+    public static entity createSkeleton() {
+        return new entity("[SKELETON] " + genName((byte) 2),50,5,35,5);
     }
-    public static entities createWitch() {
-        return new entities("[WITCH] " +genName((byte) 3),75,20,50,0);
+    public static entity createSkeletonGuard() {
+        return new entity("[UNDEAD GUARD] " + genName((byte) 2),10,3,3,3);
     }
-    public static entities createGoblin() {
-        return new entities("[GOBLIN] " +genName((byte) 1),25,1,20,2);
+    public static entity createWitch() {
+        return new entity("[WITCH] " +genName((byte) 3),75,20,50,0,"cursed");
     }
-    public static entities createBat()  {
-        return new entities("[BAT] Bat",30,1,10,0);
+    public static entity createGoblin() {
+        return new entity("[GOBLIN] " +genName((byte) 1),25,1,20,2,"gobbled");
+    }
+    public static entity createBat()  {
+        return new entity("Bat ",30,1,10,0,"bit");
     }
 }

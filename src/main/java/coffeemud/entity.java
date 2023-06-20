@@ -3,8 +3,8 @@ package coffeemud;
 import java.util.ArrayList;
 
 //unit 6 demonstration im crying
-//entities are players and monsters
-public class entities {
+//entity are players and monsters
+public class entity {
         // the name of the monsters
         // phoenix bad
         // die
@@ -12,6 +12,7 @@ public class entities {
 
         // whether the character is a monster or not
         boolean monster;
+        String verb;
 
         ui.menu options;
 
@@ -52,15 +53,24 @@ public class entities {
         // if monsters can heal, they will heal by this much
         int heal = health / 6;
 
-        public entities(String name, int health, int low, int high, int prot) {
+        public entity(String name, int health, int low, int high, int prot) {
                 this.name = name;
                 this.maxHealth = health;
                 this.health = this.maxHealth;
                 this.armour = prot;
                 this.attackLow = low;
                 this.attackHigh = high;
+                verb = "attacked";
         }
-
+        public entity(String name, int health, int low, int high, int prot,String verb) {
+                this.name = name;
+                this.maxHealth = health;
+                this.health = this.maxHealth;
+                this.armour = prot;
+                this.attackLow = low;
+                this.attackHigh = high;
+                this.verb = verb;
+        }
         public void attack() {
                 int damage = (int) ((Math.random() * (attackHigh - attackLow)) + attackLow) - player.armour;
                 if (damage < 0) damage = 0;
@@ -74,7 +84,7 @@ public class entities {
                         this.health += this.heal;
         }
 
-        public entities(String name, ui.menu options, boolean monster, int maxHealth) {
+        public entity(String name, ui.menu options, boolean monster, int maxHealth) {
 
         }
 

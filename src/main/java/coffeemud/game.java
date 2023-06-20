@@ -1,18 +1,21 @@
 package coffeemud;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.concurrent.Callable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class game {
+    public static item drop;
     public static boolean running = false;
     static Callable<Void> filler = () -> {
         return null;
+
     };
     static String name;
+    public static battle roomBattle;
     static player protag;
     static dungeons gameDungeon;
     public static int pX = 9;
@@ -77,8 +80,8 @@ public class game {
                         logger.info("All traps complete!");
                         update(mainMenu());
                     } else {
-                        battle roomBattle = new battle(
-                                new ArrayList<entities>(Arrays.asList(gameDungeon.currentRoom.monsters)));
+                        roomBattle = new battle(
+                                new ArrayList<entity>(Arrays.asList(gameDungeon.currentRoom.monsters)));
                         gameDungeon.currentRoom.complete = roomBattle.fight();
                     }
                     return null;
@@ -104,7 +107,123 @@ public class game {
         menu = ui.createMap(commands, callables);
         return menu;
     }
+    public static void pickupMenu() {
+        ui.stage.headsUp("You received " + drop.name);
+        try {
+            ui.currentStage.updateMenu(new ui.menu(ui.createMap(new String[] { "Receive","Ignore" },
+                    new Callable[] { () -> {
+                        for(item slot : player.inventory) {
+                            if(Objects.isNull(slot)) {
+                                slot = drop;
+                                drop.get();
+                                drop = null;
+                                update(mainMenu());
+                                return null;
+                            }
+                        }
+                        game.itemDeleteMenu();
+                        return null;
+                    }, () -> {
+                        update(mainMenu());
+                        return null;
+                    } })));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void itemUseMenu() {
+        logger.debug("menuballs");
+        ui.stage.headsUp("Select an item to use");
+        String[] itemNames = new String[player.inventory.length];
+        for (byte i = 0; i < player.inventory.length; i++) {
+            if(!Objects.isNull(player.inventory[i])){
+                itemNames[i] = player.inventory[i].name;
+            } else {
+                itemNames[i] = "Empty";
+            }
+        }
+        try {
+            ui.currentStage.updateMenu(new ui.menu(ui.createMap(itemNames, new Callable[] {
+                    () -> {
+                        if(Objects.isNull(player.inventory[0])) {
+                            update(roomBattle.battleMenu());
+                            return null;
+                        }
+                        item.use(player.inventory[0]);
+                        update(roomBattle.battleMenu());
+                        return null;
+                    }, () -> {
+                if(Objects.isNull(player.inventory[1])) {
+                    update(roomBattle.battleMenu());
+                    return null;
+                }
+                item.use(player.inventory[1]);
+                update(roomBattle.battleMenu());
 
+                return null;
+            }, () -> {
+                if(Objects.isNull(player.inventory[2])) {
+                    update(roomBattle.battleMenu());
+                    return null;
+                }
+                item.use(player.inventory[2]);
+                update(roomBattle.battleMenu());
+
+                return null;
+            }, () -> {
+                if(Objects.isNull(player.inventory[3])) {
+                    update(roomBattle.battleMenu());
+                    return null;
+                }
+                item.use(player.inventory[3]);
+                update(roomBattle.battleMenu());
+
+                return null;
+            }, () -> {
+                if(Objects.isNull(player.inventory[4])) {
+                    update(roomBattle.battleMenu());
+                    return null;
+                }
+                item.use(player.inventory[4]);
+                update(roomBattle.battleMenu());
+
+                return null;
+            }
+            })));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void itemDeleteMenu() {
+        ui.stage.headsUp("Select an item to replace");
+        String[] itemNames = new String[player.inventory.length];
+        for (byte i = 0; i < player.inventory.length; i++) {
+            itemNames[i] = player.inventory[i].name;
+        }
+        try {
+            ui.currentStage.updateMenu(new ui.menu(ui.createMap(itemNames, new Callable[] {
+                () -> {
+                    player.inventory[0].safeRemove();
+    //                update(mainMenu());
+                    return null;
+                }, () -> {
+                    player.inventory[1].safeRemove();
+                    return null;
+                }, () -> {
+                    player.inventory[2].safeRemove();
+                    return null;
+                }, () -> {
+                    player.inventory[3].safeRemove();
+                    return null;
+                }, () -> {
+                    player.inventory[4].safeRemove();
+                    return null;
+                }
+            })));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static TreeMap<String, Callable<Void>> moveMenu() {
         TreeMap<String, Callable<Void>> menu;
         String[] directions = { "North", "East", "South", "West", "Back" };
