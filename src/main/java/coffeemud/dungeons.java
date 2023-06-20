@@ -218,7 +218,7 @@ public class dungeons {
         currentRoom = dungeonRooms[x][y];
     }
 
-    public int randRange(int low, int high) {
+    public static int randRange(int low, int high) {
         Random rand = new Random();
         return rand.nextInt((high - low) + 1) + low;
     }

@@ -22,7 +22,8 @@ public class game {
         // Load dungeon & player
         logger.debug("Starting game");
         running = true;
-        player.spellList.add(spellbook.spells[0]);
+        player.spellList.add(spellbook.spells[dungeons.randRange(0, 5)]);
+        player.spellList.add(spellbook.spells[dungeons.randRange(0, 5)]);
         player.spellList.add(spellbook.spells[6]);
         gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
