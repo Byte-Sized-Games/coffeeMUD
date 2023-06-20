@@ -28,7 +28,6 @@ public class game {
         player.spellList.add(spellbook.spells[dungeons.randRange(0, 5)]);
         player.spellList.add(spellbook.spells[dungeons.randRange(0, 5)]);
         player.spellList.add(spellbook.spells[6]);
-        gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
         gameDungeon = new dungeons(pX, pY);
         logger.debug("Dungeons generated");
@@ -56,7 +55,8 @@ public class game {
         TreeMap<String, Callable<Void>> menu;
         String[] commands = { "Move", "Fight", "Solve", "Quit" };
         Callable[] callables = { () -> {
-            if (gameDungeon.currentRoom.complete || logger.sneaky) {
+            if (gameDungeon.currentRoom.complete || logger.sneaky || player.skips-- >= 0) {
+                if (player.skips < 0) player.skips = 0;
                 player.gold += gameDungeon.currentRoom.gold;
                 gameDungeon.currentRoom.gold = 0;
                 if (player.gold >= 50) {

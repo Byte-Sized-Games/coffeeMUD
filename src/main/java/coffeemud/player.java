@@ -17,7 +17,7 @@ public class player {
     public static int level = 1;
     public static int gold;
     public static inventory inv = new inventory();
-    public static ArrayList<spell> spellList = new ArrayList<spell>(1);
+    public static ArrayList<spell> spellList = new ArrayList<spell>(0);
 
     
     public static ArrayList<Character> effects = new ArrayList<>('0');
