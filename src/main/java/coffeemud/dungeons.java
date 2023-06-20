@@ -99,6 +99,7 @@ public class dungeons {
         entities[] monsters; // Monsters in room
         roomTraps[] traps; // Any potential traps
         int gold; // Gold gained for beating room
+        int heal; // Health gained from room;
         String description; // Short description of the room
 
         public room() throws Exception {
@@ -111,9 +112,11 @@ public class dungeons {
                 }
                 gold = randRange(5, 50);
                 complete = false;
+                heal = randRange(0, 5);
             } else if (maxTraps == 0 && maxEntities > 0) {
                 monsters = new entities[maxEntities];
                 for (int i = 0; i < maxEntities; i++) {
+                    heal = 0;
                     int x = randRange(0, 4);
                     logger.debug(x);
                     switch (x) {
@@ -128,6 +131,7 @@ public class dungeons {
                 complete = false;
             } else {
                 gold = randRange(0, 5);
+                heal = randRange(5, 30);
                 complete = true;
             }
             description = setDescription(maxEntities, maxTraps);
@@ -140,15 +144,15 @@ public class dungeons {
         }
 
         public String setDescription(int monsters, int traps) {
-            String[] adjective = { "Fancy", "Dusty", "Old", "Well Kept", "Grimey", "Odd", "Suspicious", "Magical",
-                    "Overgrown", "Warm", "Cold", "Freezing", "Burning", "Dark", "Bright" };
+            String[] adjective = { "fancy", "dusty", "old", "well kept", "grimey", "odd", "suspicious", "magical",
+                    "overgrown", "warm", "cold", "freezing", "burning", "dark", "bright" };
             StringBuilder desc = new StringBuilder("The room is " + adjective[randRange(0, adjective.length - 1)]);
             if (monsters == 0 && traps > 0) {
                 desc.append(", there appear to be " + traps + " traps that you'll need to solve to get through.");
             } else if (traps == 0 && monsters > 0) {
                 desc.append(", there are " + monsters + " monsters that you'll need to fight to proceed.");
             } else {
-                desc.append(", and it seems to be empty. No traps or monsters in sight.");
+                desc.append(", and it seems to be empty. A comfortable glow fills the room.");
             }
             desc.append(" There is " + gold + " pieces of gold to be looted from here");
             return desc.toString();
