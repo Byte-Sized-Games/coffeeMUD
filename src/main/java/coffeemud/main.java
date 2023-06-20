@@ -7,6 +7,10 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.SwingTerminal;
+
+import java.awt.Font;
+import java.awt.*;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -62,14 +66,13 @@ public class main {
                     break;
             }
         }
-
+        logger.debug(item.genName(monsterbook.genName((byte)2), (byte) 0, (byte) 2));
         // Create the terminal and UI components
         Terminal terminalThing = new DefaultTerminalFactory().createTerminalEmulator();
         ui.terminal = new TerminalScreen(terminalThing);
         ui.textGraphics = ui.terminal.newTextGraphics();
         ui.terminal.startScreen();
         ui.terminal.setCursorPosition(new TerminalPosition(100,terminalThing.getTerminalSize().getRows() +2));
-
         // Set up the title screen
         titleScreen();
 
@@ -83,7 +86,6 @@ public class main {
             keyStroke = ui.terminal.readInput();
             logger.debug("new input");
             if(keyStroke == null) continue;
-
             try {
                 if(!ui.typing) {
                     // Handle key inputs when not typing

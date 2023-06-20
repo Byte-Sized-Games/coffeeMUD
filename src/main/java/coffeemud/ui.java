@@ -24,10 +24,10 @@ public class ui {
         }
         return menu;
     }
-    public static TreeMap<String, Callable<Void>> createMonsterMap(entities[] monsters) {
+    public static TreeMap<String, Callable<Void>> createMonsterMap(entity[] monsters) {
         TreeMap<String, Callable<Void>> monsterMenu = new TreeMap<>();
         for(byte i = 0; i < monsters.length; i++) {
-            monsterMenu.put(i + monsters[i].name + " ♥" + monsters[i].health + " ", () -> {
+            monsterMenu.put(i + monsters[i].name + " ♥" + (monsters[i].health > 0 ? monsters[i].health : "DEAD") + " ", () -> {
                 return null;
             });
         }
@@ -63,7 +63,7 @@ public class ui {
 
 
             // Prepare data for drawing
-//            ArrayList<entities> monsters = new ArrayList<>();
+//            ArrayList<entity> monsters = new ArrayList<>();
 //            monsters.add(monsterbook.createGoblin());
 //            monsters.add(monsterbook.createTroll());
 //            monsters.add(monsterbook.createWitch());
@@ -75,7 +75,7 @@ public class ui {
             if(game.running && !Objects.isNull(game.gameDungeon.currentRoom.monsters)) new monsterMenu(createMonsterMap(game.gameDungeon.currentRoom.monsters)).draw((short) ((short) -12 + (2*game.gameDungeon.currentRoom.monsters.length)), columns);
 
             // Draw the heads-up display
-            headsUp(currentMessage, rows, columns);
+            headsUp(currentMessage);
 
             byte day = 0;
             String days = "Day " + day + " of 7";
@@ -88,7 +88,7 @@ public class ui {
 
 
             // Draw the monster information
-//            for(entities monster : monsters) {
+//            for(entity monster : monsters) {
 //                textGraphics.putString(new TerminalPosition(columns - monster.name.length() - (Integer.toString(monster.health).length() + 2),2*iterator),monster.name + " ♥" + monster.health);
 //                iterator++;
 //            }
@@ -97,7 +97,7 @@ public class ui {
             // Draw player information
             textGraphics.putString(new TerminalPosition(0, 2), "You ♥ " + player.health);
             textGraphics.putString(new TerminalPosition(0,4), "⮹ " + player.level);
-            textGraphics.putString(new TerminalPosition(0, 6), "Gold: " + player.gold);
+            textGraphics.putString(new TerminalPosition(0, 6), "₲: " + player.gold);
 
             // Refresh the terminal screen
             terminal.refresh();
@@ -112,7 +112,9 @@ public class ui {
         public static String currentMessage = "Best Dungeon System Movement";
 
         // Draw the heads-up display with a given message
-        public static void headsUp(String message, short rows, short columns) {
+        public static void headsUp(String message) {
+            short rows = (short) terminal.getTerminalSize().getRows();
+            short columns = (short) terminal.getTerminalSize().getColumns();
             short lines = (short) Math.ceil((double)message.length()/(double)columns);
             String pushMsg;
             for(byte i = 0; i < lines; i++) {
@@ -135,7 +137,7 @@ public class ui {
     }
     // scrapped fightscene template
     public static class fightScene extends stage {
-        public fightScene(String name, ArrayList<entities> monsters, status status, TreeMap<String, Callable<Void>> menuItems) {
+        public fightScene(String name, ArrayList<entity> monsters, status status, TreeMap<String, Callable<Void>> menuItems) {
             super(status, menuItems);
             this.name = name;
         }
@@ -181,6 +183,7 @@ public class ui {
             super(items);
             alignment = true;
             gap = -2;
+            selectedIndex = -1;
         }
         @Override
         public void call() {

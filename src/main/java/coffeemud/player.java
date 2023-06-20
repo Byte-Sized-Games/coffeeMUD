@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class player {
     public static int health = 100;
+    public static byte lives = 0;
+    public static item[] inventory = new item[5];
+    public static byte skips = 0;
     public static int maxHealth = 100;
     public static int tempHealth = 0;
     public static String name;
@@ -41,8 +44,15 @@ public class player {
     }
 
     public static void die() {
-        logger.info("You have died.");
-        System.exit(0);
+        if(lives > 0) {
+            lives--;
+            health = maxHealth;
+            logger.info("You have died. You have " + lives + " lives left.");
+            return;
+        } else {
+            logger.info("You have died.");
+            System.exit(0);
+        }
     }
 
     public static void levelUP(int i) {
