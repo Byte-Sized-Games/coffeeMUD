@@ -99,6 +99,7 @@ public class dungeons {
         entity[] monsters; // Monsters in room
         roomTraps[] traps; // Any potential traps
         int gold; // Gold gained for beating room
+        int heal; // Amount room heals by
         String description; // Short description of the room
 
         public room() throws Exception {
@@ -141,6 +142,9 @@ public class dungeons {
 //                gold = randRange(5, 50);
 //                complete = true;
 //            }
+            if (monsters.length == 0 && traps.length == 0) {
+                heal = randRange(5, 25);
+            }
             description = setDescription(monsters.length, traps.length);
 
         }
@@ -159,7 +163,7 @@ public class dungeons {
             } else if (traps == 0 && monsters > 0) {
                 desc.append(", there are " + monsters + " monsters that you'll need to fight to proceed.");
             } else {
-                desc.append(", and it seems to be empty. No traps or monsters in sight.");
+                desc.append(", and it seems to be empty. A warm glow fills the room.");
             }
             desc.append(" There is " + gold + " pieces of gold to be looted from here");
             return desc.toString();
@@ -213,7 +217,7 @@ public class dungeons {
         for (int i = 0; i < 20; i++) {
             for (int a = 0; a < 20; a++) {
                 dungeonRooms[i][a] = new room();
-                logger.debug("x:" + i + ", y:" + a + " | " + dungeonRooms[i][a].description + ". Complete = " + dungeonRooms[i][a].complete);
+                logger.debug("x:" + i + ", y:" + a + " [Desc]\t" + dungeonRooms[i][a].description + ". Complete = " + dungeonRooms[i][a].complete);
             }
         }
     }
@@ -225,7 +229,7 @@ public class dungeons {
         currentRoom = dungeonRooms[x][y];
     }
 
-    public int randRange(int low, int high) {
+    public static int randRange(int low, int high) {
         Random rand = new Random();
         return rand.nextInt((high - low) + 1) + low;
     }

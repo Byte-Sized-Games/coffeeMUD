@@ -25,7 +25,8 @@ public class game {
         // Load dungeon & player
         logger.debug("Starting game");
         running = true;
-        player.spellList.add(spellbook.spells[0]);
+        player.spellList.add(spellbook.spells[dungeons.randRange(0, 5)]);
+        player.spellList.add(spellbook.spells[dungeons.randRange(0, 5)]);
         player.spellList.add(spellbook.spells[6]);
         gameDungeon = new dungeons(pX, pY);
         logger.debug("Generating dungeons");
@@ -228,6 +229,7 @@ public class game {
         TreeMap<String, Callable<Void>> menu;
         String[] directions = { "North", "East", "South", "West", "Back" };
         Callable[] callables = { () -> {
+            player.health += gameDungeon.currentRoom.heal;
             gameDungeon.moveRooms('n');
             update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
             Thread.sleep(2 * 1000);
@@ -235,6 +237,7 @@ public class game {
             return null;
         },
                 () -> {
+                    player.health += gameDungeon.currentRoom.heal;
                     gameDungeon.moveRooms('e');
                     update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
                     Thread.sleep(2 * 1000);
@@ -242,6 +245,7 @@ public class game {
                     return null;
                 },
                 () -> {
+                    player.health += gameDungeon.currentRoom.heal;
                     gameDungeon.moveRooms('s');
                     update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
                     Thread.sleep(2 * 1000);
@@ -249,6 +253,7 @@ public class game {
                     return null;
                 },
                 () -> {
+                    player.health += gameDungeon.currentRoom.heal;
                     gameDungeon.moveRooms('w');
                     update(blankMenu(), "X: " + gameDungeon.x + ", Y: " + gameDungeon.y);
                     Thread.sleep(2 * 1000);
